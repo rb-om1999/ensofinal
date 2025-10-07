@@ -201,15 +201,15 @@ const ChartAnalyzer = () => {
                         data-testid="chart-file-upload"
                       />
                       <label htmlFor="file-upload" className="cursor-pointer">
-                        <div className="space-y-3">
-                          <div className="w-16 h-16 bg-slate-700 rounded-full mx-auto flex items-center justify-center">
-                            <Upload className="w-8 h-8 text-amber-400" />
+                        <div className="space-y-4">
+                          <div className="w-18 h-18 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full mx-auto flex items-center justify-center ring-1 ring-white/10">
+                            <Upload className="w-10 h-10 text-amber-400 drop-shadow-sm" />
                           </div>
                           <div>
-                            <p className="text-white font-medium">
+                            <p className="text-white font-semibold text-lg">
                               {file ? file.name : 'Drop your chart here or click to upload'}
                             </p>
-                            <p className="text-slate-400 text-sm mt-1">
+                            <p className="text-slate-300 text-sm mt-1 font-medium">
                               PNG, JPG up to 4MB
                             </p>
                           </div>
