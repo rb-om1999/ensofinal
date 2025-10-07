@@ -227,7 +227,7 @@ const ChartAnalyzer = () => {
                       placeholder="e.g., BTCUSDT, EURUSD, AAPL"
                       value={symbol}
                       onChange={(e) => setSymbol(e.target.value.toUpperCase())}
-                      className="bg-slate-800 border-slate-600 text-white placeholder:text-slate-500 focus:border-amber-400"
+                      className="bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-slate-400 focus:border-amber-400 focus:bg-white/15 transition-all duration-200"
                     />
                   </div>
 
