@@ -235,7 +235,7 @@ const ChartAnalyzer = () => {
                   <div className="space-y-2">
                     <Label htmlFor="timeframe" className="text-white font-medium">Timeframe *</Label>
                     <Select value={timeframe} onValueChange={setTimeframe}>
-                      <SelectTrigger data-testid="timeframe-select" className="bg-slate-800 border-slate-600 text-white focus:border-amber-400">
+                      <SelectTrigger data-testid="timeframe-select" className="bg-white/10 backdrop-blur-sm border-white/20 text-white focus:border-amber-400 focus:bg-white/15 transition-all duration-200">
                         <SelectValue placeholder="Select timeframe" />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-800 border-slate-600">
