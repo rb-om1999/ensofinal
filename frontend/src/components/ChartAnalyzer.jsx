@@ -283,7 +283,7 @@ const ChartAnalyzer = () => {
                   <Button
                     onClick={analyzeChart}
                     disabled={isAnalyzing || !file || !symbol || !timeframe}
-                    className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-medium py-3 text-lg transition-all duration-200 disabled:opacity-50"
+                    className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-semibold py-4 text-lg shadow-lg shadow-amber-500/30 hover:shadow-amber-500/40 transition-all duration-300 disabled:opacity-50 disabled:shadow-none ring-1 ring-amber-400/20 hover:ring-amber-400/40"
                     data-testid="analyze-chart-button"
                   >
                     {isAnalyzing ? (
