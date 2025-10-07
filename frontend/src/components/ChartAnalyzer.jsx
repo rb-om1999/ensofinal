@@ -350,7 +350,7 @@ const ChartAnalyzer = () => {
 
                     {/* Technical Signals */}
                     {analysis.signals && analysis.signals.length > 0 && (
-                      <Card className="bg-slate-800/50 backdrop-blur-xl border-slate-700/50 shadow-2xl">
+                      <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
                         <CardHeader>
                           <CardTitle className="text-xl text-white flex items-center gap-2">
                             <Target className="w-5 h-5 text-amber-400" />
