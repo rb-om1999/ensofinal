@@ -274,7 +274,7 @@ const ChartAnalyzer = () => {
 
                   {/* Error Alert */}
                   {error && (
-                    <Alert className="border-red-500/50 bg-red-500/10 text-red-300" data-testid="error-alert">
+                    <Alert className="border-red-400/50 bg-red-500/10 backdrop-blur-sm text-red-200 shadow-lg" data-testid="error-alert">
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
