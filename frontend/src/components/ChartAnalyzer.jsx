@@ -238,7 +238,7 @@ const ChartAnalyzer = () => {
                       <SelectTrigger data-testid="timeframe-select" className="bg-white/10 backdrop-blur-sm border-white/20 text-white focus:border-amber-400 focus:bg-white/15 transition-all duration-200">
                         <SelectValue placeholder="Select timeframe" />
                       </SelectTrigger>
-                      <SelectContent className="bg-slate-800 border-slate-600">
+                      <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
                         <SelectItem value="1m" className="text-white hover:bg-slate-700">1 Minute</SelectItem>
                         <SelectItem value="5m" className="text-white hover:bg-slate-700">5 Minutes</SelectItem>
                         <SelectItem value="15m" className="text-white hover:bg-slate-700">15 Minutes</SelectItem>
@@ -262,7 +262,7 @@ const ChartAnalyzer = () => {
                       <SelectTrigger data-testid="trading-style-select" className="bg-slate-800 border-slate-600 text-white focus:border-amber-400">
                         <SelectValue placeholder="Select trading style" />
                       </SelectTrigger>
-                      <SelectContent className="bg-slate-800 border-slate-600">
+                      <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
                         <SelectItem value="scalping" className="text-white hover:bg-slate-700">Scalping</SelectItem>
                         <SelectItem value="daytrading" className="text-white hover:bg-slate-700">Day Trading</SelectItem>
                         <SelectItem value="swing-trading" className="text-white hover:bg-slate-700">Swing Trading</SelectItem>
