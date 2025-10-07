@@ -152,10 +152,10 @@ const ChartAnalyzer = () => {
           <div className="max-w-6xl mx-auto">
             {/* Hero Section */}
             <div className="text-center mb-12">
-              <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white via-slate-200 to-amber-200 bg-clip-text text-transparent">
+              <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-white via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-lg">
                 Professional Chart Analysis
               </h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+              <p className="text-xl text-slate-200 max-w-3xl mx-auto mb-8 leading-relaxed">
                 Upload your trading chart and get comprehensive AI-powered analysis with technical signals, 
                 market sentiment, and strategic recommendations.
               </p>
