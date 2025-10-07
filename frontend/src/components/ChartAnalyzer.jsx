@@ -129,18 +129,18 @@ const ChartAnalyzer = () => {
       
       <div className="relative z-10">
         {/* Header */}
-        <header className="border-b border-slate-700/50 bg-slate-900/80 backdrop-blur-xl">
+        <header className="border-b border-white/10 bg-white/5 backdrop-blur-xl shadow-xl">
           <div className="container mx-auto px-6 py-6">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">
-                  <BarChart3 className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg ring-1 ring-amber-400/20">
+                  <BarChart3 className="w-7 h-7 text-white drop-shadow-sm" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 bg-clip-text text-transparent drop-shadow-sm">
                     EnsoTrade
                   </h1>
-                  <p className="text-slate-400 text-sm">AI-Powered Chart Analysis</p>
+                  <p className="text-slate-300 text-sm font-medium">AI-Powered Chart Analysis</p>
                 </div>
               </div>
             </div>
