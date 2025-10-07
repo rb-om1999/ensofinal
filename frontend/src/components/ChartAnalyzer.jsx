@@ -360,9 +360,9 @@ const ChartAnalyzer = () => {
                         <CardContent>
                           <div className="grid gap-2" data-testid="technical-signals">
                             {analysis.signals.map((signal, index) => (
-                              <div key={index} className="flex items-center space-x-3 p-3 bg-slate-700/30 rounded-lg">
-                                <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
-                                <span className="text-slate-200">{signal}</span>
+                              <div key={index} className="flex items-center space-x-3 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200">
+                                <div className="w-2 h-2 bg-amber-400 rounded-full shadow-sm shadow-amber-400/50"></div>
+                                <span className="text-slate-100 font-medium">{signal}</span>
                               </div>
                             ))}
                           </div>
