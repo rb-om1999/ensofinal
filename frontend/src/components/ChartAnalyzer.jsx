@@ -225,30 +225,45 @@ const ChartAnalyzer = () => {
                     />
                   </div>
 
-                  {/* Timeframe Input */}
+                  {/* Timeframe Select */}
                   <div className="space-y-2">
                     <Label htmlFor="timeframe" className="text-white font-medium">Timeframe *</Label>
-                    <Input
-                      id="timeframe"
-                      data-testid="timeframe-input"
-                      placeholder="e.g., 1H, 4H, 1D, 1W"
-                      value={timeframe}
-                      onChange={(e) => setTimeframe(e.target.value)}
-                      className="bg-slate-800 border-slate-600 text-white placeholder:text-slate-500 focus:border-amber-400"
-                    />
+                    <Select value={timeframe} onValueChange={setTimeframe}>
+                      <SelectTrigger data-testid="timeframe-select" className="bg-slate-800 border-slate-600 text-white focus:border-amber-400">
+                        <SelectValue placeholder="Select timeframe" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-slate-800 border-slate-600">
+                        <SelectItem value="1m" className="text-white hover:bg-slate-700">1 Minute</SelectItem>
+                        <SelectItem value="5m" className="text-white hover:bg-slate-700">5 Minutes</SelectItem>
+                        <SelectItem value="15m" className="text-white hover:bg-slate-700">15 Minutes</SelectItem>
+                        <SelectItem value="30m" className="text-white hover:bg-slate-700">30 Minutes</SelectItem>
+                        <SelectItem value="1H" className="text-white hover:bg-slate-700">1 Hour</SelectItem>
+                        <SelectItem value="2H" className="text-white hover:bg-slate-700">2 Hours</SelectItem>
+                        <SelectItem value="4H" className="text-white hover:bg-slate-700">4 Hours</SelectItem>
+                        <SelectItem value="6H" className="text-white hover:bg-slate-700">6 Hours</SelectItem>
+                        <SelectItem value="12H" className="text-white hover:bg-slate-700">12 Hours</SelectItem>
+                        <SelectItem value="1D" className="text-white hover:bg-slate-700">1 Day</SelectItem>
+                        <SelectItem value="3D" className="text-white hover:bg-slate-700">3 Days</SelectItem>
+                        <SelectItem value="1W" className="text-white hover:bg-slate-700">1 Week</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
-                  {/* Trading Style Input */}
+                  {/* Trading Style Select */}
                   <div className="space-y-2">
                     <Label htmlFor="tradingStyle" className="text-white font-medium">Trading Style (Optional)</Label>
-                    <Input
-                      id="tradingStyle"
-                      data-testid="trading-style-input"
-                      placeholder="e.g., Scalping, Swing Trading, Day Trading"
-                      value={tradingStyle}
-                      onChange={(e) => setTradingStyle(e.target.value)}
-                      className="bg-slate-800 border-slate-600 text-white placeholder:text-slate-500 focus:border-amber-400"
-                    />
+                    <Select value={tradingStyle} onValueChange={setTradingStyle}>
+                      <SelectTrigger data-testid="trading-style-select" className="bg-slate-800 border-slate-600 text-white focus:border-amber-400">
+                        <SelectValue placeholder="Select trading style" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-slate-800 border-slate-600">
+                        <SelectItem value="scalping" className="text-white hover:bg-slate-700">Scalping</SelectItem>
+                        <SelectItem value="daytrading" className="text-white hover:bg-slate-700">Day Trading</SelectItem>
+                        <SelectItem value="swing-trading" className="text-white hover:bg-slate-700">Swing Trading</SelectItem>
+                        <SelectItem value="long-term" className="text-white hover:bg-slate-700">Long Term</SelectItem>
+                        <SelectItem value="intraday-trading" className="text-white hover:bg-slate-700">Intraday Trading</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   {/* Error Alert */}
