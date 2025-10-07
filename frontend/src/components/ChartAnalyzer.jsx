@@ -306,7 +306,7 @@ const ChartAnalyzer = () => {
                 {analysis ? (
                   <>
                     {/* Analysis Overview */}
-                    <Card className="bg-slate-800/50 backdrop-blur-xl border-slate-700/50 shadow-2xl" data-testid="analysis-results">
+                    <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300" data-testid="analysis-results">
                       <CardHeader>
                         <CardTitle className="text-xl text-white flex items-center gap-2">
                           <TrendingUp className="w-5 h-5 text-amber-400" />
