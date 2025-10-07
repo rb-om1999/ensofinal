@@ -7,6 +7,7 @@ import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { Alert, AlertDescription } from './ui/alert';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Upload, TrendingUp, BarChart3, Brain, Target, Shield, DollarSign } from 'lucide-react';
 import axios from 'axios';
 
