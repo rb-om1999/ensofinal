@@ -180,12 +180,12 @@ const ChartAnalyzer = () => {
                   <div className="space-y-2">
                     <Label className="text-white font-medium">Chart Image *</Label>
                     <div
-                      className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 ${
+                      className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 backdrop-blur-sm ${
                         dragActive
-                          ? 'border-amber-400 bg-amber-400/5'
+                          ? 'border-amber-400 bg-amber-400/10 shadow-lg shadow-amber-500/20'
                           : file
-                          ? 'border-green-500 bg-green-500/5'
-                          : 'border-slate-600 hover:border-slate-500 bg-slate-800/30'
+                          ? 'border-green-400 bg-green-400/10 shadow-lg shadow-green-500/20'
+                          : 'border-white/20 hover:border-white/30 bg-white/5 hover:bg-white/10'
                       }`}
                       onDragEnter={handleDrag}
                       onDragLeave={handleDrag}
