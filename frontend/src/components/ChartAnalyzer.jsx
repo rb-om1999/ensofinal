@@ -239,7 +239,7 @@ const ChartAnalyzer = () => {
                         <SelectValue placeholder="Select timeframe" />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
-                        <SelectItem value="1m" className="text-white hover:bg-slate-700">1 Minute</SelectItem>
+                        <SelectItem value="1m" className="text-white hover:bg-white/10 focus:bg-white/10">1 Minute</SelectItem>
                         <SelectItem value="5m" className="text-white hover:bg-slate-700">5 Minutes</SelectItem>
                         <SelectItem value="15m" className="text-white hover:bg-slate-700">15 Minutes</SelectItem>
                         <SelectItem value="30m" className="text-white hover:bg-slate-700">30 Minutes</SelectItem>
