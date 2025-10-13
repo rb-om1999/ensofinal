@@ -73,7 +73,7 @@ def has_sufficient_credits(user_metadata: dict, email: str) -> bool:
     if plan == "pro":
         return True
     
-    credits = user_metadata.get("credits_remaining", 5)
+    credits = user_metadata.get("credits_remaining", 0)
     return credits > 0
 
 def get_gemini_prompt(user_metadata: dict, email: str, symbol: str, timeframe: str, trading_style: str = None) -> str:
