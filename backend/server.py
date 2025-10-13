@@ -167,21 +167,28 @@ async def register(user_data: UserCreate):
 
 @api_router.post("/auth/login", response_model=Token)
 async def login(user_data: UserLogin):
-    # Find user
-    user = await db.users.find_one({"email": user_data.email})
-    if not user:
-        raise HTTPException(status_code=401, detail="Incorrect email or password")
-    
-    # Verify password
-    if not verify_password(user_data.password, user['hashed_password']):
-        raise HTTPException(status_code=401, detail="Incorrect email or password")
-    
-    # Create access token
-    access_token = create_access_token(data={"sub": user['id']})
-    
-    user_obj = User(**{k: v for k, v in user.items() if k != 'hashed_password'})
-    
-    return Token(access_token=access_token, token_type="bearer", user=user_obj)
+    try:
+        # Find user
+        user = await db.users.find_one({"email": user_data.email})
+        if not user:
+            raise HTTPException(status_code=401, detail="Incorrect email or password")
+        
+        # Verify password
+        if not verify_password(user_data.password, user['hashed_password']):
+            raise HTTPException(status_code=401, detail="Incorrect email or password")
+        
+        # Create access token
+        access_token = create_access_token(data={"sub": user['id']})
+        
+        user_obj = User(**{k: v for k, v in user.items() if k != 'hashed_password'})
+        
+        return Token(access_token=access_token, token_type="bearer", user=user_obj)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Login error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Login failed")
 
 # Protected routes
 @api_router.get("/")
