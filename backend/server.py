@@ -96,16 +96,22 @@ class StatusCheckCreate(BaseModel):
 
 # Helper functions
 def verify_password(plain_password, hashed_password):
-    # Handle bcrypt 72-byte limit by using SHA256 for long passwords
-    if len(plain_password.encode('utf-8')) > 72:
-        plain_password = hashlib.sha256(plain_password.encode('utf-8')).hexdigest()
-    return pwd_context.verify(plain_password, hashed_password)
+    # Split stored hash to get salt and hash
+    try:
+        stored_salt, stored_hash = hashed_password.split(':')
+        # Hash the provided password with the stored salt
+        password_hash = hashlib.sha256((plain_password + stored_salt).encode()).hexdigest()
+        return password_hash == stored_hash
+    except:
+        return False
 
 def get_password_hash(password):
-    # Handle bcrypt 72-byte limit by using SHA256 for long passwords
-    if len(password.encode('utf-8')) > 72:
-        password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-    return pwd_context.hash(password)
+    # Generate a random salt
+    salt = secrets.token_hex(32)
+    # Hash password with salt
+    password_hash = hashlib.sha256((password + salt).encode()).hexdigest()
+    # Return salt:hash format
+    return f"{salt}:{password_hash}"
 
 def create_access_token(data: dict):
     to_encode = data.copy()
