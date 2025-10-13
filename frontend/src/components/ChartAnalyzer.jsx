@@ -241,16 +241,16 @@ const ChartAnalyzer = () => {
                       <div className="flex flex-col">
                         <span className="text-white font-medium">{user.name}</span>
                         <div className="flex items-center gap-2 text-xs">
-                          {userProfile?.is_admin ? (
+                          {isAdmin ? (
                             <span className="text-purple-400 font-medium">Admin</span>
-                          ) : userProfile?.plan === 'pro' ? (
+                          ) : isPro ? (
                             <span className="text-amber-400 font-medium flex items-center gap-1">
                               <Crown className="w-3 h-3" />
                               Pro
                             </span>
                           ) : (
                             <span className="text-slate-400">
-                              {userProfile?.credits_remaining || 0}/5 credits
+                              {isAdmin || userProfile?.plan === 'pro' ? '∞' : (userProfile?.credits_remaining || 0)}/5 credits
                             </span>
                           )}
                         </div>
