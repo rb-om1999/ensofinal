@@ -305,6 +305,18 @@ async def root():
 @api_router.post("/analyze", response_model=dict)
 async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(get_current_user)):
     try:
+        # Check if user has sufficient credits
+        if not has_sufficient_credits(current_user.user_metadata, current_user.email):
+            raise HTTPException(
+                status_code=402, 
+                detail={
+                    "error": "insufficient_credits",
+                    "message": "You have run out of free analyses. Upgrade to Pro for unlimited access!",
+                    "credits_remaining": current_user.user_metadata.get("credits_remaining", 0),
+                    "plan": current_user.user_metadata.get("plan", "free")
+                }
+            )
+        
         # Get API key from environment
         api_key = os.environ.get('EMERGENT_LLM_KEY')
         if not api_key:
@@ -318,23 +330,14 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
             system_message="You are an expert trading analyst."
         ).with_model("gemini", "gemini-2.0-flash")
         
-        # Prepare the prompt
-        style_text = f"Tailor the analysis to the user's chosen trading style ({request.tradingStyle})" if request.tradingStyle else ''
-        prompt = f"""You are an expert trading analyst. Analyze the trading chart image provided. Please provide a comprehensive analysis in the following JSON format:
-
-{{
-  "signals": ["List of 3-5 specific technical signals you identify in the chart"],
-  "movement": "Bullish|Bearish|Neutral",
-  "action": "Buy|Sell|Hold",
-  "confidence": "High|Medium|Low",
-  "summary": "A concise 2-3 sentence summary of your analysis and reasoning. Also suggest leverage, take profit and stoploss, they must be accurate. stop-loss amount should not be greater than the profit margin.",
-  "fullAnalysis": "A detailed paragraph explaining your complete analysis, including technical patterns, support/resistance levels, indicators, and market context",
-  "customStrategy": "Tailor the analysis to the user's chosen trading style ({request.tradingStyle or 'suggest a suitable strategy'}) and provide specific entry/exit strategies."
-}}
-
-Symbol: {request.symbol.upper()}
-Timeframe: {request.timeframe}
-Please do not provide anything outside JSON{style_text}"""
+        # Get appropriate prompt based on user plan
+        prompt = get_gemini_prompt(
+            current_user.user_metadata, 
+            current_user.email, 
+            request.symbol, 
+            request.timeframe, 
+            request.tradingStyle
+        )
         
         # Create image content
         image_content = ImageContent(image_base64=request.imageBase64)
