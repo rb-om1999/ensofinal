@@ -11,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ChartAnalyzer />} />
           <Route path="/analyze" element={<ChartAnalyzer />} />
+          <Route path="/verify" element={<VerifyEmail />} />
         </Routes>
       </BrowserRouter>
     </div>
