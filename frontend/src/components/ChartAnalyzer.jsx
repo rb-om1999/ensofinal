@@ -8,11 +8,13 @@ import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { Alert, AlertDescription } from './ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Upload, TrendingUp, BarChart3, Brain, Target, Shield, DollarSign, User, LogOut, LogIn, Crown, Settings } from 'lucide-react';
+import { Upload, TrendingUp, BarChart3, Brain, Target, Shield, DollarSign, User, LogOut, LogIn, Crown, Settings, History } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import axios from 'axios';
 import AuthModal from './AuthModal';
 import UpgradeModal from './UpgradeModal';
 import ProfileSettings from './ProfileSettings';
+import AnalysisHistory from './AnalysisHistory';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
