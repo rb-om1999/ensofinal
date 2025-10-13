@@ -315,6 +315,10 @@ async def login(user_data: UserLogin):
         if not verify_password(user_data.password, user['hashed_password']):
             raise HTTPException(status_code=401, detail="Incorrect email or password")
         
+        # Check if user is verified
+        if not user.get('is_verified', False):
+            raise HTTPException(status_code=403, detail="Email not verified. Please check your email and verify your account before logging in.")
+        
         # Create access token
         access_token = create_access_token(data={"sub": user['id']})
         
