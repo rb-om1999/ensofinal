@@ -294,6 +294,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
             </form>
           </TabsContent>
         </Tabs>
+        )}
       </DialogContent>
     </Dialog>
   );
