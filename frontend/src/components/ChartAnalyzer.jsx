@@ -31,6 +31,8 @@ const ChartAnalyzer = () => {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showProfileSettings, setShowProfileSettings] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
+  const [riskProfile, setRiskProfile] = useState('');
+  const [balance, setBalance] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
