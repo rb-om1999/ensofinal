@@ -139,6 +139,14 @@ const ChartAnalyzer = () => {
       });
 
       setAnalysis(response.data);
+      
+      // Update user profile with new credits
+      if (response.data.credits_remaining !== undefined) {
+        setUserProfile(prev => ({
+          ...prev,
+          credits_remaining: response.data.credits_remaining
+        }));
+      }
     } catch (err) {
       console.error('Analysis error:', err);
       if (err.response?.status === 401) {
