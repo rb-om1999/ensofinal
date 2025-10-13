@@ -720,6 +720,409 @@ const ChartAnalyzer = () => {
                 )}
               </div>
             </div>
+          </TabsContent>
+
+          <TabsContent value="history" className="mt-0">
+            <AnalysisHistory 
+              user={user} 
+              isAdmin={isAdmin} 
+              isPro={isPro} 
+            />
+          </TabsContent>
+        </Tabs>
+      ) : (
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Upload & Analysis Form for non-authenticated or free users */}
+          <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+            <CardHeader className="bg-gradient-to-r from-white/5 to-transparent">
+              <CardTitle className="text-2xl text-white flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">
+                  <Upload className="w-5 h-5 text-white" />
+                </div>
+                Chart Upload & Analysis
+              </CardTitle>
+              <CardDescription className="text-slate-300">
+                Upload your chart image and provide trading details for AI analysis
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* File Upload */}
+              <div className="space-y-2">
+                <Label className="text-white font-medium">Chart Image *</Label>
+                <div
+                  className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 backdrop-blur-sm ${
+                    dragActive
+                      ? 'border-amber-400 bg-amber-400/10 shadow-lg shadow-amber-500/20'
+                      : file
+                      ? 'border-green-400 bg-green-400/10 shadow-lg shadow-green-500/20'
+                      : 'border-white/20 hover:border-white/30 bg-white/5 hover:bg-white/10'
+                  }`}
+                  onDragEnter={handleDrag}
+                  onDragLeave={handleDrag}
+                  onDragOver={handleDrag}
+                  onDrop={handleDrop}
+                >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileSelect(e.target.files[0])}
+                    className="hidden"
+                    id="file-upload"
+                    data-testid="chart-file-upload"
+                  />
+                  <label htmlFor="file-upload" className="cursor-pointer">
+                    <div className="space-y-4">
+                      <div className="w-18 h-18 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full mx-auto flex items-center justify-center ring-1 ring-white/10">
+                        <Upload className="w-10 h-10 text-amber-400 drop-shadow-sm" />
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-lg">
+                          {file ? file.name : 'Drop your chart here or click to upload'}
+                        </p>
+                        <p className="text-slate-300 text-sm mt-1 font-medium">
+                          PNG, JPG up to 4MB
+                        </p>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Symbol Input */}
+              <div className="space-y-2">
+                <Label htmlFor="symbol" className="text-white font-medium">Trading Symbol *</Label>
+                <Input
+                  id="symbol"
+                  data-testid="symbol-input"
+                  placeholder="e.g., BTCUSDT, EURUSD, AAPL"
+                  value={symbol}
+                  onChange={(e) => setSymbol(e.target.value.toUpperCase())}
+                  className="bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-slate-400 focus:border-amber-400 focus:bg-white/15 transition-all duration-200"
+                />
+              </div>
+
+              {/* Timeframe Select */}
+              <div className="space-y-2">
+                <Label htmlFor="timeframe" className="text-white font-medium">Timeframe *</Label>
+                <Select value={timeframe} onValueChange={setTimeframe}>
+                  <SelectTrigger data-testid="timeframe-select" className="bg-white/10 backdrop-blur-sm border-white/20 text-white focus:border-amber-400 focus:bg-white/15 transition-all duration-200">
+                    <SelectValue placeholder="Select timeframe" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
+                    <SelectItem value="1m" className="text-white hover:bg-white/10 focus:bg-white/10">1 Minute</SelectItem>
+                    <SelectItem value="5m" className="text-white hover:bg-white/10 focus:bg-white/10">5 Minutes</SelectItem>
+                    <SelectItem value="15m" className="text-white hover:bg-white/10 focus:bg-white/10">15 Minutes</SelectItem>
+                    <SelectItem value="30m" className="text-white hover:bg-white/10 focus:bg-white/10">30 Minutes</SelectItem>
+                    <SelectItem value="1H" className="text-white hover:bg-white/10 focus:bg-white/10">1 Hour</SelectItem>
+                    <SelectItem value="2H" className="text-white hover:bg-white/10 focus:bg-white/10">2 Hours</SelectItem>
+                    <SelectItem value="4H" className="text-white hover:bg-white/10 focus:bg-white/10">4 Hours</SelectItem>
+                    <SelectItem value="6H" className="text-white hover:bg-white/10 focus:bg-white/10">6 Hours</SelectItem>
+                    <SelectItem value="12H" className="text-white hover:bg-white/10 focus:bg-white/10">12 Hours</SelectItem>
+                    <SelectItem value="1D" className="text-white hover:bg-white/10 focus:bg-white/10">1 Day</SelectItem>
+                    <SelectItem value="3D" className="text-white hover:bg-white/10 focus:bg-white/10">3 Days</SelectItem>
+                    <SelectItem value="1W" className="text-white hover:bg-white/10 focus:bg-white/10">1 Week</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Trading Style Select */}
+              <div className="space-y-2">
+                <Label htmlFor="tradingStyle" className="text-white font-medium">Trading Strategy (Optional)</Label>
+                <Select value={tradingStyle} onValueChange={setTradingStyle}>
+                  <SelectTrigger data-testid="trading-style-select" className="bg-white/10 backdrop-blur-sm border-white/20 text-white focus:border-amber-400 focus:bg-white/15 transition-all duration-200">
+                    <SelectValue placeholder="Select trading strategy" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl max-h-64 overflow-y-auto">
+                    {/* Advanced Strategies */}
+                    <div className="px-2 py-1 text-xs font-semibold text-amber-400 uppercase tracking-wider">Advanced</div>
+                    <SelectItem value="smart-money-concepts" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Smart Money Concepts (SMC)</SelectItem>
+                    <SelectItem value="liquidity-sweep" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Liquidity Sweep</SelectItem>
+                    <SelectItem value="pullback-retracement" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Pullback Retracement</SelectItem>
+                    
+                    {/* Scalping Strategies */}
+                    <div className="px-2 py-1 text-xs font-semibold text-amber-400 uppercase tracking-wider mt-2">Scalping</div>
+                    <SelectItem value="scalping-ema" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Scalping EMA</SelectItem>
+                    <SelectItem value="volatility-breakout" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Volatility Breakout</SelectItem>
+                    <SelectItem value="breakout-retest" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Breakout Retest</SelectItem>
+                    <SelectItem value="squeeze-momentum" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Squeeze Momentum</SelectItem>
+                    <SelectItem value="mean-reversion" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Mean Reversion</SelectItem>
+                    
+                    {/* Swing Strategies */}
+                    <div className="px-2 py-1 text-xs font-semibold text-amber-400 uppercase tracking-wider mt-2">Swing</div>
+                    <SelectItem value="momentum-swing" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Momentum Swing</SelectItem>
+                    <SelectItem value="trend-following" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Trend Following</SelectItem>
+                    <SelectItem value="trend-reversal" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Trend Reversal</SelectItem>
+                    <SelectItem value="divergence-play" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Divergence Play</SelectItem>
+                    <SelectItem value="continuation-pattern" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Continuation Pattern</SelectItem>
+                    <SelectItem value="range-bound" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Range Bound</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Pro/Admin Only Settings */}
+              {(isPro || isAdmin) && (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Risk Profile */}
+                    <div className="space-y-2">
+                      <Label className="text-white font-medium flex items-center gap-2">
+                        Risk Profile
+                        <Crown className="w-3 h-3 text-amber-400" />
+                      </Label>
+                      <Select value={riskProfile} onValueChange={setRiskProfile}>
+                        <SelectTrigger className="bg-white/10 backdrop-blur-sm border-white/20 text-white focus:border-amber-400 focus:bg-white/15 transition-all duration-200">
+                          <SelectValue placeholder="Select risk profile" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
+                          <SelectItem value="conservative" className="text-white hover:bg-white/10 focus:bg-white/10">Conservative</SelectItem>
+                          <SelectItem value="moderate" className="text-white hover:bg-white/10 focus:bg-white/10">Moderate</SelectItem>
+                          <SelectItem value="aggressive" className="text-white hover:bg-white/10 focus:bg-white/10">Aggressive</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Trading Balance */}
+                    <div className="space-y-2">
+                      <Label className="text-white font-medium flex items-center gap-2">
+                        <DollarSign className="w-4 h-4" />
+                        Trading Balance
+                        <Crown className="w-3 h-3 text-amber-400" />
+                      </Label>
+                      <Input
+                        placeholder="e.g., $10,000"
+                        value={balance}
+                        onChange={(e) => setBalance(e.target.value)}
+                        className="bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-slate-400 focus:border-amber-400 focus:bg-white/15 transition-all duration-200"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* Error Alert */}
+              {error && (
+                <Alert className="border-red-400/50 bg-red-500/10 backdrop-blur-sm text-red-200 shadow-lg" data-testid="error-alert">
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+
+              {/* Analyze Button */}
+              <Button
+                onClick={analyzeChart}
+                disabled={isAnalyzing || !file || !symbol || !timeframe}
+                className="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:via-orange-600 hover:to-amber-700 text-white font-semibold py-4 text-lg shadow-lg shadow-amber-500/30 hover:shadow-amber-500/40 transition-all duration-300 disabled:opacity-50 disabled:shadow-none ring-1 ring-amber-400/20 hover:ring-amber-400/40"
+                data-testid="analyze-chart-button"
+              >
+                {isAnalyzing ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Analyzing Chart...</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <Brain className="w-5 h-5" />
+                    <span>{user ? 'Analyze Chart' : 'Sign In to Analyze'}</span>
+                  </div>
+                )}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Analysis Results */}
+          <div className="space-y-6">
+            {analysis ? (
+              <>
+                {/* Analysis Overview */}
+                <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300" data-testid="analysis-results">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-white flex items-center gap-2">
+                      <TrendingUp className="w-5 h-5 text-amber-400" />
+                      Analysis Overview
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label className="text-slate-400 text-sm">Market Movement</Label>
+                        <Badge className={`${getMovementColor(analysis.movement)} font-medium`} data-testid="movement-badge">
+                          {analysis.movement || 'Unknown'}
+                        </Badge>
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-slate-400 text-sm">Recommended Action</Label>
+                        {(isPro || isAdmin) ? (
+                          <Button size="sm" className={getActionColor(analysis.action)} data-testid="action-badge">
+                            {analysis.action || 'Hold'}
+                          </Button>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 bg-slate-600 rounded flex items-center justify-center">
+                              <Crown className="w-3 h-3 text-amber-400" />
+                            </div>
+                            <span className="text-slate-400 text-sm">Upgrade to Pro</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label className="text-slate-400 text-sm">Confidence Level</Label>
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-1 bg-slate-700 rounded-full h-2">
+                          <div
+                            className={`h-2 rounded-full ${getConfidenceColor(analysis.confidence)} transition-all duration-500`}
+                            style={{
+                              width: analysis.confidence === 'High' ? '85%' : analysis.confidence === 'Medium' ? '60%' : '35%'
+                            }}
+                          ></div>
+                        </div>
+                        <span className="text-white font-medium" data-testid="confidence-level">
+                          {analysis.confidence || 'Unknown'}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Technical Signals - Only for Pro/Admin */}
+                {analysis.signals && analysis.signals.length > 0 && (isPro || isAdmin) && (
+                  <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-white flex items-center gap-2">
+                        <Target className="w-5 h-5 text-amber-400" />
+                        Technical Signals
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid gap-2" data-testid="technical-signals">
+                        {analysis.signals.map((signal, index) => (
+                          <div key={index} className="flex items-center space-x-3 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200">
+                            <div className="w-2 h-2 bg-amber-400 rounded-full shadow-sm shadow-amber-400/50"></div>
+                            <span className="text-slate-100 font-medium">{signal}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Analysis Summary */}
+                <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-white flex items-center gap-2">
+                      <DollarSign className="w-5 h-5 text-amber-400" />
+                      Summary & Strategy
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-3">
+                      <div>
+                        <Label className="text-slate-400 text-sm font-medium">Quick Summary</Label>
+                        <p className="text-slate-200 mt-1 leading-relaxed" data-testid="analysis-summary">
+                          {analysis.summary || 'No summary available'}
+                        </p>
+                      </div>
+                      
+                      {analysis.customStrategy && (
+                        <>
+                          <Separator className="bg-slate-600" />
+                          <div>
+                            <Label className="text-slate-400 text-sm font-medium">Custom Strategy</Label>
+                            <p className="text-slate-200 mt-1 leading-relaxed" data-testid="custom-strategy">
+                              {analysis.customStrategy}
+                            </p>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Detailed Analysis */}
+                {analysis.fullAnalysis && (isPro || isAdmin) && (
+                  <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-white flex items-center gap-2">
+                        <Shield className="w-5 h-5 text-amber-400" />
+                        Detailed Analysis
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-slate-200 leading-relaxed" data-testid="full-analysis">
+                        {analysis.fullAnalysis}
+                      </p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Upgrade Prompt for Free Users */}
+                {!isPro && !isAdmin && analysis && (
+                  <Card className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-amber-400/30 ring-2 ring-amber-400/20 shadow-2xl">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-white flex items-center gap-2">
+                        <Crown className="w-5 h-5 text-amber-400" />
+                        Unlock Advanced Analysis
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 text-slate-300">
+                          <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                            <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                          </div>
+                          <span>Technical signals and indicators analysis</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-slate-300">
+                          <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                            <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                          </div>
+                          <span>Buy/Sell/Hold recommendations</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-slate-300">
+                          <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                            <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                          </div>
+                          <span>Take profit and stop loss suggestions</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-slate-300">
+                          <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                            <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                          </div>
+                          <span>Custom trading strategies</span>
+                        </div>
+                      </div>
+                      <Button
+                        onClick={() => setShowUpgradeModal(true)}
+                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3"
+                      >
+                        <Crown className="w-4 h-4 mr-2" />
+                        Upgrade to Pro - $29/month
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )}
+              </>
+            ) : (
+              <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10">
+                <CardContent className="text-center py-12">
+                  <div className="space-y-4">
+                    <div className="w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full mx-auto flex items-center justify-center ring-1 ring-white/10">
+                      <Brain className="w-10 h-10 text-amber-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-2">Ready to Analyze</h3>
+                      <p className="text-slate-300">
+                        {user ? 'Upload your trading chart and fill in the details to get started with AI-powered analysis.' : 'Sign in to upload your trading chart and get AI-powered analysis.'}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      )}
+            </div>
           </div>
         </main>
       </div>
