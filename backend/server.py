@@ -73,7 +73,7 @@ async def analyze_chart(request: ChartAnalysisRequest):
         style_text = f"Tailor the analysis to the user's chosen trading style ({request.tradingStyle})" if request.tradingStyle else ''
         prompt = f"""You are an expert trading analyst. Analyze the trading chart image provided. Please provide a comprehensive analysis in the following JSON format:
 
-{{
+ 
   "signals": ["List of 3-5 specific technical signals you identify in the chart"],
   "movement": "Bullish|Bearish|Neutral",
   "action": "Buy|Sell|Hold",
@@ -81,7 +81,10 @@ async def analyze_chart(request: ChartAnalysisRequest):
   "summary": "A concise 2-3 sentence summary of your analysis and reasoning. Also suggest leverage, take profit and stoploss, they must be accurate. stop-loss amount should not be greater than the profit margin.",
   "fullAnalysis": "A detailed paragraph explaining your complete analysis, including technical patterns, support/resistance levels, indicators, and market context",
   "customStrategy": "Tailor the analysis to the user's chosen trading style ({request.tradingStyle or 'suggest a suitable strategy'}) and provide specific entry/exit strategies."
-}}
+ 
+When suggesting take profit and stop loss, use logical levels based on nearby swing highs/lows and risk-to-reward of 1.5:1 to 2:1.
+If the exact price levels are unclear, provide the ratio or percentage distance instead.
+Always keep values consistent with realistic volatility on the chart.
 
 Symbol: {request.symbol.upper()}
 Timeframe: {request.timeframe}

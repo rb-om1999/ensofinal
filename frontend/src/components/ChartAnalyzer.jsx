@@ -263,11 +263,20 @@ const ChartAnalyzer = () => {
                         <SelectValue placeholder="Select trading style" />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
-                        <SelectItem value="scalping" className="text-white hover:bg-slate-700">Scalping</SelectItem>
-                        <SelectItem value="daytrading" className="text-white hover:bg-slate-700">Day Trading</SelectItem>
-                        <SelectItem value="swing-trading" className="text-white hover:bg-slate-700">Swing Trading</SelectItem>
-                        <SelectItem value="long-term" className="text-white hover:bg-slate-700">Long Term</SelectItem>
-                        <SelectItem value="intraday-trading" className="text-white hover:bg-slate-700">Intraday Trading</SelectItem>
+                        <SelectItem value="smart-money-concepts" className="text-white hover:bg-slate-700">Smart Money Concepts (SMC)</SelectItem>
+                        <SelectItem value="liquidity-sweep" className="text-white hover:bg-slate-700">Liquidity Sweep</SelectItem>
+                        <SelectItem value="pullback-retracement" className="text-white hover:bg-slate-700">Pullback Retracement</SelectItem>
+                        <SelectItem value="scalping-ema" className="text-white hover:bg-slate-700">Scalping EMA</SelectItem>
+                        <SelectItem value="volatality-breakout" className="text-white hover:bg-slate-700">Volatality Breakout</SelectItem>
+                        <SelectItem value="breakout-retest" className="text-white hover:bg-slate-700">Breakout Retest</SelectItem>
+                        <SelectItem value="squeeze-momentum" className="text-white hover:bg-slate-700">Squeeze Momentum</SelectItem>
+                        <SelectItem value="mean-reversion" className="text-white hover:bg-slate-700">Mean Reversion</SelectItem>
+                        <SelectItem value="momentum-swing" className="text-white hover:bg-slate-700">Momentum Swing</SelectItem>
+                        <SelectItem value="trend-following" className="text-white hover:bg-slate-700">Trend Following</SelectItem>
+                        <SelectItem value="trend-reversal" className="text-white hover:bg-slate-700">Trend Reversal</SelectItem>
+                        <SelectItem value="divergence-play" className="text-white hover:bg-slate-700">Divergence Play</SelectItem>
+                        <SelectItem value="continuation-pattern" className="text-white hover:bg-slate-700">Continuation Pattern</SelectItem>
+                        <SelectItem value="range-bound" className="text-white hover:bg-slate-700">Range Bound</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -404,7 +413,7 @@ const ChartAnalyzer = () => {
 
                     {/* Detailed Analysis */}
                     {analysis.fullAnalysis && (
-                      <Card className="bg-slate-800/50 backdrop-blur-xl border-slate-700/50 shadow-2xl">
+                      <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
                         <CardHeader>
                           <CardTitle className="text-xl text-white flex items-center gap-2">
                             <Shield className="w-5 h-5 text-amber-400" />
