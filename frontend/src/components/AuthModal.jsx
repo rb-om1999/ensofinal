@@ -43,13 +43,33 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
 
       const response = await axios.post(`${API}${endpoint}`, payload);
       
-      localStorage.setItem('token', response.data.access_token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      
-      onAuthSuccess(response.data.user);
-      onClose();
+      if (isLogin) {
+        // Login successful
+        localStorage.setItem('token', response.data.access_token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        onAuthSuccess(response.data.user);
+        onClose();
+      } else {
+        // Registration successful - show verification message
+        setShowVerificationMessage(true);
+        setVerificationEmail(formData.email);
+      }
     } catch (err) {
       setError(err.response?.data?.detail || 'Authentication failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    setIsLoading(true);
+    setError('');
+
+    try {
+      await axios.post(`${API}/auth/resend-verification`, { email: verificationEmail });
+      setError('Verification email resent! Please check your inbox.');
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Failed to resend verification email');
     } finally {
       setIsLoading(false);
     }
