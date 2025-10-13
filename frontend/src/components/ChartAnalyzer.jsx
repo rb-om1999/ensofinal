@@ -37,8 +37,23 @@ const ChartAnalyzer = () => {
     const userData = localStorage.getItem('user');
     if (token && userData) {
       setUser(JSON.parse(userData));
+      fetchUserProfile();
     }
   }, []);
+
+  const fetchUserProfile = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${API}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setUserProfile(response.data);
+    } catch (err) {
+      console.error('Failed to fetch user profile:', err);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
