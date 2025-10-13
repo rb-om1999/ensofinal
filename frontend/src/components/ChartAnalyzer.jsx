@@ -326,7 +326,11 @@ const ChartAnalyzer = () => {
               )}
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            {/* Tab Content */}
+            {(isPro || isAdmin) && user ? (
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+                <TabsContent value="analyze" className="mt-0">
+                  <div className="grid lg:grid-cols-2 gap-8">
               {/* Upload & Analysis Form */}
               <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
                 <CardHeader className="bg-gradient-to-r from-white/5 to-transparent">
