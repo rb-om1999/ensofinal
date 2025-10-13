@@ -332,6 +332,74 @@ async def login(user_data: UserLogin):
         logger.error(f"Login error: {str(e)}")
         raise HTTPException(status_code=500, detail="Login failed")
 
+@api_router.get("/auth/verify")
+async def verify_email(token: str):
+    try:
+        # Find user with verification token
+        user = await db.users.find_one({"verification_token": token})
+        if not user:
+            raise HTTPException(status_code=400, detail="Invalid or expired verification token")
+        
+        # Check if already verified
+        if user.get('is_verified', False):
+            return {"message": "Email already verified"}
+        
+        # Update user as verified
+        await db.users.update_one(
+            {"verification_token": token},
+            {
+                "$set": {"is_verified": True},
+                "$unset": {"verification_token": ""}
+            }
+        )
+        
+        return {"message": "Email verified successfully! You can now log in to your account."}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Email verification error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Verification failed")
+
+@api_router.post("/auth/resend-verification")
+async def resend_verification(email_request: dict):
+    try:
+        email = email_request.get('email')
+        if not email:
+            raise HTTPException(status_code=400, detail="Email is required")
+        
+        # Find user
+        user = await db.users.find_one({"email": email})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Check if already verified
+        if user.get('is_verified', False):
+            raise HTTPException(status_code=400, detail="Email already verified")
+        
+        # Generate new verification token
+        verification_token = generate_verification_token()
+        
+        # Update user with new token
+        await db.users.update_one(
+            {"email": email},
+            {"$set": {"verification_token": verification_token}}
+        )
+        
+        # Send verification email
+        email_sent = await send_verification_email(email, user['name'], verification_token)
+        
+        return {
+            "message": "Verification email sent! Please check your email.",
+            "email_sent": email_sent
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Resend verification error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to resend verification email")
+
 # Protected routes
 @api_router.get("/")
 async def root():
