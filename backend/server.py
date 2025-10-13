@@ -2,45 +2,26 @@ from fastapi import FastAPI, APIRouter, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, EmailStr, validator
+from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 import json
 from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
-import jwt
-import hashlib
-import secrets
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from supabase import create_client, Client
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# Security
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30 * 24 * 60  # 30 days
-
-# Email configuration
-SMTP_SERVER = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
-SMTP_PORT = int(os.environ.get('SMTP_PORT', '587'))
-SMTP_USERNAME = os.environ.get('SMTP_USERNAME', '')
-SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD', '')
-FROM_EMAIL = os.environ.get('FROM_EMAIL', SMTP_USERNAME)
-FRONTEND_URL = os.environ.get('FRONTEND_URL', 'https://chart-whisperer-3.preview.emergentagent.com')
+# Supabase configuration
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 security = HTTPBearer()
-
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -49,41 +30,14 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 # Define Models
-class User(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    email: EmailStr
-    name: str
-    is_verified: bool = False
-    verification_token: Optional[str] = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-
 class UserCreate(BaseModel):
     email: EmailStr
-    name: str
     password: str
-    
-    @validator('password')
-    def validate_password(cls, v):
-        if len(v) < 6:
-            raise ValueError('Password must be at least 6 characters long')
-        if len(v) > 200:  # Reasonable upper limit
-            raise ValueError('Password too long')
-        return v
-    
-    @validator('name')
-    def validate_name(cls, v):
-        if len(v.strip()) < 2:
-            raise ValueError('Name must be at least 2 characters long')
-        return v.strip()
+    name: str
 
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
-
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-    user: User
 
 class ChartAnalysisRequest(BaseModel):
     imageBase64: str
@@ -99,277 +53,87 @@ class ChartAnalysisResponse(BaseModel):
     analysis: dict
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
 # Helper functions
-def verify_password(plain_password, hashed_password):
-    # Split stored hash to get salt and hash
-    try:
-        stored_salt, stored_hash = hashed_password.split(':')
-        # Hash the provided password with the stored salt
-        password_hash = hashlib.sha256((plain_password + stored_salt).encode()).hexdigest()
-        return password_hash == stored_hash
-    except:
-        return False
-
-def get_password_hash(password):
-    # Generate a random salt
-    salt = secrets.token_hex(32)
-    # Hash password with salt
-    password_hash = hashlib.sha256((password + salt).encode()).hexdigest()
-    # Return salt:hash format
-    return f"{salt}:{password_hash}"
-
-def generate_verification_token():
-    return secrets.token_urlsafe(32)
-
-async def send_verification_email(email: str, name: str, verification_token: str):
-    try:
-        # Use a simple HTTP-based email service for demo purposes
-        import requests
-        
-        # For demo - log the verification URL so user can verify manually
-        verification_url = f"{FRONTEND_URL}/verify?token={verification_token}"
-        logger.info(f"Verification URL for {email}: {verification_url}")
-        
-        # Simulate email sending for demo
-        print(f"VERIFICATION EMAIL FOR {email}:")
-        print(f"Visit this link to verify your account: {verification_url}")
-        print("-" * 50)
-        
-        return True
-            
-        # Create verification URL
-        verification_url = f"{FRONTEND_URL}/verify?token={verification_token}"
-        
-        # Create email content
-        subject = "Verify Your EnsoTrade Account"
-        
-        html_body = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #1e293b, #374151); padding: 30px; border-radius: 12px; text-align: center;">
-                <h1 style="color: #f59e0b; margin-bottom: 10px;">Welcome to EnsoTrade</h1>
-                <p style="color: #e2e8f0; font-size: 16px;">AI-Powered Chart Analysis</p>
-            </div>
-            
-            <div style="padding: 30px 0;">
-                <h2 style="color: #1e293b;">Hi {name},</h2>
-                <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-                    Thank you for signing up for EnsoTrade! To complete your registration and start analyzing trading charts with AI, please verify your email address.
-                </p>
-                
-                <div style="text-align: center; margin: 30px 0;">
-                    <a href="{verification_url}" 
-                       style="background: linear-gradient(135deg, #f59e0b, #f97316); 
-                              color: white; 
-                              text-decoration: none; 
-                              padding: 15px 30px; 
-                              border-radius: 8px; 
-                              font-weight: bold; 
-                              display: inline-block;
-                              font-size: 16px;">
-                        Verify Email Address
-                    </a>
-                </div>
-                
-                <p style="color: #6b7280; font-size: 14px;">
-                    If the button doesn't work, copy and paste this link into your browser:<br>
-                    <a href="{verification_url}" style="color: #f59e0b;">{verification_url}</a>
-                </p>
-                
-                <p style="color: #6b7280; font-size: 14px;">
-                    This verification link will expire in 24 hours for security reasons.
-                </p>
-            </div>
-            
-            <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; text-align: center;">
-                <p style="color: #9ca3af; font-size: 12px;">
-                    If you didn't create an EnsoTrade account, you can safely ignore this email.
-                </p>
-            </div>
-        </body>
-        </html>
-        """
-        
-        text_body = f"""
-        Welcome to EnsoTrade!
-        
-        Hi {name},
-        
-        Thank you for signing up for EnsoTrade! To complete your registration and start analyzing trading charts with AI, please verify your email address by clicking the link below:
-        
-        {verification_url}
-        
-        This verification link will expire in 24 hours for security reasons.
-        
-        If you didn't create an EnsoTrade account, you can safely ignore this email.
-        
-        Best regards,
-        The EnsoTrade Team
-        """
-        
-        # Create message
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = subject
-        msg['From'] = FROM_EMAIL
-        msg['To'] = email
-        
-        # Add text and HTML parts
-        text_part = MIMEText(text_body, 'plain')
-        html_part = MIMEText(html_body, 'html')
-        
-        msg.attach(text_part)
-        msg.attach(html_part)
-        
-        # Send email
-        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.starttls()
-        server.login(SMTP_USERNAME, SMTP_PASSWORD)
-        server.send_message(msg)
-        server.quit()
-        
-        logger.info(f"Verification email sent to {email}")
-        return True
-        
-    except Exception as e:
-        logger.error(f"Failed to send verification email: {str(e)}")
-        return False
-
-def create_access_token(data: dict):
-    to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
-
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
     try:
-        payload = jwt.decode(credentials.credentials, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: str = payload.get("sub")
-        if user_id is None:
+        # Verify JWT token with Supabase
+        user = supabase.auth.get_user(credentials.credentials)
+        if not user or not user.user:
             raise HTTPException(status_code=401, detail="Invalid authentication credentials")
-    except jwt.PyJWTError:
+        
+        # Check if email is verified
+        if not user.user.email_confirmed_at:
+            raise HTTPException(status_code=403, detail="Email not verified. Please check your email and verify your account.")
+        
+        return user.user
+        
+    except Exception as e:
         raise HTTPException(status_code=401, detail="Invalid authentication credentials")
-    
-    user = await db.users.find_one({"id": user_id})
-    if user is None:
-        raise HTTPException(status_code=401, detail="User not found")
-    
-    user_obj = User(**user)
-    
-    # Check if user is verified
-    if not user_obj.is_verified:
-        raise HTTPException(status_code=403, detail="Email not verified. Please check your email and verify your account.")
-    
-    return user_obj
 
 # Authentication routes
 @api_router.post("/auth/register")
 async def register(user_data: UserCreate):
     try:
-        # Check if user already exists
-        existing_user = await db.users.find_one({"email": user_data.email})
-        if existing_user:
-            raise HTTPException(status_code=400, detail="Email already registered")
+        # Register user with Supabase Auth
+        response = supabase.auth.sign_up({
+            "email": user_data.email,
+            "password": user_data.password,
+            "options": {
+                "data": {
+                    "name": user_data.name
+                }
+            }
+        })
         
-        # Generate verification token
-        verification_token = generate_verification_token()
+        if response.user:
+            return {
+                "message": "Registration successful! Please check your email to verify your account.",
+                "email_sent": True
+            }
+        else:
+            raise HTTPException(status_code=400, detail="Registration failed")
         
-        # Create new user (unverified)
-        user = User(
-            email=user_data.email,
-            name=user_data.name,
-            is_verified=False,
-            verification_token=verification_token
-        )
-        
-        # Hash password and store user
-        user_dict = user.dict()
-        user_dict['hashed_password'] = get_password_hash(user_data.password)
-        user_dict['timestamp'] = user_dict['created_at'].isoformat()
-        
-        await db.users.insert_one(user_dict)
-        
-        # Send verification email
-        email_sent = await send_verification_email(user_data.email, user_data.name, verification_token)
-        
-        return {
-            "message": "Registration successful! Please check your email to verify your account.",
-            "email_sent": email_sent
-        }
-        
-    except HTTPException:
-        raise
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        logger.error(f"Registration error: {str(e)}")
-        raise HTTPException(status_code=500, detail="Registration failed")
+        error_msg = str(e)
+        if "already registered" in error_msg.lower():
+            raise HTTPException(status_code=400, detail="Email already registered")
+        raise HTTPException(status_code=400, detail=error_msg)
 
-@api_router.post("/auth/login", response_model=Token)
+@api_router.post("/auth/login")
 async def login(user_data: UserLogin):
     try:
-        # Find user
-        user = await db.users.find_one({"email": user_data.email})
-        if not user:
-            raise HTTPException(status_code=401, detail="Incorrect email or password")
+        # Sign in with Supabase Auth
+        response = supabase.auth.sign_in_with_password({
+            "email": user_data.email,
+            "password": user_data.password
+        })
         
-        # Verify password
-        if not verify_password(user_data.password, user['hashed_password']):
-            raise HTTPException(status_code=401, detail="Incorrect email or password")
-        
-        # Check if user is verified
-        if not user.get('is_verified', False):
-            raise HTTPException(status_code=403, detail="Email not verified. Please check your email and verify your account before logging in.")
-        
-        # Create access token
-        access_token = create_access_token(data={"sub": user['id']})
-        
-        user_obj = User(**{k: v for k, v in user.items() if k != 'hashed_password'})
-        
-        return Token(access_token=access_token, token_type="bearer", user=user_obj)
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Login error: {str(e)}")
-        raise HTTPException(status_code=500, detail="Login failed")
-
-@api_router.get("/auth/verify")
-async def verify_email(token: str):
-    try:
-        # Find user with verification token
-        user = await db.users.find_one({"verification_token": token})
-        if not user:
-            raise HTTPException(status_code=400, detail="Invalid or expired verification token")
-        
-        # Check if already verified
-        if user.get('is_verified', False):
-            return {"message": "Email already verified"}
-        
-        # Update user as verified
-        await db.users.update_one(
-            {"verification_token": token},
-            {
-                "$set": {"is_verified": True},
-                "$unset": {"verification_token": ""}
+        if response.user and response.session:
+            # Check if email is verified
+            if not response.user.email_confirmed_at:
+                raise HTTPException(status_code=403, detail="Email not verified. Please check your email and verify your account before logging in.")
+            
+            return {
+                "access_token": response.session.access_token,
+                "token_type": "bearer",
+                "user": {
+                    "id": response.user.id,
+                    "email": response.user.email,
+                    "name": response.user.user_metadata.get("name", ""),
+                    "is_verified": bool(response.user.email_confirmed_at),
+                    "created_at": response.user.created_at
+                }
             }
-        )
-        
-        return {"message": "Email verified successfully! You can now log in to your account."}
-        
+        else:
+            raise HTTPException(status_code=401, detail="Incorrect email or password")
+            
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Email verification error: {str(e)}")
-        raise HTTPException(status_code=500, detail="Verification failed")
+        error_msg = str(e)
+        if "invalid" in error_msg.lower():
+            raise HTTPException(status_code=401, detail="Incorrect email or password")
+        raise HTTPException(status_code=500, detail="Login failed")
 
 @api_router.post("/auth/resend-verification")
 async def resend_verification(email_request: dict):
@@ -378,36 +142,15 @@ async def resend_verification(email_request: dict):
         if not email:
             raise HTTPException(status_code=400, detail="Email is required")
         
-        # Find user
-        user = await db.users.find_one({"email": email})
-        if not user:
-            raise HTTPException(status_code=404, detail="User not found")
-        
-        # Check if already verified
-        if user.get('is_verified', False):
-            raise HTTPException(status_code=400, detail="Email already verified")
-        
-        # Generate new verification token
-        verification_token = generate_verification_token()
-        
-        # Update user with new token
-        await db.users.update_one(
-            {"email": email},
-            {"$set": {"verification_token": verification_token}}
-        )
-        
-        # Send verification email
-        email_sent = await send_verification_email(email, user['name'], verification_token)
+        # Resend confirmation email
+        supabase.auth.resend(type="signup", email=email)
         
         return {
             "message": "Verification email sent! Please check your email.",
-            "email_sent": email_sent
+            "email_sent": True
         }
         
-    except HTTPException:
-        raise
     except Exception as e:
-        logger.error(f"Resend verification error: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to resend verification email")
 
 # Protected routes
@@ -416,7 +159,7 @@ async def root():
     return {"message": "EnsoTrade API is running"}
 
 @api_router.post("/analyze", response_model=dict)
-async def analyze_chart(request: ChartAnalysisRequest, current_user: User = Depends(get_current_user)):
+async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(get_current_user)):
     try:
         # Get API key from environment
         api_key = os.environ.get('EMERGENT_LLM_KEY')
@@ -486,17 +229,20 @@ Please do not provide anything outside JSON{style_text}"""
                 "customStrategy": "Please try again with a clearer image"
             }
         
-        # Store analysis in database
-        analysis_record = ChartAnalysisResponse(
-            user_id=current_user.id,
-            symbol=request.symbol,
-            timeframe=request.timeframe,
-            analysis=analysis_data
-        )
-        
-        record_dict = analysis_record.dict()
-        record_dict['timestamp'] = record_dict['timestamp'].isoformat()
-        await db.chart_analyses.insert_one(record_dict)
+        # Store analysis in Supabase
+        try:
+            analysis_record = {
+                "id": str(uuid.uuid4()),
+                "user_id": current_user.id,
+                "symbol": request.symbol,
+                "timeframe": request.timeframe,
+                "analysis": analysis_data,
+                "timestamp": datetime.utcnow().isoformat()
+            }
+            
+            supabase.table("chart_analyses").insert(analysis_record).execute()
+        except Exception as db_error:
+            logger.warning(f"Failed to store analysis in database: {str(db_error)}")
         
         return analysis_data
         
@@ -505,26 +251,14 @@ Please do not provide anything outside JSON{style_text}"""
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
 @api_router.get("/analyses", response_model=List[dict])
-async def get_analyses(current_user: User = Depends(get_current_user)):
+async def get_analyses(current_user = Depends(get_current_user)):
     """Get user's chart analyses"""
     try:
-        analyses = await db.chart_analyses.find({"user_id": current_user.id}).sort("timestamp", -1).limit(50).to_list(50)
-        return analyses
+        response = supabase.table("chart_analyses").select("*").eq("user_id", current_user.id).order("timestamp", desc=True).limit(50).execute()
+        return response.data or []
     except Exception as e:
         logger.error(f"Error fetching analyses: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to fetch analyses")
-
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
-
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
 
 # Include the router in the main app
 app.include_router(api_router)
@@ -543,7 +277,3 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
