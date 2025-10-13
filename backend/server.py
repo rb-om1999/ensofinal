@@ -261,7 +261,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     return user_obj
 
 # Authentication routes
-@api_router.post("/auth/register", response_model=Token)
+@api_router.post("/auth/register")
 async def register(user_data: UserCreate):
     try:
         # Check if user already exists
@@ -269,10 +269,15 @@ async def register(user_data: UserCreate):
         if existing_user:
             raise HTTPException(status_code=400, detail="Email already registered")
         
-        # Create new user
+        # Generate verification token
+        verification_token = generate_verification_token()
+        
+        # Create new user (unverified)
         user = User(
             email=user_data.email,
-            name=user_data.name
+            name=user_data.name,
+            is_verified=False,
+            verification_token=verification_token
         )
         
         # Hash password and store user
@@ -282,10 +287,13 @@ async def register(user_data: UserCreate):
         
         await db.users.insert_one(user_dict)
         
-        # Create access token
-        access_token = create_access_token(data={"sub": user.id})
+        # Send verification email
+        email_sent = await send_verification_email(user_data.email, user_data.name, verification_token)
         
-        return Token(access_token=access_token, token_type="bearer", user=user)
+        return {
+            "message": "Registration successful! Please check your email to verify your account.",
+            "email_sent": email_sent
+        }
         
     except HTTPException:
         raise
