@@ -220,15 +220,37 @@ const ChartAnalyzer = () => {
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
                       <User className="w-4 h-4 text-amber-400" />
-                      <span className="text-white font-medium">{user.name}</span>
+                      <div className="flex flex-col">
+                        <span className="text-white font-medium">{user.name}</span>
+                        <div className="flex items-center gap-2 text-xs">
+                          {userProfile?.is_admin ? (
+                            <span className="text-purple-400 font-medium">Admin</span>
+                          ) : userProfile?.plan === 'pro' ? (
+                            <span className="text-amber-400 font-medium flex items-center gap-1">
+                              <Crown className="w-3 h-3" />
+                              Pro
+                            </span>
+                          ) : (
+                            <span className="text-slate-400">
+                              {userProfile?.credits_remaining || 0}/5 credits
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </div>
+                    <Button
+                      onClick={() => setShowProfileSettings(true)}
+                      variant="ghost"
+                      className="text-white hover:bg-white/10 transition-colors"
+                    >
+                      <Settings className="w-4 h-4" />
+                    </Button>
                     <Button
                       onClick={handleLogout}
                       variant="ghost"
                       className="text-white hover:bg-white/10 transition-colors"
                     >
-                      <LogOut className="w-4 h-4 mr-2" />
-                      Sign Out
+                      <LogOut className="w-4 h-4" />
                     </Button>
                   </div>
                 ) : (
