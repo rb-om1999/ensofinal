@@ -153,8 +153,12 @@ const ChartAnalyzer = () => {
         handleLogout();
         setShowAuthModal(true);
         setError('Session expired. Please login again.');
+      } else if (err.response?.status === 402) {
+        // Insufficient credits - show upgrade modal
+        setShowUpgradeModal(true);
+        setError('');
       } else {
-        setError(err.response?.data?.detail || 'Analysis failed. Please try again.');
+        setError(err.response?.data?.detail || err.response?.data?.message || 'Analysis failed. Please try again.');
       }
     } finally {
       setIsAnalyzing(false);
