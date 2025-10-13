@@ -64,6 +64,7 @@ const ChartAnalyzer = () => {
 
   const handleAuthSuccess = (userData) => {
     setUser(userData);
+    fetchUserProfile();
   };
 
   const handleFileSelect = (selectedFile) => {
