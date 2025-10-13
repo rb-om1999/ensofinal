@@ -52,6 +52,8 @@ const ChartAnalyzer = () => {
         }
       });
       setUserProfile(response.data);
+      setRiskProfile(response.data.risk_profile || '');
+      setBalance(response.data.balance || '');
     } catch (err) {
       console.error('Failed to fetch user profile:', err);
     }
