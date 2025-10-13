@@ -581,7 +581,7 @@ const ChartAnalyzer = () => {
                     </Card>
 
                     {/* Detailed Analysis */}
-                    {analysis.fullAnalysis && (
+                    {analysis.fullAnalysis && (isPro || isAdmin) && (
                       <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
                         <CardHeader>
                           <CardTitle className="text-xl text-white flex items-center gap-2">
@@ -593,6 +593,53 @@ const ChartAnalyzer = () => {
                           <p className="text-slate-200 leading-relaxed" data-testid="full-analysis">
                             {analysis.fullAnalysis}
                           </p>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Upgrade Prompt for Free Users */}
+                    {!isPro && !isAdmin && analysis && (
+                      <Card className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 border-amber-400/30 ring-2 ring-amber-400/20 shadow-2xl">
+                        <CardHeader>
+                          <CardTitle className="text-xl text-white flex items-center gap-2">
+                            <Crown className="w-5 h-5 text-amber-400" />
+                            Unlock Advanced Analysis
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2 text-slate-300">
+                              <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                                <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                              </div>
+                              <span>Technical signals and indicators analysis</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-slate-300">
+                              <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                                <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                              </div>
+                              <span>Buy/Sell/Hold recommendations</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-slate-300">
+                              <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                                <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                              </div>
+                              <span>Take profit and stop loss suggestions</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-slate-300">
+                              <div className="w-4 h-4 bg-amber-400/20 rounded flex items-center justify-center">
+                                <div className="w-2 h-2 bg-amber-400 rounded"></div>
+                              </div>
+                              <span>Custom trading strategies</span>
+                            </div>
+                          </div>
+                          <Button
+                            onClick={() => setShowUpgradeModal(true)}
+                            className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold py-3"
+                          >
+                            <Crown className="w-4 h-4 mr-2" />
+                            Upgrade to Pro - $29/month
+                          </Button>
                         </CardContent>
                       </Card>
                     )}
