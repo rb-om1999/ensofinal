@@ -567,6 +567,23 @@ const ChartAnalyzer = () => {
         onClose={() => setShowAuthModal(false)}
         onAuthSuccess={handleAuthSuccess}
       />
+
+      <UpgradeModal 
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        creditsRemaining={userProfile?.credits_remaining || 0}
+      />
+
+      {showProfileSettings && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+          <div className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <ProfileSettings 
+              user={userProfile} 
+              onClose={() => setShowProfileSettings(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
