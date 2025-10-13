@@ -300,6 +300,30 @@ const ChartAnalyzer = () => {
                 Upload your trading chart and get comprehensive AI-powered analysis with technical signals, 
                 market sentiment, and strategic recommendations.
               </p>
+
+              {/* Navigation Tabs for Pro/Admin users */}
+              {(isPro || isAdmin) && user && (
+                <div className="flex justify-center mb-8">
+                  <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
+                    <TabsList className="bg-white/10 backdrop-blur-sm border border-white/20">
+                      <TabsTrigger 
+                        value="analyze" 
+                        className="data-[state=active]:bg-amber-500 data-[state=active]:text-white text-slate-300"
+                      >
+                        <BarChart3 className="w-4 h-4 mr-2" />
+                        Analyze Chart
+                      </TabsTrigger>
+                      <TabsTrigger 
+                        value="history" 
+                        className="data-[state=active]:bg-amber-500 data-[state=active]:text-white text-slate-300"
+                      >
+                        <History className="w-4 h-4 mr-2" />
+                        Analysis History
+                      </TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                </div>
+              )}
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8">
