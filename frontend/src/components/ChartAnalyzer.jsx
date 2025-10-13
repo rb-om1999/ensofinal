@@ -28,6 +28,9 @@ const ChartAnalyzer = () => {
   const [dragActive, setDragActive] = useState(false);
   const [user, setUser] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [showProfileSettings, setShowProfileSettings] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
