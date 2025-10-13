@@ -410,6 +410,46 @@ const ChartAnalyzer = () => {
                     </Select>
                   </div>
 
+                  {/* Pro/Admin Only Settings */}
+                  {(isPro || isAdmin) && (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Risk Profile */}
+                        <div className="space-y-2">
+                          <Label className="text-white font-medium flex items-center gap-2">
+                            Risk Profile
+                            <Crown className="w-3 h-3 text-amber-400" />
+                          </Label>
+                          <Select value={riskProfile} onValueChange={setRiskProfile}>
+                            <SelectTrigger className="bg-white/10 backdrop-blur-sm border-white/20 text-white focus:border-amber-400 focus:bg-white/15 transition-all duration-200">
+                              <SelectValue placeholder="Select risk profile" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
+                              <SelectItem value="conservative" className="text-white hover:bg-white/10 focus:bg-white/10">Conservative</SelectItem>
+                              <SelectItem value="moderate" className="text-white hover:bg-white/10 focus:bg-white/10">Moderate</SelectItem>
+                              <SelectItem value="aggressive" className="text-white hover:bg-white/10 focus:bg-white/10">Aggressive</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        {/* Trading Balance */}
+                        <div className="space-y-2">
+                          <Label className="text-white font-medium flex items-center gap-2">
+                            <DollarSign className="w-4 h-4" />
+                            Trading Balance
+                            <Crown className="w-3 h-3 text-amber-400" />
+                          </Label>
+                          <Input
+                            placeholder="e.g., $10,000"
+                            value={balance}
+                            onChange={(e) => setBalance(e.target.value)}
+                            className="bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-slate-400 focus:border-amber-400 focus:bg-white/15 transition-all duration-200"
+                          />
+                        </div>
+                      </div>
+                    </>
+                  )}
+
                   {/* Error Alert */}
                   {error && (
                     <Alert className="border-red-400/50 bg-red-500/10 backdrop-blur-sm text-red-200 shadow-lg" data-testid="error-alert">
