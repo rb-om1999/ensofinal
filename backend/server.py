@@ -59,6 +59,105 @@ class ChartAnalysisResponse(BaseModel):
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 
 # Helper functions
+def is_admin_user(email: str) -> bool:
+    return email == "omsonii9846@gmail.com"
+
+def get_user_plan(user_metadata: dict) -> str:
+    return user_metadata.get("plan", "free")
+
+def has_sufficient_credits(user_metadata: dict, email: str) -> bool:
+    if is_admin_user(email):
+        return True
+    
+    plan = get_user_plan(user_metadata)
+    if plan == "pro":
+        return True
+    
+    credits = user_metadata.get("credits_remaining", 5)
+    return credits > 0
+
+def get_gemini_prompt(user_metadata: dict, email: str, symbol: str, timeframe: str, trading_style: str = None) -> str:
+    if is_admin_user(email) or get_user_plan(user_metadata) == "pro":
+        # Pro/Admin prompt
+        risk_profile = user_metadata.get("risk_profile", "")
+        balance = user_metadata.get("balance", "")
+        
+        risk_text = f"Risk profile: {risk_profile}" if risk_profile else ""
+        balance_text = f"Trading account balance: {balance}" if balance else ""
+        style_text = f"Tailor the analysis to the user's chosen trading style ({trading_style})" if trading_style else ""
+        
+        return f"""You are an expert trading analyst. Analyze the trading chart image provided. 
+Please provide a comprehensive analysis in the following JSON format:
+
+{{
+  "signals": ["List of 3-5 specific technical signals you identify in the chart"],
+  "movement": "Bullish|Bearish|Neutral",
+  "action": "Buy|Sell|Hold",
+  "confidence": "High|Medium|Low",
+  "summary": "A concise 2-3 sentence summary of your analysis and reasoning. Also suggest leverage, take profit and stoploss, they must be accurate. stop-loss amount should not be greater than the profit margin.",
+  "fullAnalysis": "A detailed paragraph explaining your complete analysis, including technical patterns, support/resistance levels, indicators, and market context",
+  "customStrategy": "Tailor the analysis to the user's chosen trading style ({trading_style or 'suggest a suitable strategy'}) and provide specific entry/exit strategies."
+}}
+
+When suggesting take profit and stop loss, use logical levels based on nearby swing highs/lows and risk-to-reward of 1.5:1 to 2:1. 
+If the exact price levels are unclear, provide the ratio or percentage distance instead. 
+Always keep values consistent with realistic volatility on the chart.
+
+Symbol: {symbol.upper()}
+Timeframe: {timeframe}
+{risk_text}
+{balance_text}
+Please do not provide anything outside JSON{style_text}"""
+    else:
+        # Free plan prompt
+        return f"""You are a trading assistant. Only provide basic chart analysis. 
+Only describe support and resistance levels and general trend direction.
+Please provide the analysis in the following JSON format:
+
+{{
+  "movement": "Bullish|Bearish|Neutral",
+  "summary": "A concise 2-3 sentence summary of your analysis and reasoning."
+}}
+
+If the chart contains any indicator, reply that "our free plan doesn't allow the usage of indicators, please hide them from chart and then upload the image" in the summary.
+
+Symbol: {symbol.upper()}
+Timeframe: {timeframe}"""
+
+async def deduct_credit(user_id: str, email: str):
+    """Deduct credit after successful analysis"""
+    if is_admin_user(email):
+        return  # Admin has unlimited credits
+    
+    try:
+        # Get current user data
+        user_response = supabase.table("user_profiles").select("*").eq("user_id", user_id).execute()
+        
+        if not user_response.data:
+            # Create user profile if doesn't exist
+            new_profile = {
+                "user_id": user_id,
+                "plan": "free",
+                "credits_remaining": 4,  # Start with 4 after first use
+                "is_admin": is_admin_user(email),
+                "created_at": datetime.utcnow().isoformat()
+            }
+            supabase.table("user_profiles").insert(new_profile).execute()
+        else:
+            user_profile = user_response.data[0]
+            plan = user_profile.get("plan", "free")
+            
+            if plan == "free":
+                current_credits = user_profile.get("credits_remaining", 5)
+                new_credits = max(0, current_credits - 1)
+                
+                supabase.table("user_profiles").update({
+                    "credits_remaining": new_credits
+                }).eq("user_id", user_id).execute()
+                
+    except Exception as e:
+        logger.warning(f"Failed to deduct credit: {str(e)}")
+
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
     try:
         # Verify JWT token with Supabase
@@ -69,6 +168,46 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         # Check if email is verified
         if not user.user.email_confirmed_at:
             raise HTTPException(status_code=403, detail="Email not verified. Please check your email and verify your account.")
+        
+        # Get user profile from database
+        try:
+            profile_response = supabase.table("user_profiles").select("*").eq("user_id", user.user.id).execute()
+            
+            if profile_response.data:
+                user_profile = profile_response.data[0]
+                user.user.user_metadata.update({
+                    "plan": user_profile.get("plan", "free"),
+                    "credits_remaining": user_profile.get("credits_remaining", 5),
+                    "is_admin": user_profile.get("is_admin", False),
+                    "risk_profile": user_profile.get("risk_profile"),
+                    "balance": user_profile.get("balance"),
+                    "trading_style": user_profile.get("trading_style")
+                })
+            else:
+                # Create default profile for new users
+                default_profile = {
+                    "user_id": user.user.id,
+                    "plan": "free",
+                    "credits_remaining": 5,
+                    "is_admin": is_admin_user(user.user.email),
+                    "created_at": datetime.utcnow().isoformat()
+                }
+                supabase.table("user_profiles").insert(default_profile).execute()
+                
+                user.user.user_metadata.update({
+                    "plan": "free",
+                    "credits_remaining": 5,
+                    "is_admin": is_admin_user(user.user.email)
+                })
+                
+        except Exception as e:
+            logger.warning(f"Failed to get user profile: {str(e)}")
+            # Set defaults if profile fetch fails
+            user.user.user_metadata.update({
+                "plan": "free",
+                "credits_remaining": 5,
+                "is_admin": is_admin_user(user.user.email)
+            })
         
         return user.user
         
