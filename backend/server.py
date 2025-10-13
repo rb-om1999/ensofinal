@@ -297,6 +297,77 @@ async def resend_verification(email_request: dict):
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to resend verification email")
 
+@api_router.get("/user/profile")
+async def get_user_profile(current_user = Depends(get_current_user)):
+    try:
+        profile_response = supabase.table("user_profiles").select("*").eq("user_id", current_user.id).execute()
+        
+        if profile_response.data:
+            profile = profile_response.data[0]
+            return {
+                "id": current_user.id,
+                "email": current_user.email,
+                "name": current_user.user_metadata.get("name", ""),
+                "plan": profile.get("plan", "free"),
+                "credits_remaining": profile.get("credits_remaining", 5),
+                "is_admin": profile.get("is_admin", False),
+                "risk_profile": profile.get("risk_profile"),
+                "balance": profile.get("balance"),
+                "trading_style": profile.get("trading_style"),
+                "is_verified": bool(current_user.email_confirmed_at),
+                "created_at": current_user.created_at
+            }
+        else:
+            raise HTTPException(status_code=404, detail="User profile not found")
+            
+    except Exception as e:
+        logger.error(f"Error fetching user profile: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to fetch user profile")
+
+@api_router.put("/user/profile")
+async def update_user_profile(profile_data: UserProfile, current_user = Depends(get_current_user)):
+    try:
+        # Only allow pro users and admin to update risk profile and balance
+        user_plan = current_user.user_metadata.get("plan", "free")
+        if user_plan == "free" and not is_admin_user(current_user.email):
+            raise HTTPException(status_code=403, detail="Pro subscription required to update risk profile and balance")
+        
+        update_data = {}
+        if profile_data.risk_profile is not None:
+            update_data["risk_profile"] = profile_data.risk_profile
+        if profile_data.balance is not None:
+            update_data["balance"] = profile_data.balance
+        if profile_data.trading_style is not None:
+            update_data["trading_style"] = profile_data.trading_style
+        
+        if update_data:
+            supabase.table("user_profiles").update(update_data).eq("user_id", current_user.id).execute()
+        
+        return {"message": "Profile updated successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating user profile: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to update user profile")
+
+@api_router.post("/user/upgrade-to-pro")
+async def upgrade_to_pro(current_user = Depends(get_current_user)):
+    try:
+        # In a real app, you would integrate with a payment processor here
+        # For now, we'll just simulate the upgrade
+        
+        supabase.table("user_profiles").update({
+            "plan": "pro",
+            "credits_remaining": 999999  # Unlimited for pro
+        }).eq("user_id", current_user.id).execute()
+        
+        return {"message": "Successfully upgraded to Pro plan", "plan": "pro"}
+        
+    except Exception as e:
+        logger.error(f"Error upgrading user to pro: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to upgrade to Pro plan")
+
 # Protected routes
 @api_router.get("/")
 async def root():
