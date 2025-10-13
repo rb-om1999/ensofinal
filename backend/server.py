@@ -1,19 +1,31 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
+import jwt
+from passlib.context import CryptContext
+import bcrypt
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+
+# Security
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30 * 24 * 60  # 30 days
+
+security = HTTPBearer()
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
@@ -27,6 +39,26 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 # Define Models
+class User(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    email: EmailStr
+    name: str
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    name: str
+    password: str
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user: User
+
 class ChartAnalysisRequest(BaseModel):
     imageBase64: str
     symbol: str
@@ -35,6 +67,7 @@ class ChartAnalysisRequest(BaseModel):
 
 class ChartAnalysisResponse(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
     symbol: str
     timeframe: str
     analysis: dict
@@ -48,13 +81,86 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add your routes to the router instead of directly to app
+# Helper functions
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
+
+def get_password_hash(password):
+    return pwd_context.hash(password)
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    try:
+        payload = jwt.decode(credentials.credentials, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id: str = payload.get("sub")
+        if user_id is None:
+            raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+    except jwt.PyJWTError:
+        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+    
+    user = await db.users.find_one({"id": user_id})
+    if user is None:
+        raise HTTPException(status_code=401, detail="User not found")
+    
+    return User(**user)
+
+# Authentication routes
+@api_router.post("/auth/register", response_model=Token)
+async def register(user_data: UserCreate):
+    # Check if user already exists
+    existing_user = await db.users.find_one({"email": user_data.email})
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    # Create new user
+    user = User(
+        email=user_data.email,
+        name=user_data.name
+    )
+    
+    # Hash password and store user
+    user_dict = user.dict()
+    user_dict['hashed_password'] = get_password_hash(user_data.password)
+    user_dict['timestamp'] = user_dict['created_at'].isoformat()
+    
+    await db.users.insert_one(user_dict)
+    
+    # Create access token
+    access_token = create_access_token(data={"sub": user.id})
+    
+    return Token(access_token=access_token, token_type="bearer", user=user)
+
+@api_router.post("/auth/login", response_model=Token)
+async def login(user_data: UserLogin):
+    # Find user
+    user = await db.users.find_one({"email": user_data.email})
+    if not user:
+        raise HTTPException(status_code=401, detail="Incorrect email or password")
+    
+    # Verify password
+    if not verify_password(user_data.password, user['hashed_password']):
+        raise HTTPException(status_code=401, detail="Incorrect email or password")
+    
+    # Create access token
+    access_token = create_access_token(data={"sub": user['id']})
+    
+    user_obj = User(**{k: v for k, v in user.items() if k != 'hashed_password'})
+    
+    return Token(access_token=access_token, token_type="bearer", user=user_obj)
+
+# Protected routes
 @api_router.get("/")
 async def root():
     return {"message": "EnsoTrade API is running"}
 
 @api_router.post("/analyze", response_model=dict)
-async def analyze_chart(request: ChartAnalysisRequest):
+async def analyze_chart(request: ChartAnalysisRequest, current_user: User = Depends(get_current_user)):
     try:
         # Get API key from environment
         api_key = os.environ.get('EMERGENT_LLM_KEY')
@@ -73,7 +179,7 @@ async def analyze_chart(request: ChartAnalysisRequest):
         style_text = f"Tailor the analysis to the user's chosen trading style ({request.tradingStyle})" if request.tradingStyle else ''
         prompt = f"""You are an expert trading analyst. Analyze the trading chart image provided. Please provide a comprehensive analysis in the following JSON format:
 
- 
+{{
   "signals": ["List of 3-5 specific technical signals you identify in the chart"],
   "movement": "Bullish|Bearish|Neutral",
   "action": "Buy|Sell|Hold",
@@ -81,10 +187,7 @@ async def analyze_chart(request: ChartAnalysisRequest):
   "summary": "A concise 2-3 sentence summary of your analysis and reasoning. Also suggest leverage, take profit and stoploss, they must be accurate. stop-loss amount should not be greater than the profit margin.",
   "fullAnalysis": "A detailed paragraph explaining your complete analysis, including technical patterns, support/resistance levels, indicators, and market context",
   "customStrategy": "Tailor the analysis to the user's chosen trading style ({request.tradingStyle or 'suggest a suitable strategy'}) and provide specific entry/exit strategies."
- 
-When suggesting take profit and stop loss, use logical levels based on nearby swing highs/lows and risk-to-reward of 1.5:1 to 2:1.
-If the exact price levels are unclear, provide the ratio or percentage distance instead.
-Always keep values consistent with realistic volatility on the chart.
+}}
 
 Symbol: {request.symbol.upper()}
 Timeframe: {request.timeframe}
@@ -129,6 +232,7 @@ Please do not provide anything outside JSON{style_text}"""
         
         # Store analysis in database
         analysis_record = ChartAnalysisResponse(
+            user_id=current_user.id,
             symbol=request.symbol,
             timeframe=request.timeframe,
             analysis=analysis_data
@@ -145,10 +249,10 @@ Please do not provide anything outside JSON{style_text}"""
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
 @api_router.get("/analyses", response_model=List[dict])
-async def get_analyses():
-    """Get recent chart analyses"""
+async def get_analyses(current_user: User = Depends(get_current_user)):
+    """Get user's chart analyses"""
     try:
-        analyses = await db.chart_analyses.find().sort("timestamp", -1).limit(50).to_list(50)
+        analyses = await db.chart_analyses.find({"user_id": current_user.id}).sort("timestamp", -1).limit(50).to_list(50)
         return analyses
     except Exception as e:
         logger.error(f"Error fetching analyses: {str(e)}")

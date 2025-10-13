@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -8,8 +8,9 @@ import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { Alert, AlertDescription } from './ui/alert';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Upload, TrendingUp, BarChart3, Brain, Target, Shield, DollarSign } from 'lucide-react';
+import { Upload, TrendingUp, BarChart3, Brain, Target, Shield, DollarSign, User, LogOut, LogIn } from 'lucide-react';
 import axios from 'axios';
+import AuthModal from './AuthModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -23,9 +24,30 @@ const ChartAnalyzer = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState('');
   const [dragActive, setDragActive] = useState(false);
+  const [user, setUser] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+    if (token && userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    setAnalysis(null);
+  };
+
+  const handleAuthSuccess = (userData) => {
+    setUser(userData);
+  };
 
   const handleFileSelect = (selectedFile) => {
-    if (selectedFile && selectedFile.size <= 4 * 1024 * 1024) { // 4MB limit
+    if (selectedFile && selectedFile.size <= 4 * 1024 * 1024) {
       setFile(selectedFile);
       setError('');
     } else {
@@ -59,7 +81,7 @@ const ChartAnalyzer = () => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        const base64 = reader.result.split(',')[1]; // Remove data:image/... prefix
+        const base64 = reader.result.split(',')[1];
         resolve(base64);
       };
       reader.onerror = error => reject(error);
@@ -67,6 +89,11 @@ const ChartAnalyzer = () => {
   };
 
   const analyzeChart = async () => {
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
+
     if (!file || !symbol || !timeframe) {
       setError('Please fill in all required fields and select a file');
       return;
@@ -76,6 +103,7 @@ const ChartAnalyzer = () => {
     setError('');
 
     try {
+      const token = localStorage.getItem('token');
       const imageBase64 = await convertToBase64(file);
       
       const response = await axios.post(`${API}/analyze`, {
@@ -83,12 +111,22 @@ const ChartAnalyzer = () => {
         symbol: symbol.toUpperCase(),
         timeframe,
         tradingStyle: tradingStyle || undefined
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
       setAnalysis(response.data);
     } catch (err) {
       console.error('Analysis error:', err);
-      setError(err.response?.data?.detail || 'Analysis failed. Please try again.');
+      if (err.response?.status === 401) {
+        handleLogout();
+        setShowAuthModal(true);
+        setError('Session expired. Please login again.');
+      } else {
+        setError(err.response?.data?.detail || 'Analysis failed. Please try again.');
+      }
     } finally {
       setIsAnalyzing(false);
     }
@@ -125,13 +163,13 @@ const ChartAnalyzer = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-amber-500/5 to-transparent transform rotate-12 -translate-y-1/2"></div>
       
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='1'%3E%3C/circle%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}></div>
+      <div className="absolute inset-0 opacity-30" style={{backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='1'%3E%3C/circle%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"}}>")</div>
       
       <div className="relative z-10">
         {/* Header */}
         <header className="border-b border-white/10 bg-white/5 backdrop-blur-xl shadow-xl">
           <div className="container mx-auto px-6 py-6">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg ring-1 ring-amber-400/20">
                   <BarChart3 className="w-7 h-7 text-white drop-shadow-sm" />
@@ -142,6 +180,33 @@ const ChartAnalyzer = () => {
                   </h1>
                   <p className="text-slate-300 text-sm font-medium">AI-Powered Chart Analysis</p>
                 </div>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                {user ? (
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+                      <User className="w-4 h-4 text-amber-400" />
+                      <span className="text-white font-medium">{user.name}</span>
+                    </div>
+                    <Button
+                      onClick={handleLogout}
+                      variant="ghost"
+                      className="text-white hover:bg-white/10 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={() => setShowAuthModal(true)}
+                    className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-medium"
+                  >
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Sign In
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -240,17 +305,17 @@ const ChartAnalyzer = () => {
                       </SelectTrigger>
                       <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
                         <SelectItem value="1m" className="text-white hover:bg-white/10 focus:bg-white/10">1 Minute</SelectItem>
-                        <SelectItem value="5m" className="text-white hover:bg-slate-700">5 Minutes</SelectItem>
-                        <SelectItem value="15m" className="text-white hover:bg-slate-700">15 Minutes</SelectItem>
-                        <SelectItem value="30m" className="text-white hover:bg-slate-700">30 Minutes</SelectItem>
-                        <SelectItem value="1H" className="text-white hover:bg-slate-700">1 Hour</SelectItem>
-                        <SelectItem value="2H" className="text-white hover:bg-slate-700">2 Hours</SelectItem>
-                        <SelectItem value="4H" className="text-white hover:bg-slate-700">4 Hours</SelectItem>
-                        <SelectItem value="6H" className="text-white hover:bg-slate-700">6 Hours</SelectItem>
-                        <SelectItem value="12H" className="text-white hover:bg-slate-700">12 Hours</SelectItem>
-                        <SelectItem value="1D" className="text-white hover:bg-slate-700">1 Day</SelectItem>
-                        <SelectItem value="3D" className="text-white hover:bg-slate-700">3 Days</SelectItem>
-                        <SelectItem value="1W" className="text-white hover:bg-slate-700">1 Week</SelectItem>
+                        <SelectItem value="5m" className="text-white hover:bg-white/10 focus:bg-white/10">5 Minutes</SelectItem>
+                        <SelectItem value="15m" className="text-white hover:bg-white/10 focus:bg-white/10">15 Minutes</SelectItem>
+                        <SelectItem value="30m" className="text-white hover:bg-white/10 focus:bg-white/10">30 Minutes</SelectItem>
+                        <SelectItem value="1H" className="text-white hover:bg-white/10 focus:bg-white/10">1 Hour</SelectItem>
+                        <SelectItem value="2H" className="text-white hover:bg-white/10 focus:bg-white/10">2 Hours</SelectItem>
+                        <SelectItem value="4H" className="text-white hover:bg-white/10 focus:bg-white/10">4 Hours</SelectItem>
+                        <SelectItem value="6H" className="text-white hover:bg-white/10 focus:bg-white/10">6 Hours</SelectItem>
+                        <SelectItem value="12H" className="text-white hover:bg-white/10 focus:bg-white/10">12 Hours</SelectItem>
+                        <SelectItem value="1D" className="text-white hover:bg-white/10 focus:bg-white/10">1 Day</SelectItem>
+                        <SelectItem value="3D" className="text-white hover:bg-white/10 focus:bg-white/10">3 Days</SelectItem>
+                        <SelectItem value="1W" className="text-white hover:bg-white/10 focus:bg-white/10">1 Week</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -263,20 +328,11 @@ const ChartAnalyzer = () => {
                         <SelectValue placeholder="Select trading style" />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl">
-                        <SelectItem value="smart-money-concepts" className="text-white hover:bg-slate-700">Smart Money Concepts (SMC)</SelectItem>
-                        <SelectItem value="liquidity-sweep" className="text-white hover:bg-slate-700">Liquidity Sweep</SelectItem>
-                        <SelectItem value="pullback-retracement" className="text-white hover:bg-slate-700">Pullback Retracement</SelectItem>
-                        <SelectItem value="scalping-ema" className="text-white hover:bg-slate-700">Scalping EMA</SelectItem>
-                        <SelectItem value="volatality-breakout" className="text-white hover:bg-slate-700">Volatality Breakout</SelectItem>
-                        <SelectItem value="breakout-retest" className="text-white hover:bg-slate-700">Breakout Retest</SelectItem>
-                        <SelectItem value="squeeze-momentum" className="text-white hover:bg-slate-700">Squeeze Momentum</SelectItem>
-                        <SelectItem value="mean-reversion" className="text-white hover:bg-slate-700">Mean Reversion</SelectItem>
-                        <SelectItem value="momentum-swing" className="text-white hover:bg-slate-700">Momentum Swing</SelectItem>
-                        <SelectItem value="trend-following" className="text-white hover:bg-slate-700">Trend Following</SelectItem>
-                        <SelectItem value="trend-reversal" className="text-white hover:bg-slate-700">Trend Reversal</SelectItem>
-                        <SelectItem value="divergence-play" className="text-white hover:bg-slate-700">Divergence Play</SelectItem>
-                        <SelectItem value="continuation-pattern" className="text-white hover:bg-slate-700">Continuation Pattern</SelectItem>
-                        <SelectItem value="range-bound" className="text-white hover:bg-slate-700">Range Bound</SelectItem>
+                        <SelectItem value="scalping" className="text-white hover:bg-white/10 focus:bg-white/10">Scalping</SelectItem>
+                        <SelectItem value="daytrading" className="text-white hover:bg-white/10 focus:bg-white/10">Day Trading</SelectItem>
+                        <SelectItem value="swing-trading" className="text-white hover:bg-white/10 focus:bg-white/10">Swing Trading</SelectItem>
+                        <SelectItem value="long-term" className="text-white hover:bg-white/10 focus:bg-white/10">Long Term</SelectItem>
+                        <SelectItem value="intraday-trading" className="text-white hover:bg-white/10 focus:bg-white/10">Intraday Trading</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -303,7 +359,7 @@ const ChartAnalyzer = () => {
                     ) : (
                       <div className="flex items-center space-x-2">
                         <Brain className="w-5 h-5" />
-                        <span>Analyze Chart</span>
+                        <span>{user ? 'Analyze Chart' : 'Sign In to Analyze'}</span>
                       </div>
                     )}
                   </Button>
@@ -438,7 +494,7 @@ const ChartAnalyzer = () => {
                         <div>
                           <h3 className="text-xl font-semibold text-white mb-2">Ready to Analyze</h3>
                           <p className="text-slate-300">
-                            Upload your trading chart and fill in the details to get started with AI-powered analysis.
+                            {user ? 'Upload your trading chart and fill in the details to get started with AI-powered analysis.' : 'Sign in to upload your trading chart and get AI-powered analysis.'}
                           </p>
                         </div>
                       </div>
@@ -450,6 +506,12 @@ const ChartAnalyzer = () => {
           </div>
         </main>
       </div>
+
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)}
+        onAuthSuccess={handleAuthSuccess}
+      />
     </div>
   );
 };
