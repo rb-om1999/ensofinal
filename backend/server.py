@@ -13,8 +13,8 @@ from datetime import datetime, timedelta
 import json
 from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
 import jwt
-from passlib.context import CryptContext
 import hashlib
+import secrets
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -25,7 +25,6 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30 * 24 * 60  # 30 days
 
 security = HTTPBearer()
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
