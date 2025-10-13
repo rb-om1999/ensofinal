@@ -102,6 +102,52 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
           </DialogDescription>
         </DialogHeader>
         
+        {showVerificationMessage ? (
+          <div className="space-y-6 text-center">
+            <div className="space-y-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto flex items-center justify-center">
+                <Mail className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">Verification Email Sent!</h3>
+                <p className="text-slate-300 text-sm mb-4">
+                  We've sent a verification link to <strong>{verificationEmail}</strong>. 
+                  Please check your email and click the verification link to activate your account.
+                </p>
+                <p className="text-slate-400 text-xs mb-4">
+                  Don't see the email? Check your spam folder or wait a few minutes.
+                </p>
+              </div>
+            </div>
+            
+            {error && (
+              <Alert className="border-amber-400/50 bg-amber-500/10 text-amber-200">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
+            <div className="space-y-3">
+              <Button
+                onClick={handleResendVerification}
+                disabled={isLoading}
+                variant="outline"
+                className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20"
+              >
+                {isLoading ? 'Sending...' : 'Resend Verification Email'}
+              </Button>
+              <Button
+                onClick={() => {
+                  resetForm();
+                  setIsLogin(true);
+                }}
+                variant="ghost"
+                className="w-full text-slate-300 hover:text-white"
+              >
+                Back to Login
+              </Button>
+            </div>
+          </div>
+        ) : (
         <Tabs value={isLogin ? 'login' : 'register'} className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-white/10">
             <TabsTrigger 
