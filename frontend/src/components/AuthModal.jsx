@@ -92,10 +92,13 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
       <DialogContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 text-white max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
-            Welcome to EnsoTrade
+            {showVerificationMessage ? 'Check Your Email' : 'Welcome to EnsoTrade'}
           </DialogTitle>
           <DialogDescription className="text-slate-300">
-            Sign in to access professional chart analysis
+            {showVerificationMessage 
+              ? 'We\'ve sent a verification link to your email address'
+              : 'Sign in to access professional chart analysis'
+            }
           </DialogDescription>
         </DialogHeader>
         
