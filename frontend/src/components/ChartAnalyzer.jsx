@@ -1122,7 +1122,6 @@ const ChartAnalyzer = () => {
           </div>
         </div>
       )}
-            </div>
           </div>
         </main>
       </div>
