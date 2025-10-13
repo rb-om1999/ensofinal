@@ -376,6 +376,9 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
                 "customStrategy": "Please try again with a clearer image"
             }
         
+        # Deduct credit after successful analysis
+        await deduct_credit(current_user.id, current_user.email)
+        
         # Store analysis in Supabase
         try:
             analysis_record = {
@@ -384,6 +387,7 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
                 "symbol": request.symbol,
                 "timeframe": request.timeframe,
                 "analysis": analysis_data,
+                "plan_used": current_user.user_metadata.get("plan", "free"),
                 "timestamp": datetime.utcnow().isoformat()
             }
             
@@ -391,7 +395,17 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
         except Exception as db_error:
             logger.warning(f"Failed to store analysis in database: {str(db_error)}")
         
-        return analysis_data
+        # Return analysis with updated credits
+        updated_credits = current_user.user_metadata.get("credits_remaining", 5)
+        if not is_admin_user(current_user.email) and current_user.user_metadata.get("plan") == "free":
+            updated_credits = max(0, updated_credits - 1)
+        
+        return {
+            **analysis_data,
+            "credits_remaining": updated_credits,
+            "plan": current_user.user_metadata.get("plan", "free"),
+            "is_admin": is_admin_user(current_user.email)
+        }
         
     except Exception as e:
         logger.error(f"Error analyzing chart: {str(e)}")
