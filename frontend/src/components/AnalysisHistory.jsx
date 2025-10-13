@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
+import { Label } from './ui/label';
 import { Alert, AlertDescription } from './ui/alert';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { History, TrendingUp, Calendar, Clock, Crown, Target, Shield, DollarSign, Eye } from 'lucide-react';
 import axios from 'axios';
 
