@@ -35,6 +35,7 @@ const ChartAnalyzer = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [riskProfile, setRiskProfile] = useState('');
   const [balance, setBalance] = useState('');
+  const [activeTab, setActiveTab] = useState('analyze');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
