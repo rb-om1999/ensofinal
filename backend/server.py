@@ -39,6 +39,11 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+class UserProfile(BaseModel):
+    risk_profile: Optional[str] = None
+    balance: Optional[str] = None
+    trading_style: Optional[str] = None
+
 class ChartAnalysisRequest(BaseModel):
     imageBase64: str
     symbol: str
