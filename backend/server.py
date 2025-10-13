@@ -127,7 +127,7 @@ Timeframe: {timeframe}"""
 async def deduct_credit(user_id: str, email: str):
     """Deduct credit after successful analysis"""
     if is_admin_user(email):
-        return  # Admin has unlimited credits
+        return 999999  # Admin has unlimited credits
     
     try:
         # Get current user data
@@ -143,20 +143,27 @@ async def deduct_credit(user_id: str, email: str):
                 "created_at": datetime.utcnow().isoformat()
             }
             supabase.table("user_profiles").insert(new_profile).execute()
+            return 4
         else:
             user_profile = user_response.data[0]
             plan = user_profile.get("plan", "free")
             
+            if plan == "pro":
+                return 999999  # Pro has unlimited credits
+            
             if plan == "free":
-                current_credits = user_profile.get("credits_remaining", 5)
+                current_credits = user_profile.get("credits_remaining", 0)
                 new_credits = max(0, current_credits - 1)
                 
                 supabase.table("user_profiles").update({
                     "credits_remaining": new_credits
                 }).eq("user_id", user_id).execute()
                 
+                return new_credits
+                
     except Exception as e:
         logger.warning(f"Failed to deduct credit: {str(e)}")
+        return 0
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
     try:
