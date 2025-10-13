@@ -49,6 +49,20 @@ class UserCreate(BaseModel):
     email: EmailStr
     name: str
     password: str
+    
+    @validator('password')
+    def validate_password(cls, v):
+        if len(v) < 6:
+            raise ValueError('Password must be at least 6 characters long')
+        if len(v) > 200:  # Reasonable upper limit
+            raise ValueError('Password too long')
+        return v
+    
+    @validator('name')
+    def validate_name(cls, v):
+        if len(v.strip()) < 2:
+            raise ValueError('Name must be at least 2 characters long')
+        return v.strip()
 
 class UserLogin(BaseModel):
     email: EmailStr
