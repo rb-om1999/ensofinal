@@ -526,8 +526,8 @@ const ChartAnalyzer = () => {
                       </CardContent>
                     </Card>
 
-                    {/* Technical Signals */}
-                    {analysis.signals && analysis.signals.length > 0 && (
+                    {/* Technical Signals - Only for Pro/Admin */}
+                    {analysis.signals && analysis.signals.length > 0 && (isPro || isAdmin) && (
                       <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
                         <CardHeader>
                           <CardTitle className="text-xl text-white flex items-center gap-2">
