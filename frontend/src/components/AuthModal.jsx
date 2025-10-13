@@ -78,6 +78,8 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
   const resetForm = () => {
     setFormData({ email: '', password: '', name: '' });
     setError('');
+    setShowVerificationMessage(false);
+    setVerificationEmail('');
   };
 
   const switchMode = (mode) => {
