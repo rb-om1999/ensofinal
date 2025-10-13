@@ -113,6 +113,10 @@ const ChartAnalyzer = () => {
     });
   };
 
+  // Helper functions for user plan checking
+  const isAdmin = user?.email === 'omsonii9846@gmail.com';
+  const isPro = userProfile?.plan === 'pro' || isAdmin;
+
   const analyzeChart = async () => {
     if (!user) {
       setShowAuthModal(true);
@@ -122,6 +126,14 @@ const ChartAnalyzer = () => {
     if (!file || !symbol || !timeframe) {
       setError('Please fill in all required fields and select a file');
       return;
+    }
+
+    // Check credits for free users
+    if (!isAdmin && userProfile?.plan === 'free') {
+      if (!userProfile?.credits_remaining || userProfile.credits_remaining <= 0) {
+        setShowUpgradeModal(true);
+        return;
+      }
     }
 
     setIsAnalyzing(true);
