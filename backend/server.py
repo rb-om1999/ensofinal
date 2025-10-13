@@ -454,8 +454,8 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
                 "customStrategy": "Please try again with a clearer image"
             }
         
-        # Deduct credit after successful analysis
-        await deduct_credit(current_user.id, current_user.email)
+        # Deduct credit after successful analysis and get updated credit count
+        updated_credits = await deduct_credit(current_user.id, current_user.email)
         
         # Store analysis in Supabase
         try:
@@ -472,11 +472,6 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
             supabase.table("chart_analyses").insert(analysis_record).execute()
         except Exception as db_error:
             logger.warning(f"Failed to store analysis in database: {str(db_error)}")
-        
-        # Return analysis with updated credits
-        updated_credits = current_user.user_metadata.get("credits_remaining", 5)
-        if not is_admin_user(current_user.email) and current_user.user_metadata.get("plan") == "free":
-            updated_credits = max(0, updated_credits - 1)
         
         return {
             **analysis_data,
