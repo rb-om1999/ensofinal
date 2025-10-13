@@ -252,7 +252,13 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     if user is None:
         raise HTTPException(status_code=401, detail="User not found")
     
-    return User(**user)
+    user_obj = User(**user)
+    
+    # Check if user is verified
+    if not user_obj.is_verified:
+        raise HTTPException(status_code=403, detail="Email not verified. Please check your email and verify your account.")
+    
+    return user_obj
 
 # Authentication routes
 @api_router.post("/auth/register", response_model=Token)
