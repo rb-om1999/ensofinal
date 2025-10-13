@@ -126,6 +126,112 @@ def get_password_hash(password):
     # Return salt:hash format
     return f"{salt}:{password_hash}"
 
+def generate_verification_token():
+    return secrets.token_urlsafe(32)
+
+async def send_verification_email(email: str, name: str, verification_token: str):
+    try:
+        if not SMTP_USERNAME or not SMTP_PASSWORD:
+            logger.warning("Email credentials not configured - skipping email send")
+            return False
+            
+        # Create verification URL
+        verification_url = f"{FRONTEND_URL}/verify?token={verification_token}"
+        
+        # Create email content
+        subject = "Verify Your EnsoTrade Account"
+        
+        html_body = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #1e293b, #374151); padding: 30px; border-radius: 12px; text-align: center;">
+                <h1 style="color: #f59e0b; margin-bottom: 10px;">Welcome to EnsoTrade</h1>
+                <p style="color: #e2e8f0; font-size: 16px;">AI-Powered Chart Analysis</p>
+            </div>
+            
+            <div style="padding: 30px 0;">
+                <h2 style="color: #1e293b;">Hi {name},</h2>
+                <p style="color: #374151; font-size: 16px; line-height: 1.6;">
+                    Thank you for signing up for EnsoTrade! To complete your registration and start analyzing trading charts with AI, please verify your email address.
+                </p>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="{verification_url}" 
+                       style="background: linear-gradient(135deg, #f59e0b, #f97316); 
+                              color: white; 
+                              text-decoration: none; 
+                              padding: 15px 30px; 
+                              border-radius: 8px; 
+                              font-weight: bold; 
+                              display: inline-block;
+                              font-size: 16px;">
+                        Verify Email Address
+                    </a>
+                </div>
+                
+                <p style="color: #6b7280; font-size: 14px;">
+                    If the button doesn't work, copy and paste this link into your browser:<br>
+                    <a href="{verification_url}" style="color: #f59e0b;">{verification_url}</a>
+                </p>
+                
+                <p style="color: #6b7280; font-size: 14px;">
+                    This verification link will expire in 24 hours for security reasons.
+                </p>
+            </div>
+            
+            <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; text-align: center;">
+                <p style="color: #9ca3af; font-size: 12px;">
+                    If you didn't create an EnsoTrade account, you can safely ignore this email.
+                </p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        text_body = f"""
+        Welcome to EnsoTrade!
+        
+        Hi {name},
+        
+        Thank you for signing up for EnsoTrade! To complete your registration and start analyzing trading charts with AI, please verify your email address by clicking the link below:
+        
+        {verification_url}
+        
+        This verification link will expire in 24 hours for security reasons.
+        
+        If you didn't create an EnsoTrade account, you can safely ignore this email.
+        
+        Best regards,
+        The EnsoTrade Team
+        """
+        
+        # Create message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = subject
+        msg['From'] = FROM_EMAIL
+        msg['To'] = email
+        
+        # Add text and HTML parts
+        text_part = MIMEText(text_body, 'plain')
+        html_part = MIMEText(html_body, 'html')
+        
+        msg.attach(text_part)
+        msg.attach(html_part)
+        
+        # Send email
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()
+        server.login(SMTP_USERNAME, SMTP_PASSWORD)
+        server.send_message(msg)
+        server.quit()
+        
+        logger.info(f"Verification email sent to {email}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"Failed to send verification email: {str(e)}")
+        return False
+
 def create_access_token(data: dict):
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
