@@ -147,7 +147,9 @@ const ChartAnalyzer = () => {
         imageBase64,
         symbol: symbol.toUpperCase(),
         timeframe,
-        tradingStyle: tradingStyle || undefined
+        tradingStyle: tradingStyle || undefined,
+        riskProfile: riskProfile || undefined,
+        balance: balance || undefined
       }, {
         headers: {
           Authorization: `Bearer ${token}`
