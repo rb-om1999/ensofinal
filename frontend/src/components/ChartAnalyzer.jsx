@@ -501,9 +501,18 @@ const ChartAnalyzer = () => {
                           </div>
                           <div className="space-y-2">
                             <Label className="text-slate-400 text-sm">Recommended Action</Label>
-                            <Button size="sm" className={getActionColor(analysis.action)} data-testid="action-badge">
-                              {analysis.action || 'Hold'}
-                            </Button>
+                            {(isPro || isAdmin) ? (
+                              <Button size="sm" className={getActionColor(analysis.action)} data-testid="action-badge">
+                                {analysis.action || 'Hold'}
+                              </Button>
+                            ) : (
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 bg-slate-600 rounded flex items-center justify-center">
+                                  <Crown className="w-3 h-3 text-amber-400" />
+                                </div>
+                                <span className="text-slate-400 text-sm">Upgrade to Pro</span>
+                              </div>
+                            )}
                           </div>
                         </div>
                         
