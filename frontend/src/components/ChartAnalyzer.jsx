@@ -429,15 +429,15 @@ const ChartAnalyzer = () => {
                     )}
                   </>
                 ) : (
-                  <Card className="bg-slate-800/50 backdrop-blur-xl border-slate-700/50 shadow-2xl">
+                  <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10">
                     <CardContent className="text-center py-12">
                       <div className="space-y-4">
-                        <div className="w-20 h-20 bg-slate-700 rounded-full mx-auto flex items-center justify-center">
+                        <div className="w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-full mx-auto flex items-center justify-center ring-1 ring-white/10">
                           <Brain className="w-10 h-10 text-amber-400" />
                         </div>
                         <div>
                           <h3 className="text-xl font-semibold text-white mb-2">Ready to Analyze</h3>
-                          <p className="text-slate-400">
+                          <p className="text-slate-300">
                             Upload your trading chart and fill in the details to get started with AI-powered analysis.
                           </p>
                         </div>
