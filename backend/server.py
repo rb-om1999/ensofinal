@@ -15,6 +15,9 @@ from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
 import jwt
 import hashlib
 import secrets
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -23,6 +26,14 @@ load_dotenv(ROOT_DIR / '.env')
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30 * 24 * 60  # 30 days
+
+# Email configuration
+SMTP_SERVER = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
+SMTP_PORT = int(os.environ.get('SMTP_PORT', '587'))
+SMTP_USERNAME = os.environ.get('SMTP_USERNAME', '')
+SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD', '')
+FROM_EMAIL = os.environ.get('FROM_EMAIL', SMTP_USERNAME)
+FRONTEND_URL = os.environ.get('FRONTEND_URL', 'https://chart-whisperer-3.preview.emergentagent.com')
 
 security = HTTPBearer()
 
