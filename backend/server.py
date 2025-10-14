@@ -406,7 +406,7 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
             api_key=api_key,
             session_id=session_id,
             system_message="You are an expert trading analyst."
-        ).with_model("gemini", "gemini-2.0-flash")
+        ).with_model("gemini", "gemini-2.5-pro")
         
         # Get appropriate prompt based on user plan
         prompt = get_gemini_prompt(
