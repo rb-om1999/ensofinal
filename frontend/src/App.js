@@ -3,6 +3,7 @@ import '@/App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChartAnalyzer from './components/ChartAnalyzer';
 import VerifyEmail from './components/VerifyEmail';
+import PricingPage from './components/PricingPage';
 
 function App() {
   return (
