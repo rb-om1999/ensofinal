@@ -178,9 +178,14 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         
         # Get user profile from database
         try:
-            profile_response = supabase.table("user_profiles").select("*").eq("user_id", user.user.id).execute()
+            # Try to create table if it doesn't exist
+            try:
+                profile_response = supabase.table("user_profiles").select("*").eq("user_id", user.user.id).execute()
+            except:
+                logger.info("user_profiles table not found, using defaults")
+                profile_response = None
             
-            if profile_response.data:
+            if profile_response and profile_response.data:
                 user_profile = profile_response.data[0]
                 user.user.user_metadata.update({
                     "plan": user_profile.get("plan", "free"),
@@ -191,16 +196,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
                     "trading_style": user_profile.get("trading_style")
                 })
             else:
-                # Create default profile for new users
-                default_profile = {
-                    "user_id": user.user.id,
-                    "plan": "free",
-                    "credits_remaining": 5,
-                    "is_admin": is_admin_user(user.user.email),
-                    "created_at": datetime.utcnow().isoformat()
-                }
-                supabase.table("user_profiles").insert(default_profile).execute()
-                
+                # Set defaults if no profile exists
                 user.user.user_metadata.update({
                     "plan": "free",
                     "credits_remaining": 5,
