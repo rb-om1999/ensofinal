@@ -495,7 +495,7 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
         # Deduct credit after successful analysis and get updated credit count
         updated_credits = await deduct_credit(current_user.id, current_user.email)
         
-        # Store analysis in Supabase
+        # Store analysis in Supabase (if table exists)
         try:
             analysis_record = {
                 "id": str(uuid.uuid4()),
@@ -507,7 +507,10 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
                 "timestamp": datetime.utcnow().isoformat()
             }
             
-            supabase.table("chart_analyses").insert(analysis_record).execute()
+            try:
+                supabase.table("chart_analyses").insert(analysis_record).execute()
+            except:
+                logger.warning("chart_analyses table not found, skipping storage")
         except Exception as db_error:
             logger.warning(f"Failed to store analysis in database: {str(db_error)}")
         
