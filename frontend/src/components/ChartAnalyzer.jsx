@@ -929,7 +929,7 @@ const ChartAnalyzer = () => {
                 ) : (
                   <div className="flex items-center space-x-2">
                     <Brain className="w-5 h-5" />
-                    <span>{user ? 'Analyze Chart' : 'Sign In to Analyze'}</span>
+                    <span>{user ? 'Take Profit!' : 'Sign In to Analyze'}</span>
                   </div>
                 )}
               </Button>
