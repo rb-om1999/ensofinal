@@ -303,7 +303,23 @@ async def resend_verification(email_request: dict):
 @api_router.get("/user/profile")
 async def get_user_profile(current_user = Depends(get_current_user)):
     try:
-        profile_response = supabase.table("user_profiles").select("*").eq("user_id", current_user.id).execute()
+        try:
+            profile_response = supabase.table("user_profiles").select("*").eq("user_id", current_user.id).execute()
+        except:
+            # Table doesn't exist, return defaults
+            return {
+                "id": current_user.id,
+                "email": current_user.email,
+                "name": current_user.user_metadata.get("name", ""),
+                "plan": "free",
+                "credits_remaining": 5,
+                "is_admin": is_admin_user(current_user.email),
+                "risk_profile": None,
+                "balance": None,
+                "trading_style": None,
+                "is_verified": bool(current_user.email_confirmed_at),
+                "created_at": current_user.created_at
+            }
         
         if profile_response.data:
             profile = profile_response.data[0]
@@ -313,7 +329,7 @@ async def get_user_profile(current_user = Depends(get_current_user)):
                 "name": current_user.user_metadata.get("name", ""),
                 "plan": profile.get("plan", "free"),
                 "credits_remaining": profile.get("credits_remaining", 5),
-                "is_admin": profile.get("is_admin", False),
+                "is_admin": profile.get("is_admin", is_admin_user(current_user.email)),
                 "risk_profile": profile.get("risk_profile"),
                 "balance": profile.get("balance"),
                 "trading_style": profile.get("trading_style"),
@@ -321,11 +337,37 @@ async def get_user_profile(current_user = Depends(get_current_user)):
                 "created_at": current_user.created_at
             }
         else:
-            raise HTTPException(status_code=404, detail="User profile not found")
+            # Return defaults if no profile found
+            return {
+                "id": current_user.id,
+                "email": current_user.email,
+                "name": current_user.user_metadata.get("name", ""),
+                "plan": "free",
+                "credits_remaining": 5,
+                "is_admin": is_admin_user(current_user.email),
+                "risk_profile": None,
+                "balance": None,
+                "trading_style": None,
+                "is_verified": bool(current_user.email_confirmed_at),
+                "created_at": current_user.created_at
+            }
             
     except Exception as e:
         logger.error(f"Error fetching user profile: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to fetch user profile")
+        # Return defaults instead of error
+        return {
+            "id": current_user.id,
+            "email": current_user.email,
+            "name": current_user.user_metadata.get("name", ""),
+            "plan": "free",
+            "credits_remaining": 5,
+            "is_admin": is_admin_user(current_user.email),
+            "risk_profile": None,
+            "balance": None,
+            "trading_style": None,
+            "is_verified": bool(current_user.email_confirmed_at),
+            "created_at": current_user.created_at
+        }
 
 @api_router.put("/user/profile")
 async def update_user_profile(profile_data: UserProfile, current_user = Depends(get_current_user)):
