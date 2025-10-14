@@ -237,6 +237,14 @@ const ChartAnalyzer = () => {
               </div>
               
               <div className="flex items-center space-x-4">
+                <Button
+                  onClick={() => window.open('/pricing', '_self')}
+                  variant="ghost"
+                  className="text-white hover:bg-white/10 transition-colors font-medium"
+                >
+                  Pricing
+                </Button>
+                
                 {user ? (
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
