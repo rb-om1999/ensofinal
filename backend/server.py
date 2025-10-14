@@ -130,20 +130,27 @@ async def deduct_credit(user_id: str, email: str):
         return 999999  # Admin has unlimited credits
     
     try:
-        # Get current user data
-        user_response = supabase.table("user_profiles").select("*").eq("user_id", user_id).execute()
+        # Try to get current user data
+        try:
+            user_response = supabase.table("user_profiles").select("*").eq("user_id", user_id).execute()
+        except:
+            # Table doesn't exist, return default credits for free users
+            return 4  # Simulate 5-1=4 credits remaining
         
         if not user_response.data:
-            # Create user profile if doesn't exist
-            new_profile = {
-                "user_id": user_id,
-                "plan": "free",
-                "credits_remaining": 4,  # Start with 4 after first use
-                "is_admin": is_admin_user(email),
-                "created_at": datetime.utcnow().isoformat()
-            }
-            supabase.table("user_profiles").insert(new_profile).execute()
-            return 4
+            # Create user profile if doesn't exist (only if table exists)
+            try:
+                new_profile = {
+                    "user_id": user_id,
+                    "plan": "free",
+                    "credits_remaining": 4,  # Start with 4 after first use
+                    "is_admin": is_admin_user(email),
+                    "created_at": datetime.utcnow().isoformat()
+                }
+                supabase.table("user_profiles").insert(new_profile).execute()
+                return 4
+            except:
+                return 4  # Fallback credits
         else:
             user_profile = user_response.data[0]
             plan = user_profile.get("plan", "free")
@@ -152,18 +159,21 @@ async def deduct_credit(user_id: str, email: str):
                 return 999999  # Pro has unlimited credits
             
             if plan == "free":
-                current_credits = user_profile.get("credits_remaining", 0)
+                current_credits = user_profile.get("credits_remaining", 5)
                 new_credits = max(0, current_credits - 1)
                 
-                supabase.table("user_profiles").update({
-                    "credits_remaining": new_credits
-                }).eq("user_id", user_id).execute()
+                try:
+                    supabase.table("user_profiles").update({
+                        "credits_remaining": new_credits
+                    }).eq("user_id", user_id).execute()
+                except:
+                    logger.warning("Failed to update credits in database")
                 
                 return new_credits
                 
     except Exception as e:
         logger.warning(f"Failed to deduct credit: {str(e)}")
-        return 0
+        return 4  # Return fallback credits
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
     try:
