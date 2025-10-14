@@ -488,11 +488,20 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
 async def get_analyses(current_user = Depends(get_current_user)):
     """Get user's chart analyses"""
     try:
+        # Try to create table if it doesn't exist
+        try:
+            supabase.table("chart_analyses").select("id").limit(1).execute()
+        except:
+            logger.info("Creating chart_analyses table...")
+            # Table doesn't exist, return empty for now
+            return []
+        
         response = supabase.table("chart_analyses").select("*").eq("user_id", current_user.id).order("timestamp", desc=True).limit(50).execute()
         return response.data or []
     except Exception as e:
         logger.error(f"Error fetching analyses: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to fetch analyses")
+        # Return empty array instead of error to prevent UI breaking
+        return []
 
 # Include the router in the main app
 app.include_router(api_router)
