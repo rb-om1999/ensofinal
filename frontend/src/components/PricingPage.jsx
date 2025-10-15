@@ -51,7 +51,7 @@ const PricingPage = () => {
                 className="text-white hover:bg-white/10 transition-colors font-medium"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to App
+                Back to Home
               </Button>
             </div>
           </div>
