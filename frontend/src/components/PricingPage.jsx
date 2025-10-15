@@ -11,10 +11,11 @@ const PricingPage = () => {
 
   const handleGetStarted = (plan) => {
     if (plan === 'free') {
-      navigate('/');
+      // Navigate to app for free signup/login
+      navigate('/app');
     } else {
-      // Navigate to signup with pro plan
-      navigate('/?upgrade=pro');
+      // Redirect to payment provider for pro plan
+      window.open('https://buy.stripe.com/test_00g7sV1hzbxTdeM144', '_blank');
     }
   };
 
