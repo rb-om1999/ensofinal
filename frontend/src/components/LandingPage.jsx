@@ -47,7 +47,7 @@ const LandingPage = () => {
       title: "Real-Time Insights",
       description: "Instant analysis of any trading chart with professional-grade recommendations"
     }
-  ];\
+  ];
 
   const testimonials = [
     {
