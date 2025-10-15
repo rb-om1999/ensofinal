@@ -138,4 +138,169 @@ const LandingPage = () => {
               </p>
             </div>
           </div>
-        </section>\n\n        {/* Trading Charts Showcase */}\n        <section className="py-16 px-6">\n          <div className="container mx-auto max-w-6xl">\n            <div className="text-center mb-12">\n              <h3 className="text-4xl font-bold text-white mb-4">Real Results, Real Profits</h3>\n              <p className="text-xl text-slate-300 max-w-2xl mx-auto">\n                See how our analysis identifies winning opportunities in live market conditions\n              </p>\n            </div>\n            \n            <div className="grid md:grid-cols-3 gap-8 mb-12">\n              {tradingImages.map((image, index) => (\n                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-amber-400/30 transition-all duration-500 group overflow-hidden">\n                  <CardContent className="p-0 relative">\n                    <div className="relative overflow-hidden rounded-lg">\n                      <img \n                        src={image.url} \n                        alt={image.alt}\n                        className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"\n                      />\n                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>\n                      <div className="absolute top-4 right-4">\n                        <Badge className="bg-green-500/90 text-white font-bold px-3 py-1 text-lg backdrop-blur-sm">\n                          {image.profit}\n                        </Badge>\n                      </div>\n                      <div className="absolute bottom-4 left-4 right-4">\n                        <Button\n                          onClick={() => navigate('/pricing')}\n                          className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-3 text-lg shadow-lg transition-all duration-300"\n                        >\n                          <DollarSign className="w-5 h-5 mr-2" />\n                          Take Profit!\n                        </Button>\n                      </div>\n                    </div>\n                  </CardContent>\n                </Card>\n              ))}\n            </div>\n          </div>\n        </section>\n\n        {/* Features Section */}\n        <section className="py-20 px-6">\n          <div className="container mx-auto max-w-6xl">\n            <div className="text-center mb-16">\n              <h3 className="text-5xl font-bold text-white mb-6">Why Traders Choose EnsoTrade</h3>\n              <p className="text-xl text-slate-300 max-w-3xl mx-auto">\n                Professional-grade tools designed for serious traders who demand precision and results\n              </p>\n            </div>\n            \n            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">\n              {features.map((feature, index) => (\n                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300 text-center group">\n                  <CardContent className="p-8">\n                    <div className="w-16 h-16 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full mx-auto flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">\n                      <div className="text-amber-400">\n                        {feature.icon}\n                      </div>\n                    </div>\n                    <h4 className="text-xl font-bold text-white mb-3">{feature.title}</h4>\n                    <p className="text-slate-300 leading-relaxed">{feature.description}</p>\n                  </CardContent>\n                </Card>\n              ))}\n            </div>\n          </div>\n        </section>\n\n        {/* Testimonials */}\n        <section className="py-20 px-6">\n          <div className="container mx-auto max-w-6xl">\n            <div className="text-center mb-16">\n              <h3 className="text-5xl font-bold text-white mb-6">Success Stories</h3>\n              <p className="text-xl text-slate-300 max-w-2xl mx-auto">\n                Join thousands of traders who've transformed their results with EnsoTrade\n              </p>\n            </div>\n            \n            <div className="grid md:grid-cols-3 gap-8">\n              {testimonials.map((testimonial, index) => (\n                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10">\n                  <CardContent className="p-8">\n                    <div className="flex items-center mb-6">\n                      <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mr-4">\n                        <Star className="w-6 h-6 text-white" />\n                      </div>\n                      <div>\n                        <h4 className="text-lg font-bold text-white">{testimonial.name}</h4>\n                        <p className="text-slate-400 text-sm">{testimonial.role}</p>\n                      </div>\n                      <Badge className="ml-auto bg-green-500/20 text-green-300 border-green-500/50 font-bold">\n                        {testimonial.profit}\n                      </Badge>\n                    </div>\n                    <p className="text-slate-200 leading-relaxed italic">"{testimonial.quote}"</p>\n                  </CardContent>\n                </Card>\n              ))}\n            </div>\n          </div>\n        </section>\n\n        {/* CTA Section */}\n        <section className="py-20 px-6">\n          <div className="container mx-auto max-w-4xl text-center">\n            <Card className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 backdrop-blur-2xl border-amber-400/30 shadow-2xl ring-2 ring-amber-400/20">\n              <CardContent className="p-12">\n                <h3 className="text-4xl font-bold text-white mb-6">\n                  Ready to Transform Your Trading?\n                </h3>\n                <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">\n                  Join the elite community of profitable traders. Start with our free plan or unlock \n                  unlimited potential with Pro.\n                </p>\n                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">\n                  <Button\n                    onClick={() => navigate('/pricing')}\n                    className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 px-8 text-lg shadow-lg"\n                  >\n                    <Crown className="w-5 h-5 mr-2" />\n                    View Pricing Plans\n                  </Button>\n                  <Button\n                    onClick={() => navigate('/app')}\n                    variant="outline"\n                    className="border-white/30 text-white hover:bg-white/10 font-semibold py-4 px-8 text-lg"\n                  >\n                    Start Free Trial\n                    <ArrowRight className="w-5 h-5 ml-2" />\n                  </Button>\n                </div>\n              </CardContent>\n            </Card>\n          </div>\n        </section>\n\n        {/* Footer */}\n        <footer className="border-t border-white/10 py-12 px-6">\n          <div className="container mx-auto max-w-6xl text-center">\n            <div className="flex items-center justify-center space-x-3 mb-6">\n              <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">\n                <BarChart3 className="w-6 h-6 text-white" />\n              </div>\n              <h4 className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">\n                EnsoTrade\n              </h4>\n            </div>\n            <p className="text-slate-400 mb-4">\n              Professional Trading Intelligence • Powered by Advanced AI\n            </p>\n            <p className="text-slate-500 text-sm">\n              © 2024 EnsoTrade. All rights reserved. Trade responsibly.\n            </p>\n          </div>\n        </footer>\n      </div>\n    </div>\n  );\n};\n\nexport default LandingPage;
+        </section>
+
+        {/* Trading Charts Showcase */}
+        <section className="py-16 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h3 className="text-4xl font-bold text-white mb-4">Real Results, Real Profits</h3>
+              <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+                See how our analysis identifies winning opportunities in live market conditions
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              {tradingImages.map((image, index) => (
+                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-amber-400/30 transition-all duration-500 group overflow-hidden">
+                  <CardContent className="p-0 relative">
+                    <div className="relative overflow-hidden rounded-lg">
+                      <img 
+                        src={image.url} 
+                        alt={image.alt}
+                        className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-green-500/90 text-white font-bold px-3 py-1 text-lg backdrop-blur-sm">
+                          {image.profit}
+                        </Badge>
+                      </div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <Button
+                          onClick={() => navigate('/pricing')}
+                          className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-3 text-lg shadow-lg transition-all duration-300"
+                        >
+                          <DollarSign className="w-5 h-5 mr-2" />
+                          Take Profit!
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <h3 className="text-5xl font-bold text-white mb-6">Why Traders Choose EnsoTrade</h3>
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+                Professional-grade tools designed for serious traders who demand precision and results
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300 text-center group">
+                  <CardContent className="p-8">
+                    <div className="w-16 h-16 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full mx-auto flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <div className="text-amber-400">
+                        {feature.icon}
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-white mb-3">{feature.title}</h4>
+                    <p className="text-slate-300 leading-relaxed">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-16">
+              <h3 className="text-5xl font-bold text-white mb-6">Success Stories</h3>
+              <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+                Join thousands of traders who've transformed their results with EnsoTrade
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-6">
+                      <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mr-4">
+                        <Star className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-white">{testimonial.name}</h4>
+                        <p className="text-slate-400 text-sm">{testimonial.role}</p>
+                      </div>
+                      <Badge className="ml-auto bg-green-500/20 text-green-300 border-green-500/50 font-bold">
+                        {testimonial.profit}
+                      </Badge>
+                    </div>
+                    <p className="text-slate-200 leading-relaxed italic">"{testimonial.quote}"</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-4xl text-center">
+            <Card className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 backdrop-blur-2xl border-amber-400/30 shadow-2xl ring-2 ring-amber-400/20">
+              <CardContent className="p-12">
+                <h3 className="text-4xl font-bold text-white mb-6">
+                  Ready to Transform Your Trading?
+                </h3>
+                <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
+                  Join the elite community of profitable traders. Start with our free plan or unlock 
+                  unlimited potential with Pro.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <Button
+                    onClick={() => navigate('/pricing')}
+                    className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 px-8 text-lg shadow-lg"
+                  >
+                    <Crown className="w-5 h-5 mr-2" />
+                    View Pricing Plans
+                  </Button>
+                  <Button
+                    onClick={() => navigate('/app')}
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10 font-semibold py-4 px-8 text-lg"
+                  >
+                    Start Free Trial
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-white/10 py-12 px-6">
+          <div className="container mx-auto max-w-6xl text-center">
+            <div className="flex items-center justify-center space-x-3 mb-6">
+              <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 text-white" />
+              </div>
+              <h4 className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                EnsoTrade
+              </h4>
+            </div>
+            <p className="text-slate-400 mb-4">
+              Professional Trading Intelligence • Powered by Advanced AI
+            </p>
+            <p className="text-slate-500 text-sm">
+              © 2024 EnsoTrade. All rights reserved. Trade responsibly.
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
+  );
+};
+
+export default LandingPage;\n\n        {/* Trading Charts Showcase */}\n        <section className="py-16 px-6">\n          <div className="container mx-auto max-w-6xl">\n            <div className="text-center mb-12">\n              <h3 className="text-4xl font-bold text-white mb-4">Real Results, Real Profits</h3>\n              <p className="text-xl text-slate-300 max-w-2xl mx-auto">\n                See how our analysis identifies winning opportunities in live market conditions\n              </p>\n            </div>\n            \n            <div className="grid md:grid-cols-3 gap-8 mb-12">\n              {tradingImages.map((image, index) => (\n                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-amber-400/30 transition-all duration-500 group overflow-hidden">\n                  <CardContent className="p-0 relative">\n                    <div className="relative overflow-hidden rounded-lg">\n                      <img \n                        src={image.url} \n                        alt={image.alt}\n                        className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"\n                      />\n                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>\n                      <div className="absolute top-4 right-4">\n                        <Badge className="bg-green-500/90 text-white font-bold px-3 py-1 text-lg backdrop-blur-sm">\n                          {image.profit}\n                        </Badge>\n                      </div>\n                      <div className="absolute bottom-4 left-4 right-4">\n                        <Button\n                          onClick={() => navigate('/pricing')}\n                          className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-3 text-lg shadow-lg transition-all duration-300"\n                        >\n                          <DollarSign className="w-5 h-5 mr-2" />\n                          Take Profit!\n                        </Button>\n                      </div>\n                    </div>\n                  </CardContent>\n                </Card>\n              ))}\n            </div>\n          </div>\n        </section>\n\n        {/* Features Section */}\n        <section className="py-20 px-6">\n          <div className="container mx-auto max-w-6xl">\n            <div className="text-center mb-16">\n              <h3 className="text-5xl font-bold text-white mb-6">Why Traders Choose EnsoTrade</h3>\n              <p className="text-xl text-slate-300 max-w-3xl mx-auto">\n                Professional-grade tools designed for serious traders who demand precision and results\n              </p>\n            </div>\n            \n            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">\n              {features.map((feature, index) => (\n                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300 text-center group">\n                  <CardContent className="p-8">\n                    <div className="w-16 h-16 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full mx-auto flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">\n                      <div className="text-amber-400">\n                        {feature.icon}\n                      </div>\n                    </div>\n                    <h4 className="text-xl font-bold text-white mb-3">{feature.title}</h4>\n                    <p className="text-slate-300 leading-relaxed">{feature.description}</p>\n                  </CardContent>\n                </Card>\n              ))}\n            </div>\n          </div>\n        </section>\n\n        {/* Testimonials */}\n        <section className="py-20 px-6">\n          <div className="container mx-auto max-w-6xl">\n            <div className="text-center mb-16">\n              <h3 className="text-5xl font-bold text-white mb-6">Success Stories</h3>\n              <p className="text-xl text-slate-300 max-w-2xl mx-auto">\n                Join thousands of traders who've transformed their results with EnsoTrade\n              </p>\n            </div>\n            \n            <div className="grid md:grid-cols-3 gap-8">\n              {testimonials.map((testimonial, index) => (\n                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10">\n                  <CardContent className="p-8">\n                    <div className="flex items-center mb-6">\n                      <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mr-4">\n                        <Star className="w-6 h-6 text-white" />\n                      </div>\n                      <div>\n                        <h4 className="text-lg font-bold text-white">{testimonial.name}</h4>\n                        <p className="text-slate-400 text-sm">{testimonial.role}</p>\n                      </div>\n                      <Badge className="ml-auto bg-green-500/20 text-green-300 border-green-500/50 font-bold">\n                        {testimonial.profit}\n                      </Badge>\n                    </div>\n                    <p className="text-slate-200 leading-relaxed italic">"{testimonial.quote}"</p>\n                  </CardContent>\n                </Card>\n              ))}\n            </div>\n          </div>\n        </section>\n\n        {/* CTA Section */}\n        <section className="py-20 px-6">\n          <div className="container mx-auto max-w-4xl text-center">\n            <Card className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 backdrop-blur-2xl border-amber-400/30 shadow-2xl ring-2 ring-amber-400/20">\n              <CardContent className="p-12">\n                <h3 className="text-4xl font-bold text-white mb-6">\n                  Ready to Transform Your Trading?\n                </h3>\n                <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">\n                  Join the elite community of profitable traders. Start with our free plan or unlock \n                  unlimited potential with Pro.\n                </p>\n                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">\n                  <Button\n                    onClick={() => navigate('/pricing')}\n                    className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 px-8 text-lg shadow-lg"\n                  >\n                    <Crown className="w-5 h-5 mr-2" />\n                    View Pricing Plans\n                  </Button>\n                  <Button\n                    onClick={() => navigate('/app')}\n                    variant="outline"\n                    className="border-white/30 text-white hover:bg-white/10 font-semibold py-4 px-8 text-lg"\n                  >\n                    Start Free Trial\n                    <ArrowRight className="w-5 h-5 ml-2" />\n                  </Button>\n                </div>\n              </CardContent>\n            </Card>\n          </div>\n        </section>\n\n        {/* Footer */}\n        <footer className="border-t border-white/10 py-12 px-6">\n          <div className="container mx-auto max-w-6xl text-center">\n            <div className="flex items-center justify-center space-x-3 mb-6">\n              <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">\n                <BarChart3 className="w-6 h-6 text-white" />\n              </div>\n              <h4 className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">\n                EnsoTrade\n              </h4>\n            </div>\n            <p className="text-slate-400 mb-4">\n              Professional Trading Intelligence • Powered by Advanced AI\n            </p>\n            <p className="text-slate-500 text-sm">\n              © 2024 EnsoTrade. All rights reserved. Trade responsibly.\n            </p>\n          </div>\n        </footer>\n      </div>\n    </div>\n  );\n};\n\nexport default LandingPage;
