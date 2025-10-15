@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 class EnsoTradeAPITester:
-    def __init__(self, base_url="https://chart-whisperer-3.preview.emergentagent.com"):
+    def __init__(self, base_url="https://trade-vision-12.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.tests_run = 0
