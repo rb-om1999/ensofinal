@@ -448,13 +448,20 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
         if not api_key:
             raise HTTPException(status_code=500, detail="EMERGENT_LLM_KEY not found in environment")
         
-        # Initialize Gemini chat
+        # Initialize Gemini chat with model selection based on user plan
         session_id = str(uuid.uuid4())
+        
+        # Select model based on user plan
+        if is_admin_user(current_user.email) or current_user.user_metadata.get("plan") == "pro":
+            gemini_model = "gemini-2.5-pro"
+        else:
+            gemini_model = "gemini-2.0-flash"
+        
         chat = LlmChat(
             api_key=api_key,
             session_id=session_id,
             system_message="You are an expert trading analyst."
-        ).with_model("gemini", "gemini-2.5-pro")
+        ).with_model("gemini", gemini_model)
         
         # Get appropriate prompt based on user plan
         prompt = get_gemini_prompt(
