@@ -282,49 +282,6 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* Trading Charts Showcase */}
-        <section className="py-16 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-12">
-              <h3 className="text-4xl font-bold text-white mb-4">Real Results, Real Profits</h3>
-              <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-                See how our analysis identifies winning opportunities in live market conditions
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              {tradingImages.map((image, index) => (
-                <Card key={index} className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-amber-400/30 transition-all duration-500 group overflow-hidden">
-                  <CardContent className="p-0 relative">
-                    <div className="relative overflow-hidden rounded-lg">
-                      <img 
-                        src={image.url} 
-                        alt={image.alt}
-                        className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-green-500/90 text-white font-bold px-3 py-1 text-lg backdrop-blur-sm">
-                          {image.profit}
-                        </Badge>
-                      </div>
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <Button
-                          onClick={() => navigate('/pricing')}
-                          className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-3 text-lg shadow-lg transition-all duration-300"
-                        >
-                          <DollarSign className="w-5 h-5 mr-2" />
-                          Take Profit!
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Features Section */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-6xl">
