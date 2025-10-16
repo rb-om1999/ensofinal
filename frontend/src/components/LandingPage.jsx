@@ -410,37 +410,82 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 px-6">
-          <div className="container mx-auto max-w-4xl text-center">
-            <Card className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 backdrop-blur-2xl border-amber-400/30 shadow-2xl ring-2 ring-amber-400/20">
-              <CardContent className="p-12">
-                <h3 className="text-4xl font-bold text-white mb-6">
-                  Ready to Transform Your Trading?
+        {/* Luxury CTA Section */}
+        <section className="py-32 px-8 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-transparent to-amber-900/20"></div>
+          <div className="container mx-auto max-w-6xl text-center relative z-10">
+            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-purple-500/5"></div>
+              
+              <div className="relative z-10 p-16">
+                <Badge className="mb-8 bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/30 text-lg font-medium px-8 py-4 rounded-full">
+                  <Crown className="w-5 h-5 mr-2 inline" />
+                  Join The Elite Trading Community
+                </Badge>
+                
+                <h3 className="text-5xl lg:text-6xl font-bold mb-8">
+                  <span className="bg-gradient-to-r from-white via-amber-100 to-white bg-clip-text text-transparent">
+                    Ready to Multiply
+                  </span>
+                  <br />
+                  <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">
+                    Your Trading Profits?
+                  </span>
                 </h3>
-                <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
-                  Join the elite community of profitable traders. Start with our free plan or unlock 
-                  unlimited potential with Pro.
+                
+                <p className="text-2xl text-slate-200 mb-12 max-w-4xl mx-auto leading-relaxed">
+                  Join thousands of professional traders who've transformed their results with our AI-powered analysis. 
+                  Choose your path to consistent profitability.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Button
-                    onClick={() => navigate('/pricing')}
-                    className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 px-8 text-lg shadow-lg"
-                  >
-                    <Crown className="w-5 h-5 mr-2" />
-                    View Pricing Plans
-                  </Button>
-                  <Button
-                    onClick={() => navigate('/app')}
-                    variant="outline"
-                    className="border-white/30 text-white hover:bg-white/10 font-semibold py-4 px-8 text-lg"
-                  >
-                    Start Free Trial
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
+                
+                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+                  {/* Free Plan CTA */}
+                  <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300">
+                    <h4 className="text-2xl font-bold text-white mb-4">Start Free</h4>
+                    <p className="text-slate-300 mb-6">Perfect for testing our AI analysis</p>
+                    <ul className="text-left space-y-2 mb-6">
+                      <li className="text-slate-300">✓ 5 Monthly Analyses</li>
+                      <li className="text-slate-300">✓ Basic Market Insights</li>
+                      <li className="text-slate-300">✓ Email Support</li>
+                    </ul>
+                    <Button
+                      onClick={() => navigate('/app')}
+                      variant="outline"
+                      className="w-full border-white/30 text-white hover:bg-white/10 font-semibold py-4 px-8 text-lg rounded-xl"
+                    >
+                      Start Free Trial
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                  </div>
+
+                  {/* Pro Plan CTA */}
+                  <div className="bg-gradient-to-br from-amber-500/20 to-orange-500/20 backdrop-blur-xl rounded-2xl p-8 border border-amber-400/30 hover:border-amber-400/50 transition-all duration-300 ring-2 ring-amber-400/20">
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="text-2xl font-bold text-white">Go Pro</h4>
+                      <Badge className="bg-amber-500 text-black font-bold">POPULAR</Badge>
+                    </div>
+                    <p className="text-slate-200 mb-6">For serious traders seeking maximum profits</p>
+                    <ul className="text-left space-y-2 mb-6">
+                      <li className="text-slate-200">✓ Unlimited Analyses</li>
+                      <li className="text-slate-200">✓ Advanced AI Insights</li>
+                      <li className="text-slate-200">✓ Priority Support</li>
+                      <li className="text-slate-200">✓ Risk Management Tools</li>
+                    </ul>
+                    <Button
+                      onClick={() => navigate('/pricing')}
+                      className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-bold py-4 px-8 text-lg shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                    >
+                      <DollarSign className="w-5 h-5 mr-2" />
+                      Take Profit Now!
+                    </Button>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+
+                <p className="text-slate-400 text-sm">
+                  💡 Start free, upgrade anytime. No commitment, cancel whenever you want.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
