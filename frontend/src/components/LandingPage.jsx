@@ -172,7 +172,7 @@ const LandingPage = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
                     <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="font-semibold text-white">XAUUSD • Gold vs US Dollar</span>
+                    <span className="font-semibold text-white">AAPL • Apple</span>
                   </div>
                   <Badge className="bg-green-500/20 text-green-300 border-green-500/30 font-mono">
                     Live Market
