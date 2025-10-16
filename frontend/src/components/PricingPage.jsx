@@ -14,8 +14,8 @@ const PricingPage = () => {
       // Navigate to app for free signup/login
       navigate('/app');
     } else {
-      // Redirect to payment provider for pro plan
-      window.open('https://buy.stripe.com/test_00g7sV1hzbxTdeM144', '_blank');
+      // Navigate to payment page for pro plan
+      navigate('/payment');
     }
   };
 
