@@ -591,8 +591,44 @@ const ChartAnalyzer = () => {
                       </CardContent>
                     </Card>
 
+                    {/* Integration Verdict - Only for Pro/Admin */}
+                    {analysis.integrationVerdict && (isPro || isAdmin) && (
+                      <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                        <CardHeader>
+                          <CardTitle className="text-xl text-white flex items-center gap-2">
+                            <Target className="w-5 h-5 text-amber-400" />
+                            Market Integration Analysis
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <Label className="text-slate-400 text-sm">Integration Verdict</Label>
+                              <Badge className={`${getMovementColor(analysis.integrationVerdict)} font-medium`}>
+                                {analysis.integrationVerdict}
+                              </Badge>
+                            </div>
+                            <div className="space-y-2">
+                              <Label className="text-slate-400 text-sm">Ticker</Label>
+                              <Badge variant="outline" className="border-amber-400/30 text-amber-400">
+                                {analysis.ticker}
+                              </Badge>
+                            </div>
+                          </div>
+                          {analysis.conflictReasoning && analysis.integrationVerdict === 'Conflicting' && (
+                            <div className="space-y-2">
+                              <Label className="text-slate-400 text-sm">Conflict Analysis</Label>
+                              <p className="text-slate-200 text-sm bg-orange-500/10 border border-orange-500/20 rounded-lg p-3">
+                                {analysis.conflictReasoning}
+                              </p>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    )}
+
                     {/* Technical Signals - Only for Pro/Admin */}
-                    {analysis.signals && analysis.signals.length > 0 && (isPro || isAdmin) && (
+                    {analysis.technicalSignals && analysis.technicalSignals.length > 0 && (isPro || isAdmin) && (
                       <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
                         <CardHeader>
                           <CardTitle className="text-xl text-white flex items-center gap-2">
@@ -602,12 +638,68 @@ const ChartAnalyzer = () => {
                         </CardHeader>
                         <CardContent>
                           <div className="grid gap-2" data-testid="technical-signals">
-                            {analysis.signals.map((signal, index) => (
+                            {analysis.technicalSignals.map((signal, index) => (
                               <div key={index} className="flex items-center space-x-3 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200">
                                 <div className="w-2 h-2 bg-amber-400 rounded-full shadow-sm shadow-amber-400/50"></div>
                                 <span className="text-slate-100 font-medium">{signal}</span>
                               </div>
                             ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Market Context - Only for Pro/Admin */}
+                    {analysis.marketContext && analysis.marketContext.length > 0 && (isPro || isAdmin) && (
+                      <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                        <CardHeader>
+                          <CardTitle className="text-xl text-white flex items-center gap-2">
+                            <Target className="w-5 h-5 text-blue-400" />
+                            Market Context & News
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="grid gap-2">
+                            {analysis.marketContext.map((context, index) => (
+                              <div key={index} className="flex items-center space-x-3 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-all duration-200">
+                                <div className="w-2 h-2 bg-blue-400 rounded-full shadow-sm shadow-blue-400/50"></div>
+                                <span className="text-slate-100 font-medium">{context}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Target Trade - Only for Pro/Admin */}
+                    {analysis.targetTrade && (isPro || isAdmin) && (
+                      <Card className="bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300">
+                        <CardHeader>
+                          <CardTitle className="text-xl text-white flex items-center gap-2">
+                            <DollarSign className="w-5 h-5 text-green-400" />
+                            Target Trade Setup
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div className="grid grid-cols-3 gap-4">
+                            <div className="space-y-2">
+                              <Label className="text-slate-400 text-sm">Entry Price</Label>
+                              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+                                <span className="text-green-400 font-mono font-medium">{analysis.targetTrade.entryPrice}</span>
+                              </div>
+                            </div>
+                            <div className="space-y-2">
+                              <Label className="text-slate-400 text-sm">Stop Loss</Label>
+                              <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                                <span className="text-red-400 font-mono font-medium">{analysis.targetTrade.stopLoss}</span>
+                              </div>
+                            </div>
+                            <div className="space-y-2">
+                              <Label className="text-slate-400 text-sm">Take Profit</Label>
+                              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3">
+                                <span className="text-emerald-400 font-mono font-medium">{analysis.targetTrade.takeProfit}</span>
+                              </div>
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
