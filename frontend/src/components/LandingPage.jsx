@@ -118,33 +118,35 @@ const LandingPage = () => {
       </div>
 
       <div className="relative z-10">
-        {/* Header */}
-        <header className="border-b border-white/10 bg-white/5 backdrop-blur-xl shadow-xl">
-          <div className="container mx-auto px-6 py-6">
+        {/* Luxury Glassmorphism Header */}
+        <header className="border-b border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-amber-500/5"></div>
+          <div className="container mx-auto px-8 py-6 relative z-10">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg ring-1 ring-amber-400/20">
-                  <BarChart3 className="w-7 h-7 text-white drop-shadow-sm" />
+              <div className="flex items-center space-x-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-amber-400 via-orange-400 to-amber-500 rounded-2xl flex items-center justify-center shadow-2xl ring-2 ring-amber-400/30 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
+                  <BarChart3 className="w-8 h-8 text-white drop-shadow-lg relative z-10" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 bg-clip-text text-transparent drop-shadow-sm">
+                  <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 bg-clip-text text-transparent drop-shadow-lg">
                     EnsoTrade
                   </h1>
-                  <p className="text-slate-300 text-sm font-medium">Professional Trading Intelligence</p>
+                  <p className="text-slate-300 text-sm font-medium tracking-wide">Professional Trading Intelligence</p>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-6">
                 <Button
                   onClick={() => navigate('/pricing')}
                   variant="ghost"
-                  className="text-white hover:bg-white/10 transition-colors font-medium"
+                  className="text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300 font-medium px-6 py-3 rounded-xl"
                 >
                   Pricing
                 </Button>
                 <Button
                   onClick={() => navigate('/app')}
-                  className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-medium"
+                  className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ring-2 ring-amber-400/20 hover:ring-amber-400/40"
                 >
                   Get Started
                 </Button>
