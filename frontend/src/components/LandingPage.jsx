@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { BarChart3, TrendingUp, Shield, Crown, Star, ArrowRight, DollarSign, Target, Zap } from 'lucide-react';
+import { BarChart3, TrendingUp, Shield, Crown, Star, ArrowRight, DollarSign, Target, Zap, Activity, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
