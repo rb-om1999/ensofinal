@@ -5,6 +5,7 @@ import LandingPage from './components/LandingPage';
 import ChartAnalyzer from './components/ChartAnalyzer';
 import VerifyEmail from './components/VerifyEmail';
 import PricingPage from './components/PricingPage';
+import PaymentPage from './components/PaymentPage';
 
 function App() {
   return (
