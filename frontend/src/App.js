@@ -17,6 +17,7 @@ function App() {
           <Route path="/analyze" element={<ChartAnalyzer />} />
           <Route path="/verify" element={<VerifyEmail />} />
           <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Routes>
       </BrowserRouter>
     </div>
