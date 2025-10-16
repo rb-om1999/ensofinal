@@ -155,22 +155,152 @@ const LandingPage = () => {
           </div>
         </header>
 
-        {/* Hero Section */}
-        <section className="py-20 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <Badge className="mb-6 bg-amber-500/20 text-amber-300 border-amber-500/50 text-sm font-medium px-4 py-2">
-                🏆 Trusted by 50,000+ Traders Worldwide
-              </Badge>
-              <h2 className="text-7xl font-bold mb-8 bg-gradient-to-r from-white via-amber-100 to-amber-300 bg-clip-text text-transparent drop-shadow-2xl leading-tight">
-                Turn Charts Into
-                <br />
-                <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Consistent Profits</span>
-              </h2>
-              <p className="text-2xl text-slate-200 max-w-4xl mx-auto mb-12 leading-relaxed">
-                Professional trading analysis powered by cutting-edge AI. Upload any chart and receive 
-                institutional-grade insights with precise entry points, risk management, and profit targets.
-              </p>
+        {/* Hero Section with Animated Chart */}
+        <section className="py-32 px-8 relative">
+          <div className="container mx-auto max-w-7xl">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Side - Content */}
+              <div className="space-y-8">
+                <Badge className="bg-gradient-to-r from-purple-500/20 to-amber-500/20 text-amber-300 border border-amber-500/30 text-sm font-medium px-6 py-3 rounded-full backdrop-blur-sm">
+                  <Sparkles className="w-4 h-4 mr-2 inline" />
+                  Trusted by 50,000+ Professional Traders
+                </Badge>
+                
+                <div className="space-y-6">
+                  <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+                    <span className="bg-gradient-to-r from-white via-amber-100 to-white bg-clip-text text-transparent">
+                      Dominate Every
+                    </span>
+                    <br />
+                    <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">
+                      Trading Market
+                    </span>
+                  </h1>
+                  
+                  <p className="text-xl text-slate-300 leading-relaxed max-w-xl">
+                    Our AI analyzes any trading instrument with institutional-grade precision. 
+                    From crypto to forex, stocks to commodities - we've got you covered.
+                  </p>
+                </div>
+
+                {/* Typing Animation Section */}
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl">
+                  <div className="flex items-center space-x-4 mb-4">
+                    <Activity className="w-6 h-6 text-amber-400" />
+                    <span className="text-slate-300 font-medium">Currently Analyzing:</span>
+                  </div>
+                  <div className="font-mono text-3xl font-bold text-amber-400 min-h-[2.5rem] flex items-center">
+                    {currentSymbol}
+                    <span className="animate-pulse ml-1">|</span>
+                  </div>
+                  <p className="text-sm text-slate-400 mt-2">Live market domination across all instruments</p>
+                </div>
+
+                <Button
+                  onClick={() => navigate('/pricing')}
+                  size="lg"
+                  className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:via-orange-400 hover:to-amber-500 text-white font-bold px-12 py-6 text-xl rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-500 transform hover:scale-105 ring-2 ring-amber-400/20 hover:ring-amber-400/40"
+                >
+                  <DollarSign className="w-6 h-6 mr-3" />
+                  Take Profit Now!
+                </Button>
+              </div>
+
+              {/* Right Side - Animated Chart */}
+              <div className="relative">
+                <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 shadow-2xl relative overflow-hidden">
+                  {/* Chart Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="font-semibold text-white">Live Market Analysis</span>
+                    </div>
+                    <Badge className="bg-green-500/20 text-green-300 border-green-500/30 font-mono">
+                      +247.8%
+                    </Badge>
+                  </div>
+
+                  {/* Animated Chart */}
+                  <div className="relative h-80 bg-gradient-to-br from-slate-900/50 to-purple-900/30 rounded-2xl overflow-hidden">
+                    {/* Chart Grid */}
+                    <div className="absolute inset-0 opacity-20">
+                      {[...Array(8)].map((_, i) => (
+                        <div key={i} className="absolute w-full h-px bg-white/10" style={{top: `${12.5 * (i + 1)}%`}}></div>
+                      ))}
+                      {[...Array(6)].map((_, i) => (
+                        <div key={i} className="absolute h-full w-px bg-white/10" style={{left: `${16.67 * (i + 1)}%`}}></div>
+                      ))}
+                    </div>
+
+                    {/* Animated Price Line */}
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 320">
+                      <defs>
+                        <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.3"/>
+                          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      
+                      {/* Filled Area */}
+                      <path
+                        d="M 0 250 Q 50 200 100 180 T 200 160 T 300 140 T 400 120 L 400 320 L 0 320 Z"
+                        fill="url(#chartGradient)"
+                        className="animate-pulse"
+                      />
+                      
+                      {/* Main Line */}
+                      <path
+                        d="M 0 250 Q 50 200 100 180 T 200 160 T 300 140 T 400 120"
+                        stroke="#f59e0b"
+                        strokeWidth="3"
+                        fill="none"
+                        className="drop-shadow-lg"
+                        style={{
+                          strokeDasharray: '1600',
+                          strokeDashoffset: '1600',
+                          animation: 'dash 4s ease-in-out infinite alternate'
+                        }}
+                      />
+                    </svg>
+
+                    {/* Floating Profit Indicators */}
+                    <div className="absolute top-4 right-4 space-y-2">
+                      <div className="bg-green-500/20 backdrop-blur-sm rounded-lg px-3 py-1 text-green-300 text-sm font-mono animate-bounce">
+                        +$2,847
+                      </div>
+                      <div className="bg-blue-500/20 backdrop-blur-sm rounded-lg px-3 py-1 text-blue-300 text-sm font-mono" style={{animationDelay: '0.5s'}}>
+                        Entry: 1.2450
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Chart Footer */}
+                  <div className="flex items-center justify-between mt-6 pt-6 border-t border-white/10">
+                    <div className="flex items-center space-x-4">
+                      <div className="text-center">
+                        <p className="text-xs text-slate-400">Win Rate</p>
+                        <p className="font-bold text-green-400">87.3%</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xs text-slate-400">Profit Factor</p>
+                        <p className="font-bold text-amber-400">2.4x</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xs text-slate-400">Drawdown</p>
+                        <p className="font-bold text-blue-400">-3.2%</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2 text-amber-400">
+                      <TrendingUp className="w-5 h-5" />
+                      <span className="font-semibold">Bullish Signal</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full animate-ping opacity-75"></div>
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full animate-pulse"></div>
+              </div>
             </div>
           </div>
         </section>
