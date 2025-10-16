@@ -7,6 +7,36 @@ import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  
+  // Typing animation state
+  const [currentSymbol, setCurrentSymbol] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
+  
+  const symbols = ['LTCUSDT', 'XAUUSD', 'AAPL', 'DXY', 'BTCUSD', 'EURUSD', 'TSLA', 'NVDA'];
+  
+  useEffect(() => {
+    const currentWord = symbols[currentIndex];
+    
+    if (isTyping) {
+      if (currentSymbol.length < currentWord.length) {
+        setTimeout(() => {
+          setCurrentSymbol(currentWord.slice(0, currentSymbol.length + 1));
+        }, 150);
+      } else {
+        setTimeout(() => setIsTyping(false), 2000);
+      }
+    } else {
+      if (currentSymbol.length > 0) {
+        setTimeout(() => {
+          setCurrentSymbol(currentSymbol.slice(0, -1));
+        }, 100);
+      } else {
+        setCurrentIndex((prev) => (prev + 1) % symbols.length);
+        setIsTyping(true);
+      }
+    }
+  }, [currentSymbol, currentIndex, isTyping, symbols]);
 
   const tradingImages = [
     {
