@@ -38,24 +38,6 @@ const LandingPage = () => {
     }
   }, [currentSymbol, currentIndex, isTyping, symbols]);
 
-  const tradingImages = [
-    {
-      url: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldHxlbnwwfHx8fDE3NjA1MzM2MTd8MA&ixlib=rb-4.1.0&q=85",
-      alt: "Professional Trading Dashboard",
-      profit: "+247.8%"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1639754390580-2e7437267698?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHx0cmFkaW5nJTIwY2hhcnR8ZW58MHx8fHwxNzYwNTMzNjA0fDA&ixlib=rb-4.1.0&q=85",
-      alt: "Crypto Market Analysis",
-      profit: "+189.3%"
-    },
-    {
-      url: "https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg",
-      alt: "Market Trends Dashboard",
-      profit: "+156.7%"
-    }
-  ];
-
   const features = [
     {
       icon: <TrendingUp className="w-6 h-6" />,
