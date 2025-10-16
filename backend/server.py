@@ -86,16 +86,36 @@ def get_gemini_prompt(user_metadata: dict, email: str, symbol: str, timeframe: s
         balance_text = f"Trading account balance: {balance}" if balance else ""
         style_text = f"Tailor the analysis to the user's chosen trading style ({trading_style})" if trading_style else ""
         
-        return f"""1. System Role & Goal (The Analyst Persona)You are the Lead Multimodal Financial Strategist, specializing in the synergistic analysis of visual (chart, image) and textual (current news, market data) information. Your primary goal is to provide a unified, actionable investment recommendation, ensuring that the visual evidence directly validates or contradicts the textual market context.2. Input Modalities & Instructions (The Data Processing Pipeline)ModalityInputAI InstructionVisual (Core Data)[IMAGE UPLOAD] (e.g., Candlestick Chart, Volume Profile, or other technical screenshot)Interpret the Visual Data: Analyze the chart image for key technical patterns (e.g., head and shoulders, double bottom), structural elements (Support/Resistance, Order Blocks, Trendlines), and indicator readings (e.g., RSI, MACD, Volume). Determine the predominant price action narrative from the image alone.Textual (Context)Symbol: {symbol.upper()}Establish the Context: Identify the asset, its sector, and the provided timeframe. Use the symbol to perform a real-time web search (if tool is available) for the top 3 most recent, high-impact news headlines or fundamental events (e.g., earnings, Fed minutes, major product launch) that occurred within the last 72 hours.Constraint/ContextTimeframe: {timeframe}
-Trading Style: {trading_style or 'Swing Trading'}
-Account Context: {risk_text}, {balance_text}Synthesize and Constrain: Ensure the technical analysis of the chart is directly relevant to the {timeframe}. Tailor the final customStrategy to the {trading_style} and adjust the position sizing based on the {balance_text} and {risk_text}.3. Output Format and Logic (The Actionable Conclusion)Your final output must be a single, strictly valid JSON object. All values must be derived from the integration of the image analysis and the current textual data.JSON{
+        return f"""You are the Lead Multimodal Financial Strategist, specializing in the synergistic analysis of visual (chart, image) and textual (current news, market data) information. Your primary goal is to provide a unified, actionable investment recommendation, ensuring that the visual evidence directly validates or contradicts the textual market context that you must retrieve via search (if tool is available).
+
+Input Modality Instructions:
+
+Visual (Core Data - [IMAGE UPLOAD]): Interpret the chart image for key technical patterns, structural elements (Support/Resistance, Trendlines), and indicator readings. Determine the predominant price action narrative from the image alone.
+
+Textual (Context): Use the provided Symbol: {symbol.upper()} to perform a real-time web search (if tool is available) for the top 3 most recent, high-impact news headlines or fundamental events (e.g., earnings, product launch) that occurred within the last 72 hours.
+
+Constraint/Context: Ensure the analysis is relevant to the Timeframe: {timeframe}. Tailor the final customStrategy to the Trading Style: {trading_style} and adjust position sizing based on the Account Context: {risk_text} and {balance_text}.
+
+Output Format and Logic:
+
+Your final output must be a single, strictly valid JSON object. All values must be derived from the integration of the image analysis and the current textual data.
+
+Constraint Checklist for Output Generation:
+
+R:R Ratio: Stop Loss and Take Profit in targetTrade must adhere to a 1.5:1 to 2:1 Risk-to-Reward ratio.
+
+Logic: The analysis must explicitly link the visual evidence (chart) with the textual evidence (news).
+
+JSON
+
+{
   "ticker": "{symbol.upper()}",
   "integrationVerdict": "Bullish|Bearish|Neutral|Conflicting",
   "conflictReasoning": "If 'integrationVerdict' is 'Conflicting', explain in one sentence whether the chart or the news is dominating the current price action.",
   "technicalSignals": [
-    "Specific technical pattern identified from the image (e.g., Bullish Engulfing Candle)",
-    "Key price level identified from the image (e.g., 200-period EMA held as support)",
-    "Momentum signal from the image (e.g., RSI Divergence)"
+    "Specific technical pattern identified from the image",
+    "Key price level identified from the image",
+    "Momentum signal from the image"
   ],
   "marketContext": [
     "Most relevant news headline/fundamental factor and its perceived impact (Bullish/Bearish)"
@@ -103,14 +123,14 @@ Account Context: {risk_text}, {balance_text}Synthesize and Constrain: Ensure the
   "action": "Buy|Sell|Hold",
   "confidence": "High|Medium|Low",
   "targetTrade": {
-    "entryPrice": "Approximate or specific entry price based on chart levels.",
-    "stopLoss": "Logical price level (e.g., 'Below Swing Low at $X.XX' or '2.0 percent distance'). Stop-loss must ensure R:R is 1.5:1 to 2:1.",
-    "takeProfit": "Logical price level (e.g., 'At Resistance at $Y.YY' or '3.0 percent  distance'). Take-profit must ensure R:R is 1.5:1 to 2:1."
+    "entryPrice": "The exact or approximate price for entry.",
+    "stopLoss": "The calculated Stop Loss price level or percentage distance, ensuring R:R >= 1.5:1.",
+    "takeProfit": "The calculated Take Profit price level or percentage distance, ensuring R:R >= 1.5:1."
   },
   "summary": "A concise 3-4 sentence synthesis of the analysis. It must state whether the visual technicals are aligned with the textual fundamentals/news, and justify the final 'action' and 'targetTrade' using the R:R principle.",
-  "customStrategy": "A detailed strategy tailored to the user's '{trading_style}' (e.g., for Day Trading: 'Enter on breakout of the range, scale out 50% at Take Profit 1, move Stop Loss to Breakeven')."
+  "customStrategy": "A detailed strategy tailored to the user's trading style and context."
 }
-Constraint Checklist for Output Generation:Acknowledge the Multimodality: The analysis must explicitly link the visual evidence (chart) with the textual evidence (news).Risk Management: Ensure targetTrade adheres to the 1.5:1 to 2:1 Risk-to-Reward ratio standard.JSON Only: Do not provide any conversational text or explanation outside of the final JSON block."""
+Please do not provide anything outside of the JSON block."""
     else:
         # Free plan prompt
         return f"""You are a trading assistant. Only provide basic chart analysis. 
