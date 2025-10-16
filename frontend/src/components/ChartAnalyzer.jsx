@@ -551,8 +551,8 @@ const ChartAnalyzer = () => {
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
                             <Label className="text-slate-400 text-sm">Market Movement</Label>
-                            <Badge className={`${getMovementColor(analysis.movement)} font-medium`} data-testid="movement-badge">
-                              {analysis.movement || 'Unknown'}
+                            <Badge className={`${getMovementColor(analysis.integrationVerdict || analysis.movement)} font-medium`} data-testid="movement-badge">
+                              {analysis.integrationVerdict || analysis.movement || 'Unknown'}
                             </Badge>
                           </div>
                           <div className="space-y-2">
