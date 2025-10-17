@@ -595,19 +595,33 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
 async def get_analyses(current_user = Depends(get_current_user)):
     """Get user's chart analyses"""
     try:
-        # Try to create table if it doesn't exist
+        # Try Supabase first
         try:
-            supabase.table("chart_analyses").select("id").limit(1).execute()
-        except:
-            logger.info("Creating chart_analyses table...")
-            # Table doesn't exist, return empty for now
-            return []
+            response = supabase.table("chart_analyses").select("*").eq("user_id", current_user.id).order("timestamp", desc=True).limit(50).execute()
+            if response.data:
+                return response.data
+        except Exception as db_error:
+            logger.warning(f"Supabase fetch failed: {str(db_error)}, trying local file storage")
         
-        response = supabase.table("chart_analyses").select("*").eq("user_id", current_user.id).order("timestamp", desc=True).limit(50).execute()
-        return response.data or []
+        # Fallback to local file storage
+        try:
+            analyses_file = ROOT_DIR / "analyses.json"
+            if analyses_file.exists():
+                with open(analyses_file, 'r') as f:
+                    all_analyses = json.load(f)
+                
+                # Filter for current user and sort by timestamp
+                user_analyses = [a for a in all_analyses if a["user_id"] == current_user.id]
+                user_analyses = sorted(user_analyses, key=lambda x: x["timestamp"], reverse=True)[:50]
+                return user_analyses
+            else:
+                return []
+        except Exception as file_error:
+            logger.error(f"Error reading local analyses file: {str(file_error)}")
+            return []
+            
     except Exception as e:
         logger.error(f"Error fetching analyses: {str(e)}")
-        # Return empty array instead of error to prevent UI breaking
         return []
 
 # Include the router in the main app
