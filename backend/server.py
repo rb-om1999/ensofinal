@@ -106,9 +106,9 @@ R:R Ratio: Stop Loss and Take Profit in targetTrade must adhere to a 1.5:1 to 2:
 
 Logic: The analysis must explicitly link the visual evidence (chart) with the textual evidence (news).
 
-JSON
+JSON:
 
-{
+ 
   "ticker": "{symbol.upper()}",
   "integrationVerdict": "Bullish|Bearish|Neutral|Conflicting",
   "conflictReasoning": "If 'integrationVerdict' is 'Conflicting', explain in one sentence whether the chart or the news is dominating the current price action.",
@@ -122,14 +122,14 @@ JSON
   ],
   "action": "Buy|Sell|Hold",
   "confidence": "High|Medium|Low",
-  "targetTrade": {
+  "targetTrade": 
     "entryPrice": "The exact or approximate price for entry.",
     "stopLoss": "The calculated Stop Loss price level or percentage distance, ensuring R:R >= 1.5:1.",
     "takeProfit": "The calculated Take Profit price level or percentage distance, ensuring R:R >= 1.5:1."
-  },
+  ,
   "summary": "A concise 3-4 sentence synthesis of the analysis. It must state whether the visual technicals are aligned with the textual fundamentals/news, and justify the final 'action' and 'targetTrade' using the R:R principle.",
   "customStrategy": "A detailed strategy tailored to the user's trading style and context."
-}
+ 
 Please do not provide anything outside of the JSON block."""
     else:
         # Free plan prompt

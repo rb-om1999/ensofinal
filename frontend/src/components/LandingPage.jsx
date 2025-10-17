@@ -258,7 +258,7 @@ const LandingPage = () => {
                 className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:via-orange-400 hover:to-amber-500 text-white font-bold px-16 py-8 text-2xl rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-500 transform hover:scale-105 ring-2 ring-amber-400/20 hover:ring-amber-400/40"
               >
                 <DollarSign className="w-8 h-8 mr-4" />
-                Take Profit Now!
+                Take Profit!
               </Button>
             </div>
           </div>
