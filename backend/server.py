@@ -84,7 +84,6 @@ def get_gemini_prompt(user_metadata: dict, email: str, symbol: str, timeframe: s
         
         risk_text = f"Risk profile: {risk_profile}" if risk_profile else ""
         balance_text = f"Trading account balance: {balance}" if balance else ""
-        style_text = f"Tailor the analysis to the user's chosen trading style ({trading_style})" if trading_style else ""
         
         return f"""You are the Lead Multimodal Financial Strategist, specializing in the synergistic analysis of visual (chart, image) and textual (current news, market data) information. Your primary goal is to provide a unified, actionable investment recommendation, ensuring that the visual evidence directly validates or contradicts the textual market context that you must retrieve via search (if tool is available).
 
