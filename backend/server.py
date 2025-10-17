@@ -535,24 +535,50 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
         # Deduct credit after successful analysis and get updated credit count
         updated_credits = await deduct_credit(current_user.id, current_user.email)
         
-        # Store analysis in Supabase (if table exists)
+        # Store analysis in Supabase or local file as fallback
+        analysis_record = {
+            "id": str(uuid.uuid4()),
+            "user_id": current_user.id,
+            "symbol": request.symbol,
+            "timeframe": request.timeframe,
+            "analysis": analysis_data,
+            "plan_used": current_user.user_metadata.get("plan", "free"),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
         try:
-            analysis_record = {
-                "id": str(uuid.uuid4()),
-                "user_id": current_user.id,
-                "symbol": request.symbol,
-                "timeframe": request.timeframe,
-                "analysis": analysis_data,
-                "plan_used": current_user.user_metadata.get("plan", "free"),
-                "timestamp": datetime.utcnow().isoformat()
-            }
-            
-            try:
-                supabase.table("chart_analyses").insert(analysis_record).execute()
-            except:
-                logger.warning("chart_analyses table not found, skipping storage")
+            # Try Supabase first
+            supabase.table("chart_analyses").insert(analysis_record).execute()
+            logger.info("Analysis stored in Supabase successfully")
         except Exception as db_error:
-            logger.warning(f"Failed to store analysis in database: {str(db_error)}")
+            logger.warning(f"Supabase storage failed: {str(db_error)}, using local file storage")
+            # Fallback to local file storage
+            try:
+                analyses_file = ROOT_DIR / "analyses.json"
+                
+                # Load existing analyses or create empty list
+                if analyses_file.exists():
+                    with open(analyses_file, 'r') as f:
+                        analyses = json.load(f)
+                else:
+                    analyses = []
+                
+                # Add new analysis
+                analyses.append(analysis_record)
+                
+                # Keep only last 100 analyses per user to prevent file from growing too large
+                user_analyses = [a for a in analyses if a["user_id"] == current_user.id]
+                other_analyses = [a for a in analyses if a["user_id"] != current_user.id]
+                user_analyses = sorted(user_analyses, key=lambda x: x["timestamp"], reverse=True)[:100]
+                analyses = other_analyses + user_analyses
+                
+                # Save to file
+                with open(analyses_file, 'w') as f:
+                    json.dump(analyses, f, indent=2)
+                
+                logger.info("Analysis stored in local file successfully")
+            except Exception as file_error:
+                logger.error(f"Failed to store analysis in local file: {str(file_error)}")
         
         return {
             **analysis_data,
