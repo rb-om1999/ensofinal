@@ -58,6 +58,12 @@ class ChartAnalysisRequest(BaseModel):
     timeframe: str
     tradingStyle: Optional[str] = None
 
+class ChartLinkRequest(BaseModel):
+    chartUrl: str
+    symbol: str
+    timeframe: str
+    tradingStyle: Optional[str] = None
+
 class ChartAnalysisResponse(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     user_id: str
