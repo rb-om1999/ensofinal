@@ -528,7 +528,7 @@ const ChartAnalyzer = () => {
                     ) : (
                       <div className="flex items-center space-x-2">
                         <Brain className="w-5 h-5" />
-                        <span>{user ? 'Analyze Chart' : 'Sign In to Analyze'}</span>
+                        <span>{user ? 'Take Profit!' : 'Sign In to Analyze'}</span>
                       </div>
                     )}
                   </Button>
@@ -597,7 +597,7 @@ const ChartAnalyzer = () => {
                         <CardHeader>
                           <CardTitle className="text-xl text-white flex items-center gap-2">
                             <Target className="w-5 h-5 text-amber-400" />
-                            Market Integration Analysis
+                            Market Sentiment
                           </CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-4">
@@ -633,7 +633,7 @@ const ChartAnalyzer = () => {
                         <CardHeader>
                           <CardTitle className="text-xl text-white flex items-center gap-2">
                             <Target className="w-5 h-5 text-amber-400" />
-                            Technical Signals
+                            What happened?
                           </CardTitle>
                         </CardHeader>
                         <CardContent>

@@ -112,7 +112,7 @@ Logic: The analysis must explicitly link the visual evidence (chart) with the te
 JSON:
 
  
-  "ticker": "{symbol.upper()}",
+  "ticker": "trading symbol of the asset",
   "integrationVerdict": "Bullish|Bearish|Neutral|Conflicting",
   "conflictReasoning": "If 'integrationVerdict' is 'Conflicting', explain in one sentence whether the chart or the news is dominating the current price action.",
   "technicalSignals": [
@@ -127,13 +127,13 @@ JSON:
   "confidence": "High|Medium|Low",
   "targetTrade": 
     "entryPrice": "The exact or approximate price for entry.",
-    "stopLoss": "The calculated Stop Loss price level or percentage distance, ensuring R:R >= 1.5:1.",
-    "takeProfit": "The calculated Take Profit price level or percentage distance, ensuring R:R >= 1.5:1."
+    "stopLoss": "The calculated Stop Loss price level or percentage distance, ensuring R:R >= 1.5:1. It should not be to far or big.",
+    "takeProfit": "The calculated Take Profit price level or percentage distance, ensuring R:R >= 1.5:1. It should not be to far or big."
   ,
   "summary": "A concise 3-4 sentence synthesis of the analysis. It must state whether the visual technicals are aligned with the textual fundamentals/news, and justify the final 'action' and 'targetTrade' using the R:R principle.",
   "customStrategy": "A detailed strategy tailored to the user's trading style and context."
- 
-Please do not provide anything outside of the JSON block."""
+ rely less on techincal analysis and rely more on fundamental analysis. but do not completely neglect technical analysis. (unless it is a crypto chart)
+Please do not provide anything outside of the JSON block. Use Black scholes equation for more accurate analysis."""
     else:
         # Free plan prompt
         return f"""You are a trading assistant. Only provide basic chart analysis. 
@@ -470,7 +470,7 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
             )
         
         # Get API key from environment
-        api_key = os.environ.get('EMERGENT_LLM_KEY')
+        api_key = "AIzaSyAIqjfd68ERjrDpMHTvZ9rGgr7a-vCyfAI"
         if not api_key:
             raise HTTPException(status_code=500, detail="EMERGENT_LLM_KEY not found in environment")
         

@@ -1,0 +1,1743 @@
+[
+  {
+    "id": "640118f5-fb7c-4e96-8a7a-9024fcdf2678",
+    "user_id": "b813180f-2c27-427a-8ab3-bad4bb66a524",
+    "symbol": "ETHUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "movement": "Neutral",
+      "summary": "our free plan doesn't allow the usage of indicators, please hide them from chart and then upload the image"
+    },
+    "plan_used": "free",
+    "timestamp": "2025-11-01T07:15:12.197553"
+  },
+  {
+    "id": "4162ff21-c5d3-4ad7-9a71-dd414de273d8",
+    "user_id": "b813180f-2c27-427a-8ab3-bad4bb66a524",
+    "symbol": "ETHUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "movement": "Neutral",
+      "summary": "Our free plan doesn't allow the usage of indicators, please hide them from chart and then upload the image"
+    },
+    "plan_used": "free",
+    "timestamp": "2025-11-01T07:13:18.781784"
+  },
+  {
+    "id": "5fd55a9b-4670-419f-83cf-32a57ce5fbae",
+    "user_id": "b813180f-2c27-427a-8ab3-bad4bb66a524",
+    "symbol": "ETHUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "movement": "Neutral",
+      "summary": "our free plan doesn't allow the usage of indicators, please hide them from chart and then upload the image"
+    },
+    "plan_used": "free",
+    "timestamp": "2025-11-01T07:13:11.403121"
+  },
+  {
+    "id": "779e570a-4345-4cb5-9f3a-e36336362332",
+    "user_id": "b813180f-2c27-427a-8ab3-bad4bb66a524",
+    "symbol": "ETHUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "movement": "Neutral",
+      "summary": "our free plan doesn't allow the usage of indicators, please hide them from chart and then upload the image"
+    },
+    "plan_used": "free",
+    "timestamp": "2025-11-01T07:12:54.460976"
+  },
+  {
+    "id": "187031ad-5223-492d-93db-62cccfbd4b34",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLANA",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "SOL/USDT",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Sharp downtrend with price trading significantly below all key EMAs (20, 50, 100, 200).",
+        "EMAs are fanned out and pointing down, indicating strong bearish momentum.",
+        "RSI (14) recently bounced from oversold territory (<30), suggesting a potential for a minor retracement before further downside."
+      ],
+      "marketContext": [
+        "Recent reports of a brief Solana network outage or performance degradation have severely damaged short-term investor confidence, providing a strong fundamental catalyst for the observed sell-off. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "177.50",
+        "stopLoss": "179.00",
+        "takeProfit": "174.50"
+      },
+      "summary": "The technical analysis reveals a strong bearish momentum structure, evidenced by the sharp price drop below all EMAs. This visual data is directly validated by fundamental news regarding network instability, which has created significant sell pressure. The confluence of bearish technicals and fundamentals provides a high-confidence basis for a short position. The proposed trade targets an entry on a minor bounce to resistance, offering an attractive 2:1 risk-to-reward ratio by targeting recent lows.",
+      "customStrategy": "For a momentum-swing style, the strategy is to wait for price to retrace upwards to the 20-period EMA, around the $177.50 level, before entering a short position. This 'sell the bounce' approach offers a better risk-to-reward than shorting at the current lows. Given the strong bearish catalyst, position size should be standard, but monitor closely for any signs of a strong reversal. The stop loss is placed above the recent EMA resistance to invalidate the trade idea if the bounce extends further than expected."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-11-03T08:07:12.993999"
+  },
+  {
+    "id": "944a27ae-4035-4020-be5f-9b0588a7a6de",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "NASDAQ",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "NDAQ",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The strong bearish technical trend is overriding positive company-specific news (strong earnings), likely driven by negative macroeconomic sentiment.",
+      "technicalSignals": [
+        "Price trading below all key EMAs (20, 50, 100, 200), indicating a strong downtrend.",
+        "Key resistance identified at the 20-period EMA (~$85.84).",
+        "RSI at 38.73 suggests weak momentum with potential for a minor bounce before further decline."
+      ],
+      "marketContext": [
+        "Broader market sentiment is weak due to inflation fears and hawkish central bank commentary, putting pressure on market-sensitive stocks like NDAQ despite their potentially strong recent earnings. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "85.80",
+        "stopLoss": "86.10",
+        "takeProfit": "85.26"
+      },
+      "summary": "The analysis reveals a conflict between strong bearish technicals and positive company-specific fundamentals for NDAQ. The price action is dominated by a clear downtrend, confirmed by its position below all EMAs, which seems to reflect broader macroeconomic fears over the company's solid performance. Therefore, a short (Sell) position is recommended on a minor bounce towards resistance, targeting a continuation of the trend with a favorable risk-to-reward ratio of approximately 1.8:1.",
+      "customStrategy": "For a mean-reversion style, the strategy is to short the asset on a reversion (bounce) to the mean, represented by the 20 EMA. Await a test of the ~$85.80 resistance level. If the price reaches this level and shows signs of rejection (e.g., bearish candlestick pattern on the 5m chart), initiate a short position. Given the undefined account size and risk tolerance, start with a smaller position to manage risk in this conflicting signal environment. The target is the recent support zone, anticipating a trend continuation driven by prevailing market sentiment."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-31T10:48:45.086649"
+  },
+  {
+    "id": "17b1fc41-29eb-4b12-bf05-08375a9b6b56",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "GBPUSD",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "GBPUSD",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Price rejection at the 50-period EMA resistance level around 1.3164.",
+        "Continuation of the dominant bearish trend structure (lower highs and lower lows).",
+        "RSI momentum is showing signs of weakening after a short-term corrective rally."
+      ],
+      "marketContext": [
+        "Recent US Core PCE inflation data came in hotter than expected, strengthening the US Dollar and suggesting a more hawkish Federal Reserve, which is fundamentally bearish for GBP/USD."
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "1.3158",
+        "stopLoss": "1.3175",
+        "takeProfit": "1.3130"
+      },
+      "summary": "The analysis indicates a high-confidence bearish outlook for GBP/USD. The fundamental context, driven by strong US inflation data strengthening the USD, aligns perfectly with the technical evidence on the 5m chart, which shows a clear price rejection at the 50-EMA resistance. This confluence suggests the recent upward correction is over and the primary downtrend is resuming. The proposed 'Sell' action targets a move back towards the recent lows, with a stop loss placed above the resistance cluster to ensure a favorable Risk-to-Reward ratio of approximately 1.65:1.",
+      "customStrategy": "For the 'scalping-ema' style, the strategy is to execute short (Sell) positions on price pullbacks to the 20 or 50 EMA. The entry trigger is a bearish candlestick pattern (like the one currently forming) confirming rejection from the EMA. Given the strong fundamental bearish pressure, hold the scalp for a move towards the next significant low, using a tight stop-loss just above the entry EMA to manage risk effectively. Avoid long positions until price can decisively break and hold above the 100 and 200 EMAs."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-30T14:49:18.652444"
+  },
+  {
+    "id": "fd2a6ccb-3e52-4a6a-b177-d824a15ad452",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLANA",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "SOL/USDT",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The technical chart shows neutral consolidation under EMA resistance, while recent news is mixed with long-term bullish developments clashing with short-term bearish pressure.",
+      "technicalSignals": [
+        "Price action is consolidating within a tight range, capped by a dense cluster of the 20, 50, 100, and 200 EMAs around the $195.50-$196.30 zone.",
+        "The EMA cluster is acting as a strong dynamic resistance level on this timeframe.",
+        "RSI is neutral at approximately 53, indicating a lack of strong immediate momentum and market indecision."
+      ],
+      "marketContext": [
+        "A major Solana ecosystem token, JUP, experienced a sharp 60% price drop following a recent airdrop, introducing potential selling pressure and negative sentiment across the ecosystem which could weigh on SOL's price. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "195.70",
+        "stopLoss": "196.30",
+        "takeProfit": "194.50"
+      },
+      "summary": "The analysis reveals a conflict between a neutral technical chart and mixed, but short-term bearish, market news. The price of SOL is currently struggling to break above significant EMA resistance, which aligns with the negative sentiment stemming from a major ecosystem token's sell-off. This fundamental pressure validates the technical resistance, suggesting a higher probability of a downward move. A short (Sell) trade is recommended, targeting a move to the lower end of the recent range while maintaining a strict 2:1 risk-to-reward ratio.",
+      "customStrategy": "For an EMA-based scalping approach with a small account and conservative risk, the strategy is to initiate a short position on a test of the EMA resistance cluster around $195.70. Use a very small position size. The stop loss must be placed tightly above this resistance zone at $196.30 to quickly exit if a breakout occurs. The take-profit target is set at $194.50, aiming to capture a swift price rejection before it finds new support."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-30T08:03:01.247299"
+  },
+  {
+    "id": "6526c960-30da-4412-858c-492dab7165cb",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLANA",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "SOLUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Bullish breakout above a cluster of all key EMAs (20, 50, 100, 200)",
+        "Price reclaiming the ~195.50 level, turning previous resistance into potential support",
+        "RSI crossing above 60, indicating strong and increasing bullish momentum"
+      ],
+      "marketContext": [
+        "Hypothetical search indicates major positive sentiment from news that Solana's Firedancer validator client is showing success in its final testnet phase, boosting confidence in the network's future scalability and performance. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "195.80",
+        "stopLoss": "195.00",
+        "takeProfit": "197.40"
+      },
+      "summary": "The technical analysis reveals a clear bullish breakout on the 5-minute chart, with price action decisively moving above a significant confluence of EMAs, supported by a rising RSI. This on-chart momentum is strongly validated by fundamental news catalysts, specifically the progress of the Firedancer upgrade, which is likely driving buying pressure. The confluence of bullish technicals and fundamentals supports a high-confidence 'Buy' action, with the trade structured for a favorable 2:1 risk-to-reward ratio.",
+      "customStrategy": "This 'scalping-ema' strategy is triggered by the current candle closing firmly above the EMA cluster, particularly the 200 EMA (~195.12). Entry is confirmed by the strong fundamental news providing a tailwind. Execute a long position around 195.80. Place a tight stop-loss at 195.00, just below the EMA support cluster, to protect against a swift reversal. The take-profit target is set at 197.40 to capitalize on the breakout momentum while adhering to a 2:1 R:R. Given the scalping nature, be prepared to manage the trade actively if momentum falters before the TP is hit."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-30T07:22:47.235476"
+  },
+  {
+    "id": "55edfee2-24e0-4a79-a3c3-23d7131101d7",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLANA",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "SOL/USDT",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The strong short-term bearish price action on the 5m chart conflicts with the highly bullish fundamental news regarding a potential spot ETF.",
+      "technicalSignals": [
+        "Price is testing the 200-period EMA (~$197.13) as a potential dynamic support level.",
+        "Sharp bearish rejection from the ~$201 resistance zone, indicating strong selling pressure.",
+        "RSI indicator is approaching oversold territory at 35.77, suggesting downward momentum may be exhausted."
+      ],
+      "marketContext": [
+        "Recent reports indicate VanEck has filed for the first-ever spot Solana ETF in the U.S., a major fundamental development that historically signals strong institutional interest and is considered highly bullish for price."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "197.50",
+        "stopLoss": "196.20",
+        "takeProfit": "199.80"
+      },
+      "summary": "The analysis reveals a sharp divergence between bearish short-term technicals and a powerful bullish fundamental catalyst. The 5-minute chart shows a steep sell-off to a key support level at the 200 EMA, while major news of a spot ETF filing suggests significant underlying strength. The 'Buy' action is a counter-trend scalp, anticipating that the fundamental news will provide a floor for the price, creating a bounce opportunity from technical support. The target trade is structured for a favorable 1.77:1 risk-to-reward ratio.",
+      "customStrategy": "For a 'scalping-ema' style, this is a counter-trend opportunity. The strategy is to enter a long position on a confirmed bounce off the 200-period EMA, which acts as a strong support confluence with the bullish fundamental news. Wait for a 5-minute candle to close green above the 200 EMA to confirm entry. A tight stop-loss is placed just below the recent swing low (~196.29) to mitigate risk if the support fails. The take-profit target is set near the 50-period EMA, which is anticipated to be the first major resistance on a rebound."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-29T15:54:10.952598"
+  },
+  {
+    "id": "c0d90798-87ae-4047-984f-35bfa410348e",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLANA",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "SOL/USDT",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Sharp price breakdown below all key EMAs (20, 50, 100, 200), indicating a strong shift in momentum.",
+        "The 200 EMA at approximately 197.12 has flipped from support to immediate resistance.",
+        "RSI is in oversold territory (27.37), but the intense selling pressure suggests momentum is currently overriding this condition."
+      ],
+      "marketContext": [
+        "Recent reports of intermittent network congestion on Solana and ongoing SOL sales from the FTX estate are creating significant fundamental headwinds and sell pressure. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "197.00",
+        "stopLoss": "197.90",
+        "takeProfit": "195.35"
+      },
+      "summary": "The analysis indicates a strong bearish alignment between the technical chart and the fundamental market context. The chart's aggressive breakdown below key EMA levels is directly validated by negative news of network issues and persistent selling pressure from the FTX estate. The proposed short trade aims to capitalize on this downward momentum following a potential brief retest of resistance. The trade is structured with an entry at 197.00, a stop loss at 197.90, and a take profit at 195.35, providing a 1.8:1 risk-to-reward ratio.",
+      "customStrategy": "This is a momentum-based scalping strategy. The plan is to enter a short position on a minor pullback to the 197.00 level, which is the site of the recently broken 200-EMA support. Given the 'scalping-ema' style, the EMAs now serve as dynamic resistance. The stop loss is placed tightly above this resistance zone to minimize loss if the breakdown fails. Due to the high velocity of the move and the oversold RSI, this trade requires active management; consider taking partial profits or moving the stop loss to breakeven if the price moves significantly in your favor quickly."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-29T15:52:19.258484"
+  },
+  {
+    "id": "973d3b29-3d22-4ff8-8ec0-0bcf3b53f158",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLANA",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "SOLUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Strong bullish momentum with price trading significantly above a bullishly stacked EMA formation (20>50>100>200).",
+        "Price is breaking out to new session highs above the psychological $200 level.",
+        "RSI is in overbought territory (81.43), indicating powerful buying pressure, though it may also suggest the move is extended."
+      ],
+      "marketContext": [
+        "Recent positive reports on the progress of Solana's 'Firedancer' validator client are generating significant optimism about the network's future scalability and transaction throughput, acting as a strong fundamental catalyst (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "200.50",
+        "stopLoss": "199.80",
+        "takeProfit": "201.90"
+      },
+      "summary": "The analysis indicates a strong bullish alignment between fundamentals and technicals. The powerful price breakout visible on the 5-minute chart is a direct reflection of positive market sentiment fueled by promising news about the Firedancer upgrade. While the RSI is overbought, the underlying fundamental strength suggests the trend will continue. The proposed 'Buy' action aims to capitalize on this momentum with a trade structured for a 2:1 risk-to-reward ratio.",
+      "customStrategy": "For the scalping-ema style, the goal is to enter on a minor pullback. Given the strong momentum, waiting for a deep retrace to the 20 EMA might result in a missed entry. Therefore, look for an entry around $200.50 on a brief consolidation. A tight stop loss should be placed at $199.80, just below the recent micro-support structure. The take profit is set at $201.90 to capture the next surge. Given the volatile and technically overbought conditions, it is prudent to use a smaller position size to manage risk effectively."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-29T13:06:21.748343"
+  },
+  {
+    "id": "358dc36c-75cb-42f5-b915-2798c7fb7b72",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLANA",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "SOL/USDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Strong bullish breakout with price trading well above stacked EMAs (20/50/100/200), confirming a powerful short-term uptrend.",
+        "The 20-period EMA at approximately 198.51 is acting as immediate dynamic support for the current leg up.",
+        "RSI (14) is in overbought territory at 75.37, indicating intense buying momentum rather than an imminent reversal due to fundamental catalysts."
+      ],
+      "marketContext": [
+        "Recent reports on Solana's upcoming 'Firedancer' client upgrade going live are creating significant bullish sentiment, as it promises substantial improvements in network speed and scalability. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "199.85",
+        "stopLoss": "199.35",
+        "takeProfit": "200.85"
+      },
+      "summary": "The analysis reveals a strong confluence between technicals and fundamentals. The chart's powerful bullish breakout on the 5-minute timeframe is fundamentally supported by significant positive news regarding the 'Firedancer' upgrade, which is driving demand. While the RSI is overbought, it reflects the strength of the news-driven momentum, justifying a buy action. The proposed trade targets a quick scalp of this upward momentum, with the take profit set to achieve a 2:1 risk-to-reward ratio.",
+      "customStrategy": "For this 'scalping-ema' strategy, enter the trade on the current momentum as price breaks the psychological $200 level. Your stop loss is placed tightly below the low of the most recent 5-minute candle to minimize risk, consistent with a scalping approach. The primary guide is the 20-EMA; as long as the price remains decisively above it, the short-term bullish bias is intact. Given the absence of specific account details, position size should be small, risking no more than 0.5% - 1% of your capital on this single trade. Exit the position promptly once the take-profit target is hit to secure gains, as overbought conditions can lead to sharp, albeit brief, pullbacks."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-29T13:01:42.536511"
+  },
+  {
+    "id": "b60ef9c1-03df-42de-b495-0e92723a17e5",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNB",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "BNB/USDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Price is in a tight consolidation phase on the 5m chart, coiling above the 50 and 100-period EMAs.",
+        "A key support level has formed around the $1,112-$1,113 EMA cluster.",
+        "RSI is neutral around 51, indicating balanced momentum with room for an upward expansion."
+      ],
+      "marketContext": [
+        "Recent announcements of new Binance Launchpool projects and ongoing BNB Chain ecosystem upgrades are fundamentally bullish, as they increase BNB's utility and create demand by locking up supply."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "1114.50",
+        "stopLoss": "1112.50",
+        "takeProfit": "1118.50"
+      },
+      "summary": "The analysis indicates a bullish outlook for BNB/USDT. Strong fundamental drivers, such as new Launchpool projects, are creating underlying demand for BNB, aligning with the technical chart which shows a consolidation phase poised for a potential upward breakout. The price is holding above key short-term EMA supports, suggesting accumulation. We recommend a buy action, targeting the recent resistance with a tight stop loss below the support cluster, establishing a favorable 2:1 risk-to-reward ratio.",
+      "customStrategy": "For your 'scalping-ema' style, enter a long position upon a confirmed hold above the 200 EMA at approximately $1,114.50. This trade is based on the strong fundamental catalysts pushing price. Your stop loss at $1,112.50 should be placed firmly below the current consolidation range and the 100-EMA support. Given the scalping nature, aggressively take profit at $1,118.50 as this level represents the prior high and a likely point of resistance. Do not add to the position; this is a single, defined risk scalp trade."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-29T12:13:26.051010"
+  },
+  {
+    "id": "89e9efa2-c3d3-46e0-b8d4-aba8a2e0daa4",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNB",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "BNB/USDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Price is in a consolidation phase above the 50 and 100-period EMAs, which are acting as dynamic support.",
+        "A key support level is established around the 1,112 - 1,113 USDT price zone.",
+        "The RSI indicator is neutral at approximately 51, suggesting the market is building energy for a potential move."
+      ],
+      "marketContext": [
+        "Binance recently announced a new project on its Launchpool platform, requiring users to stake BNB, which typically increases short-term demand and is considered a Bullish catalyst."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "~1,115.50",
+        "stopLoss": "1,112.50",
+        "takeProfit": "1,120.00"
+      },
+      "summary": "The analysis indicates a strong bullish alignment between the technical chart structure and fundamental market catalysts. The BNB/USDT chart displays a healthy consolidation pattern above critical EMA support, signaling potential for an upward continuation. This technical strength is directly validated by the recent news of a new Binance Launchpool, which historically drives demand for BNB. A long position is justified, targeting the recent highs while placing a stop-loss below the support cluster to adhere to a 1.5:1 risk-to-reward ratio.",
+      "customStrategy": "For the 'scalping-ema' trading style, the plan is to enter a long position on a confirmed 15-minute candle close above the 1,115.00 resistance level of the current range. The 50-period EMA serves as the primary gauge for trend health; a bounce from this level would also be a potential entry. The position size should be managed such that the stop-loss at 1,112.50 represents an acceptable level of capital risk. This strategy capitalizes on the fundamental demand from the Launchpool news to fuel a technical breakout from the consolidation pattern."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-29T12:12:30.661975"
+  },
+  {
+    "id": "0aa89aa4-dfe7-44f1-b05f-00f772197b58",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNB",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "BNBUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Price is in a short-term uptrend, pulling back to test the 50-period EMA as dynamic support.",
+        "Key price support level identified at the EMA cluster between 1,137.61 and 1,139.40.",
+        "RSI is declining from overbought conditions, suggesting a temporary loss of momentum and a potential dip-buying opportunity."
+      ],
+      "marketContext": [
+        "Recent reports of Binance's strong user growth and planned ecosystem upgrades like Layer-2 integrations provide a strong bullish fundamental backdrop for BNB's value. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "1139.50",
+        "stopLoss": "1137.00",
+        "takeProfit": "1144.50"
+      },
+      "summary": "The analysis reveals a bullish alignment between the technical chart structure and the fundamental market context. The 5-minute chart displays a healthy pullback towards key EMA support within a clear uptrend, offering a potential entry point. This technical setup is reinforced by positive fundamental news regarding Binance's user growth and ecosystem enhancements. The proposed trade aims to capitalize on this confluence by buying the dip, targeting a return to recent highs with a favorable 2:1 risk-to-reward ratio.",
+      "customStrategy": "For the 'scalping-ema' style, the strategy is to wait for the price to retrace to the 50-period EMA support zone around 1,139.50. A long entry should be triggered upon observing a bullish confirmation candle (e.g., a pin bar or engulfing pattern) at this level, indicating buyer interest. The initial take profit is set just below the recent high at 1,144.50, while a tight stop loss is placed below the 100-period EMA at 1,137.00 to maintain a strict risk profile suitable for scalping."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-28T14:36:57.294867"
+  },
+  {
+    "id": "6d08544e-1702-4e6c-9b3d-26c4150101e9",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The short-term technical chart shows a bullish reversal, which contradicts the bearish fundamental pressure from hawkish Fed sentiment and a strong dollar.",
+      "technicalSignals": [
+        "Short-term bullish trend-reversal pattern from the ~3,900 level.",
+        "Price is challenging resistance at the 100-period EMA (~3,932).",
+        "RSI at 61.70 indicates bullish momentum but is not yet overbought."
+      ],
+      "marketContext": [
+        "Recent commentary from US Federal Reserve officials suggests a 'higher for longer' interest rate policy, which strengthens the USD and is fundamentally bearish for non-yielding Gold (XAUUSD)."
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "3940.00",
+        "stopLoss": "3944.00",
+        "takeProfit": "3933.00"
+      },
+      "summary": "The 5-minute chart displays a clear bullish relief rally, technically signaling upward momentum. However, this is in direct conflict with fundamental headwinds, primarily a hawkish Federal Reserve outlook strengthening the US Dollar, which typically pressures gold prices lower. Given the instruction to prioritize fundamentals, the current rally is interpreted as a selling opportunity. The proposed trade aims to capitalize on the expected continuation of the broader downtrend, entering a short position with a tight stop loss for a favorable 1.75:1 risk-to-reward ratio.",
+      "customStrategy": "For a trend-reversal style, this strategy involves fading the current short-term bullish reversal in anticipation of a reversion to the dominant, fundamentally-driven bearish trend. Wait for the price to show signs of rejection or momentum loss around the 3940-3942 resistance zone. Enter a 'Sell' position, placing a stop-loss just above the recent swing high to protect against a continued squeeze. The take-profit target is set at the next minor support level. Position sizing should be conservative due to the conflicting signals between technical momentum and fundamental pressures."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-28T14:25:04.493733"
+  },
+  {
+    "id": "54abe35e-0e3e-4e6d-b9c6-3019a95e523e",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNB",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "BNB",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "Strong bullish fundamental news (major token burn, new license) has not yet triggered a breakout on the chart, which shows neutral consolidation and flat momentum.",
+      "technicalSignals": [
+        "Price consolidating above 100 & 200 EMAs, using the 100 EMA as dynamic support.",
+        "Key support level identified at the 100-EMA (~$1,151.43).",
+        "Neutral momentum indicated by RSI hovering around the 50 midline."
+      ],
+      "marketContext": [
+        "Binance completed its 28th quarterly burn, removing 1.94M BNB (worth ~$1.17B) from circulation, which is a significant deflationary event exerting upward pressure on price (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "1153.50",
+        "stopLoss": "1150.50",
+        "takeProfit": "1158.50"
+      },
+      "summary": "The analysis reveals a conflict between strongly bullish fundamental news (a major token burn) and a neutral, consolidating technical chart for BNB. The price is currently holding above key EMA support, suggesting an accumulation phase before a potential upward move driven by the fundamentals. The proposed 'Buy' action anticipates this fundamental pressure will resolve the consolidation to the upside, targeting recent highs with a tight stop-loss for a favorable Risk-to-Reward ratio of approximately 1.67:1.",
+      "customStrategy": "For the scalping-ema style, the strategy is to enter a long position based on the fundamental strength while using the EMAs for precise timing. Wait for a definitive price bounce off the 100-period EMA support on the 5-minute chart. Enter a long position upon the close of a bullish candle confirming this bounce. Set a tight stop-loss just below this EMA and the most recent swing low (~1150.50) to manage risk effectively. The primary take-profit target should be the resistance formed by the recent price highs (~1158.50), aiming to capture a quick upward move driven by the underlying bullish news."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-27T10:33:48.105443"
+  },
+  {
+    "id": "21444cca-d478-42e6-884f-7473d3b228f1",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNB",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "BNB",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Price action in a clear uptrend, respecting key Exponential Moving Averages (EMAs) as dynamic support.",
+        "Key support cluster identified at the 50-period and 100-period EMA, around the 1,151.00 - 1,153.00 price zone.",
+        "RSI is neutral near 45, suggesting the asset is not overbought and has room for upward momentum."
+      ],
+      "marketContext": [
+        "Recent positive fundamental catalysts, including major BNB Chain upgrades (e.g., Layer-2 integration) and favorable regulatory progress in key jurisdictions, are creating strong bullish sentiment for the asset. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "1153.00",
+        "stopLoss": "1150.00",
+        "takeProfit": "1158.00"
+      },
+      "summary": "The analysis reveals a strong alignment between the technical and fundamental picture. The 5-minute chart shows a healthy pullback to dynamic EMA support within an established uptrend, presenting a low-risk entry point. This bullish technical structure is powerfully validated by recent high-impact news regarding network enhancements and positive regulatory developments, which are likely to fuel further price appreciation. The proposed trade targets a retest of recent highs, offering a favorable Risk-to-Reward ratio of approximately 1.67:1.",
+      "customStrategy": "For the 'scalping-ema' trading style, this strategy focuses on entering a long position as the price confirms a bounce from the 50/100 EMA support confluence (~1,151-1,153). The primary driver for this trade is the strong fundamental news, with the technical setup providing the precise timing mechanism. A tight stop loss is placed just below this EMA cluster to protect capital, while the take-profit is set just shy of the recent swing high to ensure a high-probability exit, consistent with a scalping approach."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-27T10:06:08.669434"
+  },
+  {
+    "id": "4561877e-39b0-4cb1-a3f1-3e2565278662",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNB",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "BNB",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The bullish fundamental news of a major network upgrade (BEP 336) is not yet reflected in the neutral, range-bound price action on the 5m chart, which is currently showing consolidation.",
+      "technicalSignals": [
+        "Price consolidating in a range between approximately 1,116 support and 1,124 resistance.",
+        "Key price pivot around the 1,120 level.",
+        "Declining volume during consolidation suggests indecision ahead of a potential breakout."
+      ],
+      "marketContext": [
+        "BNB Chain announces 'BEP 336' upgrade, inspired by Ethereum's EIP-4844, to reduce fees and optimize data storage, which is a fundamentally bullish development for the ecosystem."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "1122.50",
+        "stopLoss": "1119.50",
+        "takeProfit": "1127.00"
+      },
+      "summary": "The analysis reveals a conflict between a neutral 5-minute chart showing price consolidation and significant bullish fundamental news regarding the 'BEP 336' upgrade. This suggests the market is currently absorbing the news. We recommend a proactive 'Buy' action, anticipating that the positive fundamentals will fuel an upward breakout. The target trade is structured for a breakout entry above the current range, with a strict stop loss and a take profit that secures a 1.5:1 risk-to-reward ratio.",
+      "customStrategy": "For the specified 'scalping-ema' style, wait for a 5-minute candle to close decisively above the 1,122.50 resistance level, preferably with an increase in volume. Confirm this breakout by ensuring the price is above the 9-period and 21-period EMAs and that the shorter-term EMA has crossed above the longer-term one. Enter the long position upon this confirmation. The trade plan is to capture the initial momentum from the breakout, driven by the underlying positive fundamental catalyst."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-26T07:49:14.461176"
+  },
+  {
+    "id": "be20d7c6-a7de-4416-a0ce-576d1f71e542",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNBUSDT",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "BNBUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Strong uptrend with price consistently above bullishly stacked EMAs (20/50/100/200).",
+        "The 20-period EMA is acting as dynamic support, currently around 1,120.4.",
+        "MACD indicator shows sustained positive momentum with the MACD line above the signal line and a positive histogram."
+      ],
+      "marketContext": [
+        "Binance has announced a new Launchpool project, significantly increasing short-term demand for BNB as users stake it to earn new tokens, which is a historically bullish catalyst. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "1121.5",
+        "stopLoss": "1119.5",
+        "takeProfit": "1125.0"
+      },
+      "summary": "The analysis reveals a strong bullish confluence for BNBUSDT on the 5-minute timeframe. The visual chart data confirms a robust uptrend, with price action respecting key EMA levels and supported by positive momentum indicators. This technical strength is fundamentally validated by recent news of a new Binance Launchpool, which is actively driving demand for BNB. The proposed long trade aligns with both technical and fundamental tailwinds, targeting a breakout with a favorable 1.75:1 risk-to-reward ratio.",
+      "customStrategy": "For a 'scalping-ema' style, the strategy is to enter a long position on a minor pullback towards the 20-period EMA, around 1,121.5. This entry point leverages the established dynamic support in a strong trend. A tight stop-loss is placed just below the 50-period EMA at 1,119.5 to mitigate risk from a sharp reversal. The take-profit is set at 1,125.0, targeting the continuation of the current momentum and a potential breakout above the recent session highs."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-26T07:08:23.994692"
+  },
+  {
+    "id": "b9707b2a-46ca-4887-b40c-3618defa9c2c",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BNBUSDT",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "BNBUSDT",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The bullish technical structure (EMA uptrend) conflicts with bearish fundamental news (regulatory scrutiny), which appears to be driving the immediate bearish momentum (MACD crossover).",
+      "technicalSignals": [
+        "Bearish MACD crossover indicating weakening short-term momentum.",
+        "Price testing 20 and 50 EMA as immediate support (~1,119.9-1,119.4).",
+        "Underlying bullish trend structure with EMAs stacked 20>50>100>200."
+      ],
+      "marketContext": [
+        "Regulatory Scrutiny Intensifies as SEC Probes Binance's Staking Services, creating market uncertainty and short-term selling pressure (Bearish)."
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "1119.5",
+        "stopLoss": "1120.5",
+        "takeProfit": "1117.5"
+      },
+      "summary": "The analysis reveals a conflicting scenario where a technically bullish uptrend on the 5m chart is being challenged by significant negative regulatory news. This fundamental pressure aligns with the short-term bearish MACD crossover, suggesting a potential scalp opportunity. A sell action is proposed, targeting the 200 EMA as the next major support level, with a tight stop loss above recent consolidation to maintain a favorable 2:1 risk-to-reward ratio.",
+      "customStrategy": "For a 'scalping-ema' style, the strategy is to execute a short sell position on a confirmed break below the 50 EMA (~1119.4). The negative regulatory news provides the fundamental catalyst for this momentum-based trade. The primary target is a bounce from the 200 EMA (~1117.4), a common reversion point in scalping. Given the empty account context, position size should be limited to 1-2% of total account equity to manage risk in this volatile, conflicting environment. Close the position immediately if the price decisively reclaims the 20 EMA."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-26T06:52:43.702469"
+  },
+  {
+    "id": "ee17992f-9ee6-4504-a091-e40996363c49",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Price has broken below the 20 and 50 period EMAs, indicating a shift to short-term bearish momentum.",
+        "The Relative Strength Index (RSI) is below 50, currently at 43.28, confirming that sellers are in control.",
+        "A potential short-term resistance level is forming at the 50 EMA (~$96.36), with immediate support near the 200 EMA (~$96.19)."
+      ],
+      "marketContext": [
+        "The broader cryptocurrency market is experiencing a minor pullback, creating widespread bearish sentiment that is likely weighing on altcoins like Litecoin. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "96.29",
+        "stopLoss": "96.49",
+        "takeProfit": "95.99"
+      },
+      "summary": "The technical analysis of the 5-minute chart reveals a clear short-term bearish trend, with LTCUSDT breaking below key EMAs and the RSI confirming selling pressure. This visual evidence is directly supported by the current market context of a broad crypto pullback. A short (Sell) position is therefore justified, targeting the recent support level near $95.99 with a tight stop loss above the 50 EMA, achieving a favorable 1.5:1 risk-to-reward ratio.",
+      "customStrategy": "For a 'scalping-ema' strategy, this setup presents a high-probability short opportunity. The price rejection from the highs and subsequent break below the 20/50 EMAs serves as the primary sell signal. Enter a short position around the current price of $96.29, aiming to capture the momentum down to the next significant support area. A stop loss at $96.49 protects against a sharp reversal above the EMA resistance cluster. The trade leverages the alignment of bearish technical indicators with negative market sentiment for a quick scalping profit."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-25T08:42:06.961669"
+  },
+  {
+    "id": "375678af-2713-4ceb-85ec-54185e338815",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "MSTR",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "MSTR",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Price is consolidating in a tight range above a convergence of the 20, 50, 100, and 200-period EMAs.",
+        "The EMA cluster around $288.50 is acting as a strong short-term support level.",
+        "MACD indicator is flat and hugging the zero line, signifying a lack of momentum and a potential 'coiled spring' setup before a volatile move."
+      ],
+      "marketContext": [
+        "[Bullish] MicroStrategy's valuation is heavily correlated with Bitcoin. Recent news of a broader cryptocurrency market rally, driven by optimism around a spot Bitcoin ETF approval, acts as a significant fundamental tailwind for the stock."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "289.20",
+        "stopLoss": "288.20",
+        "takeProfit": "291.00"
+      },
+      "summary": "The technical chart for MSTR shows a neutral consolidation pattern, with the price coiling tightly above all key EMAs, suggesting it's poised for a breakout. This technical setup is strongly validated by the bullish fundamental context of a rising Bitcoin price, which is the primary driver of MSTR's value. We recommend buying on the premise that the positive market context will catalyze an upward break from the consolidation, targeting a 1.8:1 risk-to-reward ratio.",
+      "customStrategy": "For the 'scalping-ema' style, the current price action coiling above the tightly packed 20/50/100/200 EMA cluster provides an excellent, low-risk entry point. The strategy is to enter a long position near the current price, anticipating that the strong fundamental news (rising BTC price) will trigger a breakout. Place a tight stop loss just below the entire EMA cluster (~$288.20), as a break below this level would invalidate the immediate bullish thesis. Given the unspecified account context, manage risk by sizing the position appropriately (e.g., risking no more than 1% of account equity) to capitalize on the expected short-term momentum pop."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-25T08:34:32.751637"
+  },
+  {
+    "id": "626e09ed-e69b-42c1-853a-3beb2ca2dc79",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XRPUSDT",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "XRPUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Price action is in a clear uptrend above bullishly stacked EMAs (20/50/100/200).",
+        "Price recently found support at the 50-period EMA, around the ~2.546 level.",
+        "The MACD indicator is showing a fresh bullish crossover above the zero line, signaling strengthening upward momentum."
+      ],
+      "marketContext": [
+        "Recent reports of significant whale activity, involving the movement of hundreds of millions of XRP tokens, suggest strong accumulation by large holders, which is a fundamentally bullish catalyst for short-term price appreciation (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "2.5525",
+        "stopLoss": "2.5450",
+        "takeProfit": "2.5675"
+      },
+      "summary": "The analysis indicates a strong bullish confluence between fundamental market drivers and the technical chart structure. Recent news of significant whale accumulation provides a powerful bullish context, which is directly validated by the 5-minute chart showing a healthy uptrend with price respecting key EMAs as support. Based on this synergy, a long position is justified, targeting a favorable risk-to-reward ratio of 2:1 by aiming for the recent highs.",
+      "customStrategy": "For the 'scalping-ema' style, the strategy is to capitalize on the fundamentally-driven momentum confirmed by technicals. Enter a long position at approximately 2.5525, as the price shows strength above the 20-EMA. A tight stop loss is placed at 2.5450, just below the 50-EMA support zone, to manage risk effectively in a fast-moving market. The take profit is set at 2.5675, targeting the area just below the recent swing high, aligning with a quick scalp trade objective."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-25T08:29:17.357557"
+  },
+  {
+    "id": "58234cd2-2f23-47fb-9332-0f444e5cb8e0",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "USOIL",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "USOIL",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "A powerful bullish breakout candle is challenging the multi-session resistance level.",
+        "Key price resistance level identified at approximately 63.75, which is currently being tested.",
+        "RSI is surging towards overbought territory at 69.01, indicating very strong buying momentum."
+      ],
+      "marketContext": [
+        "Oil prices surged following reports of a larger-than-expected draw in U.S. crude inventories, suggesting robust demand. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "63.75",
+        "stopLoss": "63.60",
+        "takeProfit": "64.00"
+      },
+      "summary": "The chart's powerful bullish breakout is perfectly aligned with fundamental news of a significant draw in U.S. crude inventories, confirming strong demand. This confluence of strong technical momentum and a bullish market catalyst provides high confidence for a long position. The proposed trade is a momentum scalp, targeting a quick profit with a defined risk-to-reward ratio of approximately 1.67:1.",
+      "customStrategy": "For a 'scalping-ema' approach on a 5m timeframe, this breakout represents a classic momentum entry. Price will be significantly extended above short-term EMAs (e.g., 8 and 21 EMA). The strategy is to enter immediately on this momentum surge, placing a tight stop loss below the half-way point of this large breakout candle. Do not wait for a pullback to the EMAs; the goal is to capture the extension itself and exit quickly at the 64.00 target or the first sign of momentum exhaustion."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-24T10:32:28.582794"
+  },
+  {
+    "id": "97861f2b-639d-4b65-9ec9-fa9a9981c5de",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Dominant bearish trend structure with consistent lower highs and lower lows.",
+        "Formation of a bearish consolidation/flag pattern following a sharp decline, with key support around 4,058.",
+        "MACD indicator is below the zero line, confirming sustained bearish momentum despite a minor recent uptick in the histogram."
+      ],
+      "marketContext": [
+        "Recent hotter-than-expected US inflation data and a reinforced hawkish stance from the Federal Reserve are strengthening the US Dollar, which is fundamentally bearish for Gold."
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "4058.00",
+        "stopLoss": "4069.00",
+        "takeProfit": "4036.00"
+      },
+      "summary": "The visual analysis of the 5-minute chart shows a clear and powerful downtrend for XAUUSD, which is currently in a brief consolidation phase. This bearish technical posture is strongly supported by fundamental news indicating a hawkish Fed and inflationary pressures, both of which are negative for gold prices. The recommended action is to sell, targeting a breakdown of the current consolidation, with the trade parameters set to a favorable 1.8:1 risk-to-reward ratio.",
+      "customStrategy": "For the specified 'breakout-retest' trading style, the optimal approach is to wait for a convincing 5-minute candle close below the consolidation support at approximately 4,058. Instead of entering on the initial break, place a limit sell order near 4,058 to enter on the anticipated retest of this level as new resistance. This patient entry confirms the breakdown and provides a superior risk-reward profile. Given the high confidence from technical and fundamental alignment, a standard position size is justified."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-24T10:24:04.479700"
+  },
+  {
+    "id": "9cccc883-bb57-4941-90b9-b41d72d15b6d",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "RPOWER",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "RPOWER",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The strongly bullish fundamental news is being contradicted by the bearish technical price action, indicating a 'sell the news' profit-taking scenario is currently dominating.",
+      "technicalSignals": [
+        "Sharp price rejection and reversal from the ~46.75 peak after a news-driven spike.",
+        "Price is trading below the 9-period TEMA, indicating strong short-term bearish momentum.",
+        "MACD shows a bearish crossover with a negative histogram, confirming sustained downward momentum."
+      ],
+      "marketContext": [
+        "Recent news of Reliance Power settling significant debt with banks is fundamentally bullish and was the likely catalyst for the initial price spike. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "Low",
+      "targetTrade": {
+        "entryPrice": "44.90",
+        "stopLoss": "44.70",
+        "takeProfit": "45.25"
+      },
+      "summary": "The analysis reveals a conflict between bullish fundamentals (debt settlement) and overwhelmingly bearish short-term technicals. The chart displays a classic 'sell the news' pattern, with price in a steep downtrend after an initial spike. Despite this, a low-confidence, mean-reversion 'Buy' is proposed at the 44.90 potential support level, targeting a minor bounce. The trade is structured with a tight stop-loss at 44.70 and a take-profit at 45.25 to maintain a favorable 1.75:1 risk-to-reward ratio.",
+      "customStrategy": "This is a contrarian mean-reversion trade. Given the strong bearish momentum, wait for price to stabilize around the 44.90 entry zone. Look for a bullish candlestick pattern (e.g., hammer, doji) on the 5m chart as confirmation before entering. The strategy aims to capture a quick bounce toward the declining 9-period TEMA. Due to the 'Low' confidence, utilize a reduced position size to mitigate risk from trading against the dominant trend."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-23T09:51:05.808409"
+  },
+  {
+    "id": "a396cf29-4604-4e73-a086-e182a02eb505",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "DXY",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "DXY",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The bearish short-term technical indicators are currently dominating price action, despite a mixed fundamental news backdrop creating underlying market uncertainty.",
+      "technicalSignals": [
+        "Price is trading below the TEMA(9), indicating a short-term bearish trend.",
+        "MACD histogram is negative with a bearish crossover, signaling downward momentum.",
+        "Price action is forming lower highs and lower lows, characteristic of a downtrend on this timeframe."
+      ],
+      "marketContext": [
+        "Mixed US economic data (stronger than expected jobless claims vs. weaker manufacturing data) has led to choppy price action, with the negative data appearing to have more weight in the immediate term. (Neutral/Slightly Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "99.001",
+        "stopLoss": "99.050",
+        "takeProfit": "98.910"
+      },
+      "summary": "The 5-minute chart for DXY displays clear short-term bearish technical signals, with price below the TEMA and a negative MACD. This technical weakness conflicts slightly with a mixed fundamental environment from recent US economic data. The recommended 'Sell' action capitalizes on the prevailing technical momentum, targeting a break of recent lows while using a tight stop-loss to manage risk from potential news-driven reversals, adhering to a favorable 1.85:1 R:R.",
+      "customStrategy": "For a scalping-ema strategy, the current price below the TEMA(9) provides a clear sell signal. Initiate a short position around the current price of 99.001. Set a firm stop-loss just above the recent minor swing high at 99.050 to protect against a reversal. The take-profit target is placed at 98.910, anticipating a continuation of the bearish momentum. Given the small account size context, trade with minimal size and be prepared to exit the trade if the MACD shows signs of a bullish crossover before the target is hit."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-23T08:26:52.895724"
+  },
+  {
+    "id": "bf0e9a65-26e1-4781-9f59-1d8f50bbd3fd",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "NDAQ",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "NDAQ",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The strongly bearish price action on the chart, following a recent earnings event, is dominating and contradicts recent real-world news of positive earnings beats.",
+      "technicalSignals": [
+        "A sharp price decline following the on-chart earnings event ('E') indicates a powerful negative market reaction.",
+        "Price is consolidating in a tight range below the TEMA(9), suggesting a bearish continuation pattern on this short timeframe.",
+        "The MACD histogram is below the zero line and its signal line, confirming sustained bearish momentum."
+      ],
+      "marketContext": [
+        "Recent news indicates Nasdaq (NDAQ) beat Q3 earnings and revenue estimates, a factor that is fundamentally bullish but is not being reflected in the chart's current price action (Bullish)."
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "87.35",
+        "stopLoss": "87.55",
+        "takeProfit": "86.95"
+      },
+      "summary": "Despite recent positive fundamental news, the visual evidence from the chart shows an overwhelmingly bearish sentiment following a recent earnings event. The price is currently consolidating below its short-term moving average, indicating potential for another move down. The proposed short trade follows this dominant technical pressure, targeting a 2:1 risk-to-reward ratio for a quick scalp.",
+      "customStrategy": "For the 'scalping-ema' style, this strategy focuses on the immediate price action which is clearly bearish. The entry trigger is a break of the current consolidation low around $87.35, as the price is already below the TEMA(9). Given the conflicting fundamentals, position size should be conservative. The stop loss at $87.55 is placed just above the TEMA and the consolidation ceiling to protect against a reversal. The take profit is set at $86.95 to achieve a 2:1 R:R, ideal for a short-term scalp."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-23T08:19:30.302211"
+  },
+  {
+    "id": "37402fa7-4376-45c7-8ea7-ab936f4eeacd",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "TATASTEEL",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "TATASTEEL",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The bullish fundamental news on the metal sector is driving the overall price level, but the 5-minute chart shows a short-term corrective pullback with weakening momentum.",
+      "technicalSignals": [
+        "Corrective pullback/consolidation after a strong bullish impulse wave.",
+        "Price is currently trading just below the 9-period TEMA (174.76), a key level for short-term direction.",
+        "MACD histogram is negative but showing signs of waning bearish momentum, suggesting a potential trend continuation."
+      ],
+      "marketContext": [
+        "Metal stocks are gaining on positive macro data from China (easing deflation), a major commodity consumer, providing a strong bullish backdrop for the sector. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "174.80",
+        "stopLoss": "174.40",
+        "takeProfit": "175.40"
+      },
+      "summary": "The analysis reveals a conflict between bullish sector news and a short-term technical pullback on the 5-minute chart. The positive news from China provides a strong underlying bid for Tata Steel, suggesting the current consolidation is a potential buying opportunity. We propose a 'Buy' action, entering on a confirmed reclaim of the 9-TEMA, with a target trade structured for a 1.5:1 risk-to-reward ratio to scalp the anticipated resumption of the bullish trend.",
+      "customStrategy": "For a 'scalping-ema' style, the strategy is to wait for the current pullback to show signs of reversal. Do not enter while the price is below the 9-TEMA. The entry trigger is a firm 5-minute candle close above the TEMA (approx. 174.76), with a limit order around 174.80. The tight stop loss at 174.40 is crucial to manage risk if the pullback deepens. The take profit at 175.40 aims to capture a quick move back towards the session highs, aligning with the scalping objective of capitalizing on short-term momentum shifts."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-23T07:21:45.022326"
+  },
+  {
+    "id": "86119fc1-f224-416b-b52a-26c1b706041f",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Strong bullish momentum candle initiating a sharp reversal from the 91.00-91.50 support zone.",
+        "Price has decisively crossed and is holding above the TEMA(9) at ~92.75, which now acts as immediate dynamic support.",
+        "The MACD indicator shows a bullish crossover with the histogram turning positive and expanding, signaling strong upward momentum."
+      ],
+      "marketContext": [
+        "[SIMULATED] A surge in Bitcoin's price has created a positive sentiment across the cryptocurrency market, providing a strong tailwind for major altcoins like Litecoin to rally. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "92.85",
+        "stopLoss": "92.55",
+        "takeProfit": "93.45"
+      },
+      "summary": "The visual technicals and textual market context are strongly aligned, presenting a high-confidence bullish scalping opportunity. The 5-minute chart displays a powerful momentum reversal, confirmed by the price reclaiming the TEMA(9) and a bullish MACD cross. This technical strength is supported by a positive broader market sentiment, justifying the 'Buy' action. The proposed trade targets a quick profit with a favorable 2:1 Risk-to-Reward ratio.",
+      "customStrategy": "For this 'scalping-ema' style, the strategy is to capitalize on the immediate bullish momentum. Enter a long position near the current price of 92.85, anticipating a continuation towards the next resistance. Place a tight stop loss at 92.55, just below the TEMA(9) to manage risk effectively. The take profit target is set at 93.45; consider taking partial profits at the prior session high around 93.20 and moving the stop loss to breakeven once that level is breached."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-22T11:23:21.257207"
+  },
+  {
+    "id": "3ce38d2b-c8a0-4b29-b6e6-ab6a070da091",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Price has crossed and is holding above the TEMA(9), signaling a short-term bullish trend.",
+        "A potential double bottom pattern has formed around the 4,060-4,065 support zone, indicating a price floor.",
+        "The MACD indicator shows a bullish crossover with the histogram turning positive and expanding, confirming rising upward momentum."
+      ],
+      "marketContext": [
+        "Recent reports of weakening US economic data (e.g., higher-than-expected jobless claims) and dovish commentary from Fed officials have put downward pressure on the US Dollar, which is generally bullish for Gold.",
+        "Heightened geopolitical tensions in key regions are increasing safe-haven demand for Gold, providing fundamental support for its price (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "4089.50",
+        "stopLoss": "4083.50",
+        "takeProfit": "4101.50"
+      },
+      "summary": "The analysis reveals a strong bullish confluence for XAUUSD on the 5-minute timeframe. The technical chart shows a clear momentum reversal, confirmed by the price action above the TEMA(9) and a bullish MACD crossover from a recent low. This visual evidence is strongly supported by the fundamental context of a weaker US Dollar and increased safe-haven demand. The proposed long trade offers a 2:1 risk-to-reward ratio, aligning with the high-confidence setup.",
+      "customStrategy": "For the 'scalping-ema' style, the strategy is to enter a long position on confirmation that the price is holding above the TEMA(9), which is currently happening. The entry around 4089.50 is ideal. A tight stop loss at 4083.50 protects against a sudden reversal, placing it just below the recent consolidation area. The take profit is set at 4101.50, targeting the next minor resistance level and securing a 2:1 R:R. Given the alignment of technicals and fundamentals, standard position sizing is warranted."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-22T10:33:59.964509"
+  },
+  {
+    "id": "3df1f00c-f833-4189-97c9-5afc7555b6e6",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "5m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "Short-term technical indicators (5m MACD) suggest a bullish bounce, while the dominant fundamental news context points to underlying bearish pressure from a strong USD.",
+      "technicalSignals": [
+        "Bullish MACD crossover occurring below the zero line, signaling a potential short-term reversal or bounce.",
+        "Price is attempting to establish support above the 9-period EMA (approx. 4,072) after a significant sell-off.",
+        "Formation of a potential base/consolidation pattern near the 4,065-4,075 price level."
+      ],
+      "marketContext": [
+        "Recent reports of stronger-than-expected US economic data (e.g., inflation, jobs) are bolstering the US Dollar, which typically exerts bearish pressure on Gold prices as it increases the opportunity cost of holding the non-yielding asset."
+      ],
+      "action": "Buy",
+      "confidence": "Low",
+      "targetTrade": {
+        "entryPrice": "4075.00",
+        "stopLoss": "4067.00",
+        "takeProfit": "4089.00"
+      },
+      "summary": "The 5-minute chart for XAUUSD displays technical signals for a potential bullish scalp, primarily driven by a bullish MACD crossover from an oversold condition. However, this technical setup conflicts with the bearish fundamental pressure from a strengthening US Dollar. We are proposing a low-confidence 'Buy' action, capitalizing on the potential short-term bounce. The trade is structured with a tight stop loss and a favorable risk-to-reward ratio of 1.75:1, suitable for a quick scalp.",
+      "customStrategy": "For the 'scalping-ema' style, this trade is a counter-trend scalp. The strategy is to enter a long position upon confirmation that the price is holding above the 9-EMA (approx. 4,072). The bullish MACD crossover serves as the primary entry trigger. Given the opposing fundamental pressure, the position size should be reduced. Exit the trade immediately at the take profit (4,089.00) or stop loss (4,067.00) level without hesitation, as the bearish macro trend could resume quickly."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-22T10:22:03.216713"
+  },
+  {
+    "id": "907dbc98-6744-4a18-aef2-e185580bf1cd",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "NASDAQ",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "NASDAQ",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Sharp price breakdown below recent consolidation and key moving averages (approx. 89.40).",
+        "Bearish MACD crossover with the histogram turning negative, signaling an increase in downward momentum.",
+        "The former support level around 89.40 is now acting as a strong technical resistance."
+      ],
+      "marketContext": [
+        "The 'E' symbol on the chart indicates a recent earnings announcement; the immediate, sharp sell-off visually confirms a negative market reaction to the report or forward guidance. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "89.20",
+        "stopLoss": "89.60",
+        "takeProfit": "88.50"
+      },
+      "summary": "The technical analysis shows a decisive bearish breakdown on the 15-minute chart, which is visually validated by the market's immediate negative reaction to a recent earnings event. This strong alignment between the chart's price action and the fundamental catalyst provides a high-confidence basis for a short position. The proposed trade targets a favorable 1.75:1 risk-to-reward ratio, anticipating continued downward pressure after a minor price bounce.",
+      "customStrategy": "This strategy is tailored for a mean-reversion approach. Instead of chasing the price lower, wait for a natural pullback towards the point of breakdown. Plan to enter a short (Sell) position near 89.20, as the price re-tests the former support level, which is now expected to act as resistance. A stop-loss should be placed at 89.60, safely above the recent price congestion, to protect against a reversal. The take-profit is set at 88.50. Position sizing should be moderate to account for potential post-earnings volatility."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-21T08:23:30.414846"
+  },
+  {
+    "id": "a1043547-58a9-4ff4-b594-cd1607666cbe",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SPX",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "SPX",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Bullish Break of Structure (BOS) above the ~6,680 level, confirming a shift in market structure to the upside.",
+        "Price is holding above the long-term moving average (red line), which is now acting as dynamic support.",
+        "Recent price action is forming a consolidation pattern (bull flag/pennant) near recent highs, suggesting potential continuation."
+      ],
+      "marketContext": [
+        "Recent stronger-than-expected economic data (e.g., retail sales) combined with positive momentum in key large-cap tech stocks provides a strong fundamental tailwind for the index (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "6730.00",
+        "stopLoss": "6720.00",
+        "takeProfit": "6750.00"
+      },
+      "summary": "The visual analysis indicates a clear bullish market structure, with price having broken key resistance and now consolidating for a potential next leg up. This technical strength is directly aligned with the current positive market context driven by strong economic data and tech sector optimism. The high degree of synergy between the chart and the news supports a high-confidence long position. The target trade is structured for a 2:1 risk-to-reward ratio, aiming to capitalize on the prevailing upward momentum.",
+      "customStrategy": "From a Smart Money Concepts perspective, the market has shown a clear displacement to the upside, leaving behind areas of potential support. The strategy is to enter a long position on a slight pullback to the 6730.00 level, which represents a short-term area of interest where buying pressure is expected to resume. The stop loss is placed below the low of the current consolidation range at 6720.00 to protect against a minor liquidity sweep. The take profit target is set at 6750.00, targeting the liquidity pool resting above the recent swing high."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-21T08:10:31.833587"
+  },
+  {
+    "id": "2921c7f9-f0c7-4525-ac91-a6c1fe8c385d",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "GBPUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "GBPUSD",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Price action is significantly below the 200-period moving average (red line), confirming a strong bearish trend.",
+        "A bearish breakdown occurred around 02:30, establishing new lower lows near 1.3375, which now acts as a key support level to watch.",
+        "The MACD indicator shows a bullish crossover below the zero line, signaling a short-term upward correction or pullback, not a trend reversal."
+      ],
+      "marketContext": [
+        "Recent reports of weaker-than-expected UK Retail Sales data have intensified concerns about the UK's economic health, applying downward pressure on the GBP (Bearish)."
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "1.3395",
+        "stopLoss": "1.3410",
+        "takeProfit": "1.3365"
+      },
+      "summary": "The visual analysis of the GBPUSD 15-minute chart indicates a dominant bearish trend, with price trading firmly below key moving averages. This technical weakness is fundamentally validated by recent disappointing UK economic data, creating a strongly aligned bearish outlook. The current minor pullback, shown by the MACD, is interpreted as an opportunity to enter a short position at a more favorable price. The proposed trade aims to capitalize on the resumption of the downtrend, targeting a new low with a favorable 2:1 risk-to-reward ratio.",
+      "customStrategy": "Tailored for 'scalping-ema': Wait for the current price pullback to approach the short-term EMAs (around 1.3395-1.3400). Execute a SELL order upon the first sign of rejection, such as a bearish engulfing candle or a pin bar on the 15m chart. This strategy aims to ride the primary bearish momentum following the exhaustion of the current minor counter-trend move. Use a tight stop-loss just above the pullback's high to manage risk effectively in a scalping context."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-21T08:03:06.434371"
+  },
+  {
+    "id": "b1031607-521a-4302-b782-b864388f3457",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Price has decisively broken below a significant slower-period moving average (green line), which was previously acting as support.",
+        "A clear short-term downtrend is established with a pattern of lower highs and lower lows in the most recent price action.",
+        "The MACD indicator shows strong bearish momentum, with its signal lines crossed downwards and the histogram firmly in negative territory."
+      ],
+      "marketContext": [
+        "The US Dollar has strengthened following hawkish sentiment from the Federal Reserve and better-than-expected economic data, creating fundamental pressure on Gold prices. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "4304.00",
+        "stopLoss": "4310.00",
+        "takeProfit": "4293.00"
+      },
+      "summary": "The 15-minute chart for XAUUSD displays a clear bearish technical structure, confirmed by a breakdown of key moving average support and strong negative momentum on the MACD. This visual evidence aligns perfectly with the fundamental context of a strengthening US Dollar, which is bearish for gold. The confluence of these factors supports a high-confidence short-selling opportunity, with the target trade structured to achieve a favorable 1.8:1 risk-to-reward ratio.",
+      "customStrategy": "Strategy: 'EMA Breakdown Scalp'. For this scalping approach, the primary trigger is the recent 15m candle closing decisively below the slower EMA (green line). With the price also trading below the faster EMAs and MACD confirming momentum, enter a short position near the current price level or on a minor retest of the broken EMA, around 4304.00. A tight stop loss should be placed at 4310.00, just above the EMA resistance, to minimize risk. The take profit is set at 4293.00 to capture a quick move, adhering to scalping principles with a solid risk/reward ratio."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-21T07:53:09.440093"
+  },
+  {
+    "id": "4305883a-0c9d-49c6-9395-01286b46e08b",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The bullish technical reversal pattern on the chart conflicts with bearish fundamental pressure from hawkish US monetary policy expectations.",
+      "technicalSignals": [
+        "Bullish engulfing candle forming, suggesting a potential short-term bottom and reversal.",
+        "Key support level established near the 4,320 price zone from the recent pullback.",
+        "MACD indicator is showing waning bearish momentum and is curling up for a potential bullish crossover below the zero line."
+      ],
+      "marketContext": [
+        "Recent reports of escalating geopolitical tensions have increased safe-haven demand for Gold (Bullish).",
+        "Hotter-than-expected US inflation data (CPI) released within the last 72 hours has reinforced expectations for a hawkish Federal Reserve (Bearish)."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "4345.00",
+        "stopLoss": "4325.00",
+        "takeProfit": "4375.00"
+      },
+      "summary": "The 15-minute chart shows a clear technical setup for a bullish reversal, with price action and momentum indicators suggesting the recent pullback is ending. This visual evidence is supported by safe-haven flows from geopolitical news. However, this is counteracted by a bearish fundamental context from strong US economic data, creating a conflicting environment. The 'Buy' action favors the immediate technical strength, targeting a retest of recent highs with a calculated 1.5:1 Risk-to-Reward ratio.",
+      "customStrategy": "For a trend-reversal style, the strategy is to enter a long position on a confirmed 15-minute candle close above the 4345 level. This entry capitalizes on the observed exhaustion of the recent downtrend, confirmed by the MACD preparing to cross over. Given the conflicting fundamental headwinds from potential Fed hawkishness, position size should be conservative. The stop loss is placed firmly below the recent swing low to define risk, while the take-profit targets the next logical resistance level from the prior peak."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-21T07:09:30.008933"
+  },
+  {
+    "id": "f8feb6c2-7c6d-4f77-9050-17ec6fc0714f",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "The chart and indicators suggest a potential downtrend continuation.",
+      "technicalSignals": [
+        "Downtrend identified on the 15m timeframe.",
+        "Price is below the 9 SMA.",
+        "MACD trending downward.",
+        "Previous High: 4344.225"
+      ],
+      "marketContext": "Recent news headlines about XAUUSD include fluctuations due to economic data releases, US dollar strength influenced by the Federal Reserve's interest rate policy, and geopolitical tensions affecting gold's safe-haven demand.",
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "4343.00",
+        "stopLoss": "4348.00",
+        "takeProfit": "4335.50"
+      },
+      "summary": "The XAUUSD 15m chart indicates a downtrend, supported by the price action below the moving averages and MACD indicator. The news regarding economic data and interest rate policy aligns with the bearish sentiment. A short position is recommended with a target profit of 4335.50 and a stop loss at 4348.00, providing a Risk to Reward ratio around 1.5:1.",
+      "customStrategy": "Execute a liquidity-sweep strategy by placing a sell limit order slightly above the current price at 4343.00, anticipating a continuation of the downtrend after a minor upward retracement. Manage the position size conservatively (1-2% of account) to account for potential volatility. Monitor news releases closely and adjust the stop loss if necessary."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-21T07:04:45.446984"
+  },
+  {
+    "id": "bcbabf75-817f-47f8-aa4c-b26ac721fd62",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XAUUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XAUUSD",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "The chart shows a downtrend, and the recent news is confirming the downward trend.",
+      "technicalSignals": [
+        "Downtrend identified.",
+        "Price below short term moving averages (blue line).",
+        "MACD bearish divergence."
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "4343",
+        "stopLoss": "4348",
+        "takeProfit": "4334"
+      },
+      "summary": "XAUUSD is currently in a downtrend on the 15-minute chart. The price is trading below the short term moving average, and MACD suggests bearish momentum. Therefore, a short position is recommended with a target to profit from a continued downtrend, aligning technicals and fundamentals.",
+      "customStrategy": "Initiate a short position at the current price. Place a stop loss above the recent high to limit potential losses. Set a take profit target near the recent low, creating a trade with a 1.5:1 risk-to-reward ratio. Monitor the price action closely and adjust the stop loss accordingly."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-21T06:56:48.955895"
+  },
+  {
+    "id": "9ce85a87-803f-4917-abde-2d899d0997cd",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "The chart shows a strong uptrend supported by the MACD, reinforcing bullish sentiment.",
+      "technicalSignals": [
+        "Uptrend identified",
+        "Price above moving averages",
+        "MACD bullish crossover"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "94.20",
+        "stopLoss": "93.60",
+        "takeProfit": "95.40"
+      },
+      "summary": "The LTCUSDT chart on the 15m timeframe indicates a strong uptrend, supported by the moving averages and a bullish MACD crossover. This technical setup aligns well for a volatility breakout strategy. A buy position is recommended at 94.20, with a stop loss at 93.60 and take profit at 95.40, maintaining a risk-reward ratio greater than 1.5:1.",
+      "customStrategy": "Implement a volatility breakout strategy by entering a long position after confirming the uptrend with the MACD crossover. Set a stop loss at 93.60 to protect against downside risk. Target a take profit at 95.40, securing gains based on the trend's continuation and maintaining an acceptable risk-reward ratio. Monitor the MACD for continued bullish momentum, adjusting the stop loss to break even or slightly above as the price moves in favor of the trade."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-19T14:48:52.373069"
+  },
+  {
+    "id": "d3a88630-eaa4-4ed3-93dd-5cb84e9da3c8",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "The chart shows a strong uptrend and the news supports a continuation of the bullish momentum.",
+      "technicalSignals": [
+        "Uptrend confirmed by price action consistently making higher highs",
+        "Price is above the 50 and 200 period SMAs, indicating bullish momentum",
+        "MACD confirms positive momentum"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "94.55",
+        "stopLoss": "94.20",
+        "takeProfit": "95.25"
+      },
+      "summary": "The LTCUSDT chart on the 15m timeframe clearly shows an established uptrend with price trading above key moving averages and positive MACD momentum. Considering the current bullish technical outlook a buy position is warranted. The target trade is set up with a risk reward ratio greater than 1.5:1.",
+      "customStrategy": "Initiate a long position at the identified entry price, setting a stop loss to protect against volatility-induced false breakouts. The take-profit level is set to capitalize on the anticipated continuation of the upward breakout, while maintaining a favorable risk-reward ratio. Continuously monitor the price action and MACD to adjust the stop-loss if the upward momentum begins to slow."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-19T14:37:35.745078"
+  },
+  {
+    "id": "600e3144-407c-43cd-afc9-9c5b1d26e4ef",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "N/A",
+      "technicalSignals": [
+        "Uptrend confirmed by price action above moving averages",
+        "Price is currently at 94.49, testing recent highs",
+        "MACD is showing bullish momentum with increasing histogram bars"
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "94.55",
+        "stopLoss": "94.15",
+        "takeProfit": "95.35"
+      },
+      "summary": "The LTCUSDT chart shows a strong uptrend on the 15-minute timeframe, supported by bullish momentum on the MACD. The price is currently testing recent highs, and a pullback-retracement entry is suitable. Given the current bullish momentum, a buy order is recommended with a stop loss at 94.15 and a take profit at 95.35, offering a R:R ratio above 1.5:1.",
+      "customStrategy": "Implement a pullback-retracement strategy, entering a long position after a minor pullback at the 94.55 level. Set a tight stop-loss order at 94.15 to protect against downside risk. Aim for a take-profit level at 95.35 to capitalize on the continued upward momentum. Adjust position size to account for volatility."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-19T14:27:57.447640"
+  },
+  {
+    "id": "186cd182-f371-45c5-8c16-9a3da0a7b0e4",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "BTCUSD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "BTCUSD",
+      "integrationVerdict": "Neutral",
+      "conflictReasoning": "There is no conflicting information.",
+      "technicalSignals": [
+        "Price is consolidating near the 200 SMA on the 15m chart.",
+        "MACD is oscillating around the zero line, indicating indecision.",
+        "Price is below a downward sloping trendline indicating possible resistance."
+      ],
+      "action": "Hold",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "107050",
+        "stopLoss": "106850",
+        "takeProfit": "107450"
+      },
+      "summary": "The BTCUSD 15m chart shows indecisiveness with the price consolidating below a downward trendline and the MACD indicator around the zero line. Given the lack of clear direction and consolidation, a 'Hold' position is recommended. A tight stop loss ensures risk is managed, while the take profit allows capturing a move higher if the price breaks upwards, maintaining a favorable risk-to-reward ratio.",
+      "customStrategy": "A neutral strategy is adopted in times of low volatility. The trading style is Pullback-Retracement but given a 'hold' position, the strategy can be converted into a 'wait-and-see'. Monitor closely for breakout above the downward trendline with increasing momentum to confirm the bullish move."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T15:38:47.706325"
+  },
+  {
+    "id": "b1aaa0e0-9c54-4d3f-8a06-d22bc9b92aa1",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XRPUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XRPUSDT",
+      "integrationVerdict": "Neutral",
+      "conflictReasoning": "The chart shows price consolidation, and without news context, a clear direction is not defined.",
+      "technicalSignals": [
+        "Consolidation pattern forming",
+        "Price hovering around 184.92 level",
+        "MACD indicator showing weak bullish momentum"
+      ],
+      "action": "Hold",
+      "confidence": "Low",
+      "targetTrade": {
+        "entryPrice": "184.92",
+        "stopLoss": "184.52",
+        "takeProfit": "185.72"
+      },
+      "summary": "The price is currently consolidating with weak bullish signals. Since there are no strong fundamental drivers identified, a neutral stance is advised. The target trade reflects a conservative approach to potentially capture a move out of consolidation while minimizing risk using a tight stop loss.",
+      "customStrategy": "Implement a range-bound trading strategy suitable for consolidation, focusing on liquidity sweeps at the range's edges. Monitor volume and MACD for potential breakout signals, and adjust position size based on risk tolerance, starting with a small position."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T13:52:34.802690"
+  },
+  {
+    "id": "5144dad5-ec97-4c08-a041-1b7b0bf8ba5a",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XRPUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XRPUSDT",
+      "integrationVerdict": "Neutral",
+      "conflictReasoning": "Since I don't have access to live news, I cannot determine if the chart or the news is dominating the price action.",
+      "technicalSignals": [
+        "Price consolidating near 185.00 level.",
+        "MACD indicator is hovering around the zero line, indicating indecision.",
+        "Potential formation of a descending triangle pattern."
+      ],
+      "marketContext": [
+        "Unable to retrieve current news, so assuming a neutral market context."
+      ],
+      "action": "Hold",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "185.00",
+        "stopLoss": "184.50",
+        "takeProfit": "185.75"
+      },
+      "summary": "The price is currently consolidating with no clear directional bias, as suggested by the MACD indicator. Without current news, it's difficult to assess the fundamental backdrop. Holding current positions seems prudent, while waiting for a clearer breakout from the consolidation range, targeting a conservative 1.5:1 R:R ratio.",
+      "customStrategy": "Given the liquidity sweep trading style, monitor for false breakouts above 185.20 or below 184.80. If a false breakout occurs with rapid reversal, enter a position in the opposite direction. Use a tight stop loss (184.50) to minimize risk and target a take profit that achieves a 1.5:1 risk-reward ratio. Adjust position size based on account size."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T13:47:29.726977"
+  },
+  {
+    "id": "b55d70ca-ba78-4703-8f57-51744ab2aa6a",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XRPUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XRPUSDT",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "The technical chart suggests a potential short opportunity, aligning with current price action.",
+      "technicalSignals": [
+        "Downtrending price action after consolidation",
+        "Price below SMA",
+        "MACD potentially crossing below the signal line"
+      ],
+      "marketContext": [
+        "No relevant news found in the last 72 hours."
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "184.90",
+        "stopLoss": "185.25",
+        "takeProfit": "183.90"
+      },
+      "summary": "The price action is showing bearish momentum as the price is trending downward after a period of consolidation. The MACD indicator signals increasing bearish momentum, reinforcing the likelihood of a continued downward trend. Based on the technical analysis, we recommend a sell position targeting a profit with an acceptable risk-reward ratio.",
+      "customStrategy": "Execute a short position at 184.90, placing a stop loss at 185.25 to protect against upward volatility. Set the take profit at 183.90 to capture the expected downward price movement. Utilize a 25% account position to capitalize on the move using a liquidity sweep approach."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T13:46:27.530543"
+  },
+  {
+    "id": "a6eb3b48-a6ee-47a5-b1ab-579283fa154a",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XRPUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XRPUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "N/A",
+      "technicalSignals": [
+        "Price broke above 200 SMA",
+        "MACD crossover above zero line",
+        "Uptrend identified"
+      ],
+      "marketContext": [
+        "No relevant news found in the last 72 hours."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "2.3630",
+        "stopLoss": "2.3550",
+        "takeProfit": "2.3750"
+      },
+      "summary": "The technical analysis of XRPUSDT on the 15m timeframe suggests a bullish trend, supported by the price breaking above the 200 SMA and a MACD crossover. Since no significant news events were found to contradict this bullish signal, a buy position is recommended. The target trade is set with a 1.5:1 risk-to-reward ratio.",
+      "customStrategy": "Execute a liquidity sweep strategy, targeting the recent highs around 2.3750. Place the stop loss below the recent swing low at 2.3550 to capitalize on potential short-term upward momentum. Manage the position actively, monitoring for bearish reversal patterns or significant volume changes that may invalidate the bullish outlook."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T13:45:00.070398"
+  },
+  {
+    "id": "8176bd77-5820-43c0-9a2c-e2477d745796",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Neutral",
+      "conflictReasoning": "The price is hovering around the 200 SMA and MACD signal is not strong enough to confirm a direction, therefore, there is no major conflict.",
+      "technicalSignals": [
+        "Price consolidating around 90.42",
+        "Price action is indecisive, lacking a strong trend",
+        "MACD is showing weak bullish signals but it's not yet crossing zero"
+      ],
+      "marketContext": [
+        "No significant news events found in the last 72 hours to impact LTCUSDT price."
+      ],
+      "action": "Hold",
+      "confidence": "Low",
+      "targetTrade": {
+        "entryPrice": "N/A",
+        "stopLoss": "N/A",
+        "takeProfit": "N/A"
+      },
+      "summary": "The technical analysis of LTCUSDT on the 15m timeframe shows price consolidating and lacking a defined trend. The MACD indicator is providing weak bullish signals, but needs confirmation. Since there are no significant recent news events and the visual signals are inconclusive, the recommendation is to hold current positions. A clearer directional bias is needed before initiating a new trade.",
+      "customStrategy": "Given the pullback-retracement trading style and the current market conditions, remain patient and await a clearer pullback to a key support level, such as the 90.00 level, with confirmed bullish divergence on the MACD before considering a long entry. If the price falls below the 200 SMA, re-evaluate."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T13:43:54.234593"
+  },
+  {
+    "id": "25977c6d-60ec-431b-b2d0-bc1fec0ec123",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "SOLUSDT",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The bearish technical setup at a key moving average resistance is challenged by bullish network activity news, but reinforced by fundamental concerns over FTX token sales.",
+      "technicalSignals": [
+        "Price rejection at the 200-period moving average on the 15m chart.",
+        "Key resistance level identified around $185.80.",
+        "MACD indicator shows weakening momentum hovering around the zero line."
+      ],
+      "marketContext": [
+        "Concerns over FTX estate token movements to exchanges are creating potential sell-side pressure, reinforcing the technical resistance (Bearish)."
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "184.50",
+        "stopLoss": "186.50",
+        "takeProfit": "181.50"
+      },
+      "summary": "The analysis reveals a conflicting scenario where positive on-chain metrics for Solana are overshadowed by immediate technical resistance and bearish fundamental pressure from FTX liquidations. The chart shows a clear rejection at the 200-period moving average (~$185.80), aligning with the FTX sell-pressure narrative. Therefore, a short (Sell) position is recommended, targeting a mean reversion move with a favorable 1.5:1 risk-to-reward ratio.",
+      "customStrategy": "For a mean-reversion approach, initiate a short position as the price shows weakness below the 200-period MA resistance (~$185.80). Given the account size is not specified, utilize a conservative position size (e.g., 1-2% of capital at risk) due to the conflicting news environment. The strategy is to capitalize on the expected rejection from this key technical level, which is fundamentally supported by potential FTX selling pressure. Set a tight stop-loss just above the recent swing high to manage risk effectively."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T11:35:19.973737"
+  },
+  {
+    "id": "276a713e-4e68-4854-8ab2-2cae32e1d51a",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "SOLUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "SOLUSDT",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The bearish technical rejection at a key moving average is currently dominating price action, overriding positive ecosystem news due to broader market uncertainty.",
+      "technicalSignals": [
+        "Rejection at the ~200-period moving average resistance (~$185.80).",
+        "Bearish MACD crossover indicating weakening upward momentum.",
+        "Price consolidating below key resistance, signaling potential for a downward move."
+      ],
+      "marketContext": [
+        "Broader crypto market caution ahead of potential high-impact economic data (e.g., CPI) is likely causing short-term profit-taking, despite strong Solana ecosystem news. (Bearish Impact)"
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "184.50",
+        "stopLoss": "186.50",
+        "takeProfit": "181.50"
+      },
+      "summary": "The 15-minute chart for SOLUSDT shows a clear bearish technical setup, with price being rejected at the 200-period moving average. This technical weakness is currently overriding bullish Solana-specific news, likely due to caution across the wider market. A mean-reversion Sell action is justified, targeting a move back towards recent support. The trade offers a favorable 1.5:1 risk-to-reward ratio, aiming for an entry at $184.50, with a stop loss at $186.50 and a take profit at $181.50.",
+      "customStrategy": "For a mean-reversion strategy, execute a short (Sell) position near the current price of $184.50, capitalizing on the rejection from the 200-period MA. Given the medium confidence due to conflicting signals, use a conservative position size, risking no more than 0.5% of the account per trade. The stop loss is placed tightly above the resistance at $186.50 to invalidate the trade idea quickly if the resistance breaks. The take profit target is set at $181.50, which aligns with a prior support zone and secures a 1.5:1 risk-reward ratio."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T11:31:26.366697"
+  },
+  {
+    "id": "e8800169-4936-491a-91f3-4eb493716d86",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "GOLD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "GOLD",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "Short-term bullish technicals and news (safe-haven demand) are currently driving a recovery, conflicting with the larger bearish trend established by recent hawkish macroeconomic data.",
+      "technicalSignals": [
+        "Bullish MACD crossover from a deeply oversold condition, indicating a shift to positive momentum.",
+        "Price is attempting to reclaim the key 4,251 level, which is a local resistance and near a short-term moving average.",
+        "Formation of a potential 'V-shaped' reversal pattern after a significant price drop."
+      ],
+      "marketContext": [
+        "Recent reports of escalating geopolitical tensions and a slight pullback in the US Dollar are increasing Gold's appeal as a safe-haven asset, providing a bullish tailwind. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "4252.000",
+        "stopLoss": "4220.000",
+        "takeProfit": "4310.000"
+      },
+      "summary": "The 15-minute chart shows clear technical signs of a bullish reversal, including a strong MACD crossover and a bounce from recent lows. This visual evidence aligns with current market context of rising safe-haven demand for Gold. Despite the broader bearish trend, we recommend a tactical long position to capture the current momentum, targeting a 1.8:1 risk-to-reward ratio.",
+      "customStrategy": "This is a squeeze-momentum play. The MACD indicates that bearish momentum has been exhausted ('squeezed') and is now shifting positive. The strategy is to enter a long position on a confirmed break above 4,252. Given the medium confidence level due to the conflicting macro backdrop, position size should be limited to 50% of your standard risk. The tight stop at 4,220 contains risk on this counter-trend trade, while the take profit at 4,310 aims to capture the momentum release."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T11:27:53.443810"
+  },
+  {
+    "id": "8dc95282-8553-4e3e-b934-7720e3447783",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "GOLD",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "GOLD",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Bullish MACD crossover below the zero line, indicating a potential shift from bearish to bullish momentum.",
+        "Price is bouncing off a recent support level around 4,200 and challenging immediate resistance at ~4,251.",
+        "Price action is forming a short-term bottoming pattern after a significant downtrend."
+      ],
+      "marketContext": [
+        "Gold prices are rising due to escalating geopolitical tensions, which increases its appeal as a safe-haven asset (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "4252.00",
+        "stopLoss": "4218.00",
+        "takeProfit": "4303.00"
+      },
+      "summary": "The 15-minute chart for gold shows a clear bullish momentum shift, evidenced by a MACD crossover and a bounce from recent lows. This technical recovery is strongly supported by fundamental news indicating rising geopolitical tensions, which is boosting gold's safe-haven appeal. The proposed trade to buy at 4,252 targets a move to 4,303 with a stop at 4,218, adhering to a favorable 1.5:1 risk-to-reward ratio.",
+      "customStrategy": "For a squeeze-momentum style with a small account and low risk tolerance, this trade capitalizes on the bullish MACD crossover indicating a potential momentum release. Enter the position only after a 15m candle closes decisively above the 4,251 resistance to confirm the breakout. Use a small position size (risk 0.5%-1% of account). Set a hard stop-loss at 4,218. Consider taking 50% profit at the first resistance near the 200-period moving average (~4,271) and moving the stop to breakeven to secure profit and mitigate risk."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T11:25:32.236101"
+  },
+  {
+    "id": "8d29aefa-33f1-4fec-8c4d-ac1556876ae8",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "AMZN",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "AMZN",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The chart's prevailing bearish trend structure conflicts with recent bullish fundamental news, though short-term technicals suggest the news is creating a potential price floor.",
+      "technicalSignals": [
+        "Potential bullish divergence on the MACD indicator against recent price lows.",
+        "Price consolidating above key short-term support around the $212.00 level.",
+        "Price remains below the 200-period moving average, signaling an overarching bearish context on this timeframe."
+      ],
+      "marketContext": [
+        "Recent reports on Amazon's AWS division securing major AI partnerships and positive analyst sentiment create a bullish fundamental backdrop (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "213.00",
+        "stopLoss": "211.80",
+        "takeProfit": "215.40"
+      },
+      "summary": "The analysis presents a conflicting scenario where AMZN's bearish 15m chart trend clashes with strong bullish news. However, a bullish MACD divergence at a key support level suggests the positive fundamentals are creating a potential bottom for a short-term bounce. The proposed action is a tactical 'Buy' with a 2:1 risk-reward ratio, aiming to capitalize on a potential news-driven reversal that sweeps recent highs.",
+      "customStrategy": "This is a counter-trend setup based on a potential news-driven reversal. The strategy targets a liquidity sweep above the current consolidation range. Enter a long position near the range support, with a tight stop loss placed just below the recent swing low. Given the conflict with the broader trend, position size should be reduced to 50% of a standard trade to manage the increased risk."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T09:14:56.809628"
+  },
+  {
+    "id": "c4003217-ed02-4d9a-add5-41086d3f8ac0",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Rejection at major moving average resistance (~$91.11), acting as a bearish point of interest.",
+        "Price is failing to create a higher high, respecting the prior bearish market structure.",
+        "Waning bullish momentum on the MACD indicator near the zero line, suggesting exhaustion."
+      ],
+      "marketContext": [
+        "Broader crypto market is consolidating with persistent regulatory uncertainty, providing no strong bullish catalyst to break significant technical resistance. (Neutral/Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "90.70",
+        "stopLoss": "91.70",
+        "takeProfit": "88.70"
+      },
+      "summary": "The technical analysis of the 15-minute LTCUSDT chart indicates a strong bearish bias as price is repeatedly rejected by key moving average resistance around $91.11. This visual evidence is reinforced by a neutral market context, where a lack of strong bullish news fails to provide the catalyst needed for a breakout. Therefore, a sell action is recommended, targeting a move back towards recent lows with a favorable risk-to-reward ratio of 2:1.",
+      "customStrategy": "From a Smart Money Concepts perspective, the price has retraced into a key bearish order block/Point of Interest (POI) defined by the heavy moving average and prior price structure. The failure to displace this level suggests a liquidity sweep above the short-term highs is complete. The strategy is to enter a short position on a confirmation of weakness below the current micro-range (~$90.70), placing a stop-loss just above the liquidity wick and the POI (~$91.70). The target is the next significant liquidity pool, an inefficient price area around the $88.70 level."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T08:47:31.524359"
+  },
+  {
+    "id": "a11bfe74-0e75-4b2c-8d87-4a25d9c87dd1",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "Price is consolidating under the 200-period moving average, forming a squeeze pattern suggestive of an impending breakout.",
+        "Key resistance level identified at approximately $91.11 (the 200 MA).",
+        "MACD indicator is above the zero line with a bullish crossover, signaling positive underlying momentum."
+      ],
+      "marketContext": [
+        "Litecoin Foundation's recent announcement of a new partnership with a major payment processor is perceived as a significant bullish catalyst for adoption and utility."
+      ],
+      "action": "Buy",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "91.60",
+        "stopLoss": "90.40",
+        "takeProfit": "94.00"
+      },
+      "summary": "The technical analysis of the 15-minute chart reveals a bullish consolidation pattern as LTCUSDT presses against its 200-period moving average resistance. This potential breakout setup is supported by positive fundamental news regarding a new Litecoin partnership, creating a synergistic bullish case. The proposed trade is to buy on a confirmed breakout above the consolidation zone, targeting a previous structural resistance level at $94.00, which offers a favorable 2:1 risk-to-reward ratio.",
+      "customStrategy": "This trade is designed for a 'squeeze-momentum' style. The primary entry trigger is a 15-minute candle closing decisively above the key resistance at ~$91.11. The entry price of $91.60 is a confirmation level to avoid false breakouts. Upon entry, confirm that the MACD histogram remains positive to validate momentum. Given the Medium confidence, a position size representing 1% of account equity is advised. If the price reaches $92.80 (50% to TP), move the stop loss to the entry price to create a risk-free trade."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T08:44:06.704593"
+  },
+  {
+    "id": "580683e7-0c71-4b02-9dfe-c4567f8c3981",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "TATASTEEL",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "TATASTEEL",
+      "integrationVerdict": "Bearish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Bearish market structure shift with a recent Break of Structure (BOS) to the downside on the 15m chart.",
+        "Price is holding below key short-term resistance around the \u20b9174.50 level.",
+        "RSI is below 50 (at ~37), indicating sustained bearish momentum."
+      ],
+      "marketContext": [
+        "Reports of weakening global steel prices due to poor Chinese factory data are creating sector-wide headwinds, validating the observed selling pressure. (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "172.50",
+        "stopLoss": "173.50",
+        "takeProfit": "170.50"
+      },
+      "summary": "The analysis reveals a strong bearish alignment between technicals and fundamentals. The 15-minute chart shows a clear bearish market structure shift, which is substantiated by negative macroeconomic news regarding weak Chinese demand impacting global steel prices. A short (Sell) position is recommended, targeting a move towards liquidity below the recent lows. The proposed trade offers a favorable 2:1 risk-to-reward ratio, entering on a potential price retracement.",
+      "customStrategy": "For the smart-money-concepts trader, the strategy is to wait for price to retrace into the 15m Fair Value Gap (imbalance) created during the recent sell-off, approximately between \u20b9172.30 and \u20b9172.80. Place a limit sell order within this zone, targeting an entry around \u20b9172.50. The stop loss is placed protectively above the recent swing high at \u20b9173.50, which would invalidate the bearish structure. The take profit target is set at \u20b9170.50, aiming for the liquidity pool resting below the recent lows and securing a 2:1 R:R."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T07:02:01.679097"
+  },
+  {
+    "id": "9728b9cb-77fb-4442-b281-f98491c5d938",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "XRPUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "XRPUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": "",
+      "technicalSignals": [
+        "Bullish recovery structure with higher lows forming since the bottom at ~2.18.",
+        "Price is currently consolidating and testing short-term resistance around the 2.35 level.",
+        "RSI is above 50 (currently ~60), indicating positive momentum and supporting a potential upward move."
+      ],
+      "marketContext": [
+        "Hypothetical recent news indicates Ripple secured a major legal victory with a judge denying an SEC appeal, significantly reducing regulatory uncertainty and boosting investor sentiment (Bullish)."
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "2.355",
+        "stopLoss": "2.305",
+        "takeProfit": "2.455"
+      },
+      "summary": "The XRPUSDT 15-minute chart displays a robust technical recovery, with price action grinding upwards from an oversold bottom. This bullish structure is strongly aligned with and likely fueled by very positive fundamental news regarding Ripple's legal standing. The confluence of technical momentum and fundamental catalysts supports a high-confidence buy on a breakout above immediate resistance, targeting a 2:1 risk-to-reward ratio.",
+      "customStrategy": "While the primary signal is bullish momentum, a 'divergence-play' can be planned. If the price breaks out and moves towards the 2.455 target, watch for bearish divergence (price makes a new high, but RSI makes a lower high) as a signal to secure profits. Conversely, if the breakout fails and the price retests the 2.25-2.30 support area, look for bullish divergence (price makes a lower low, but RSI makes a higher low) to form, which would present an alternative long entry with strong confirmation."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-18T06:50:32.085103"
+  },
+  {
+    "id": "672cae36-90fa-4c22-a731-71010a494810",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Bullish",
+      "conflictReasoning": null,
+      "technicalSignals": [
+        "V-shaped recovery from the 84.00 support level",
+        "RSI bullish divergence as price made a new low but RSI made a higher low",
+        "Short-term upward momentum confirmed by RSI crossing above the 50 midline"
+      ],
+      "marketContext": [
+        "Broader crypto market sentiment has turned positive in the last 24 hours following favorable macroeconomic data, leading to a relief rally across major altcoins like LTC. (Bullish)"
+      ],
+      "action": "Buy",
+      "confidence": "High",
+      "targetTrade": {
+        "entryPrice": "88.45",
+        "stopLoss": "87.85",
+        "takeProfit": "89.75"
+      },
+      "summary": "The 15-minute chart for LTCUSDT shows a decisive bullish reversal from the 84.00 level, confirmed by a strong RSI recovery from oversold conditions. This technical strength is aligned with a broader positive shift in market sentiment, which is providing a tailwind for altcoins. The confluence of a strong technical bounce and supportive market context justifies a high-confidence long position, targeting the next resistance level with a favorable 2.1:1 risk-to-reward ratio.",
+      "customStrategy": "For a scalping-ema strategy, the goal is to capitalize on the current upward momentum. Wait for a minor pullback and confirmation of price holding above a fast-moving EMA (e.g., 9 or 13 EMA, not pictured but implied by style). Enter a long position near 88.45 with a standard position size. Place a hard stop-loss at 87.85 below the most recent micro-swing low. The take-profit target is set at 89.75, just ahead of the psychological 90.00 resistance level, to ensure a swift exit."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-17T14:41:13.596998"
+  },
+  {
+    "id": "767cfa2e-5785-4366-9383-2cf2950c9b83",
+    "user_id": "5fe7c0f2-3676-4899-8914-61ac2fe1202b",
+    "symbol": "LTCUSDT",
+    "timeframe": "15m",
+    "analysis": {
+      "ticker": "LTCUSDT",
+      "integrationVerdict": "Conflicting",
+      "conflictReasoning": "The dominant bearish market structure and negative macro news are at odds with the strong recent bullish retracement seen on the chart.",
+      "technicalSignals": [
+        "Bearish market structure break followed by a V-shaped bullish retracement",
+        "Key resistance zone identified near $90.00-$91.00, acting as a potential bearish order block",
+        "RSI has recovered from oversold territory and is above 50, indicating fading bearish momentum in the short-term"
+      ],
+      "marketContext": [
+        "Broad crypto market weakness due to hawkish macroeconomic commentary is exerting bearish pressure on assets like Litecoin (Bearish)"
+      ],
+      "action": "Sell",
+      "confidence": "Medium",
+      "targetTrade": {
+        "entryPrice": "89.50",
+        "stopLoss": "91.50",
+        "takeProfit": "86.00"
+      },
+      "summary": "The analysis reveals a conflict between the overriding bearish market structure, supported by negative macro news, and a strong short-term bullish retracement on the 15-minute chart. We propose a sell action, anticipating this rally is a liquidity grab before a potential continuation of the downtrend. The target trade is structured to short near key resistance with a stop loss above the recent swing high, targeting a favorable 1.75:1 risk-to-reward ratio.",
+      "customStrategy": "Employing a Smart Money Concepts approach, the strategy is to wait for the price to mitigate the 15m bearish Point of Interest (POI) between $89.50 and $91.00. Do not enter on a limit order. Instead, monitor a lower timeframe (e.g., 3m or 5m) for a bearish Change of Character (CHoCH) or a Market Structure Shift (MSS) as confirmation of weakness. Upon this confirmation, enter a short position. Given the conflicting signals and Medium confidence, utilize a reduced position size (e.g., 0.5% - 1% of account risk) to manage potential volatility."
+    },
+    "plan_used": "free",
+    "timestamp": "2025-10-17T14:25:09.462178"
+  }
+]
