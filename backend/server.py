@@ -224,6 +224,71 @@ If the chart contains any indicator, reply that "our free plan doesn't allow the
 Symbol: {symbol.upper()}
 Timeframe: {timeframe}"""
 
+def detect_chart_platform(url: str) -> str:
+    """Detect the chart platform from URL"""
+    if 'tradingview.com' in url.lower():
+        return 'tradingview'
+    elif 'binance.com' in url.lower():
+        return 'binance'
+    else:
+        return 'unknown'
+
+async def capture_chart_screenshot(url: str) -> str:
+    """Capture chart screenshot using Playwright and return base64 encoded image"""
+    try:
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
+            page = await browser.new_page(viewport={'width': 1920, 'height': 1080})
+            
+            # Set user agent to avoid detection
+            await page.set_extra_http_headers({
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            })
+            
+            # Navigate to the chart URL
+            await page.goto(url, wait_until='networkidle', timeout=30000)
+            
+            # Wait for chart to load
+            await page.wait_for_timeout(5000)
+            
+            # Try to remove any overlays or popups
+            try:
+                # Common selectors for TradingView popups
+                popup_selectors = [
+                    '[data-name="close"]',
+                    '.tv-dialog__close',
+                    '.close-button',
+                    '[aria-label="Close"]'
+                ]
+                for selector in popup_selectors:
+                    elements = await page.query_selector_all(selector)
+                    for element in elements:
+                        try:
+                            await element.click()
+                        except:
+                            continue
+                        
+                await page.wait_for_timeout(1000)
+            except:
+                pass
+            
+            # Take screenshot
+            screenshot_bytes = await page.screenshot(
+                full_page=False,
+                quality=90,
+                type='png'
+            )
+            
+            await browser.close()
+            
+            # Convert to base64
+            base64_string = base64.b64encode(screenshot_bytes).decode('utf-8')
+            return base64_string
+            
+    except Exception as e:
+        logger.error(f"Error capturing chart screenshot: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to capture chart: {str(e)}")
+
 async def deduct_credit(user_id: str, email: str):
     """Deduct credit after successful analysis"""
     if is_admin_user(email):
