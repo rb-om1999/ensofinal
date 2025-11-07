@@ -161,8 +161,9 @@ Constraints:
 - Prioritize **fundamentals for stocks**, **technicals for crypto**.
 - Be realistic with stoploss/takeprofit spacing relative to visible chart volatility.
 - Do not include explanatory text outside the JSON."""
-        
-        return f"""You are the Lead Multimodal Financial Strategist, specializing in the synergistic analysis of visual (chart, image) and textual (current news, market data) information. Your primary goal is to provide a unified, actionable investment recommendation, ensuring that the visual evidence directly validates or contradicts the textual market context that you must retrieve via search (if tool is available).
+        else:
+            # Original screenshot prompt for backward compatibility
+            return f"""You are the Lead Multimodal Financial Strategist, specializing in the synergistic analysis of visual (chart, image) and textual (current news, market data) information. Your primary goal is to provide a unified, actionable investment recommendation, ensuring that the visual evidence directly validates or contradicts the textual market context that you must retrieve via search (if tool is available).
 
 Input Modality Instructions:
 
