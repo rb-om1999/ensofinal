@@ -15,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/app" element={<ChartAnalyzer />} />
+          <Route path="/cockpit" element={<TradingCockpit />} />
           <Route path="/analyze" element={<ChartAnalyzer />} />
           <Route path="/verify" element={<VerifyEmail />} />
           <Route path="/pricing" element={<PricingPage />} />
