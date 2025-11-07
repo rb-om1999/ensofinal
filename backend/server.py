@@ -733,6 +733,132 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
         logger.error(f"Error analyzing chart: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
+@api_router.post("/analyze-chart-link")
+async def analyze_chart_link(request: ChartLinkRequest, current_user = Depends(get_current_user)):
+    """Analyze chart from URL using live chart capture"""
+    try:
+        # Check if user has credits or is Pro/Admin
+        user_plan = get_user_plan(current_user.user_metadata)
+        if not has_sufficient_credits(current_user.user_metadata, current_user.email):
+            return {
+                "error": True,
+                "message": "You have run out of free analyses. Upgrade to Pro for unlimited access!",
+                "credits_remaining": current_user.user_metadata.get("credits_remaining", 0)
+            }
+        
+        # Detect platform and capture screenshot
+        platform = detect_chart_platform(request.chartUrl)
+        logger.info(f"Detected platform: {platform} for URL: {request.chartUrl}")
+        
+        # Capture chart screenshot
+        screenshot_base64 = await capture_chart_screenshot(request.chartUrl)
+        
+        # Create LlmChat instance
+        llm = LlmChat()
+        
+        # Get appropriate prompt based on user tier (using liveChart mode)
+        prompt = get_gemini_prompt(
+            current_user.user_metadata, 
+            current_user.email, 
+            request.symbol, 
+            request.timeframe, 
+            request.tradingStyle,
+            mode='liveChart'
+        )
+        
+        # Create image content from screenshot
+        image_content = ImageContent(
+            image_data=screenshot_base64,
+            image_format="png"
+        )
+        
+        # Send to Gemini
+        response = await llm.send_message([
+            UserMessage(content=prompt, images=[image_content])
+        ])
+        
+        # Parse JSON response
+        try:
+            # Clean up response to extract JSON
+            response_text = response.strip()
+            if response_text.startswith('```json'):
+                response_text = response_text.replace('```json', '').replace('```', '').strip()
+            elif response_text.startswith('```'):
+                response_text = response_text.replace('```', '').strip()
+            
+            analysis_data = json.loads(response_text)
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse Gemini response as JSON: {response_text[:500]}...")
+            # Fallback to basic response format
+            analysis_data = {
+                "error": True,
+                "message": "Analysis completed but response format was invalid. Please try again.",
+                "raw_response": response_text[:1000]
+            }
+        
+        # Deduct credit after successful analysis and get updated credit count
+        updated_credits = await deduct_credit(current_user.id, current_user.email)
+        
+        # Store analysis in Supabase or local file as fallback
+        analysis_record = {
+            "id": str(uuid.uuid4()),
+            "user_id": current_user.id,
+            "symbol": request.symbol,
+            "timeframe": request.timeframe,
+            "analysis": analysis_data,
+            "plan_used": current_user.user_metadata.get("plan", "free"),
+            "timestamp": datetime.utcnow().isoformat(),
+            "chart_url": request.chartUrl,
+            "platform": platform,
+            "mode": "liveChart"
+        }
+        
+        try:
+            # Try Supabase first
+            supabase.table("chart_analyses").insert(analysis_record).execute()
+            logger.info("Analysis stored in Supabase successfully")
+        except Exception as db_error:
+            logger.warning(f"Supabase storage failed: {str(db_error)}, using local file storage")
+            # Fallback to local file storage
+            try:
+                analyses_file = ROOT_DIR / "analyses.json"
+                
+                # Load existing analyses or create empty list
+                if analyses_file.exists():
+                    with open(analyses_file, 'r') as f:
+                        analyses = json.load(f)
+                else:
+                    analyses = []
+                
+                # Add new analysis
+                analyses.append(analysis_record)
+                
+                # Keep only last 100 analyses per user to prevent file from growing too large
+                user_analyses = [a for a in analyses if a["user_id"] == current_user.id]
+                other_analyses = [a for a in analyses if a["user_id"] != current_user.id]
+                user_analyses = sorted(user_analyses, key=lambda x: x["timestamp"], reverse=True)[:100]
+                analyses = other_analyses + user_analyses
+                
+                # Save to file
+                with open(analyses_file, 'w') as f:
+                    json.dump(analyses, f, indent=2)
+                
+                logger.info("Analysis stored in local file successfully")
+            except Exception as file_error:
+                logger.error(f"Failed to store analysis in local file: {str(file_error)}")
+        
+        return {
+            **analysis_data,
+            "credits_remaining": updated_credits,
+            "plan": current_user.user_metadata.get("plan", "free"),
+            "platform": platform,
+            "mode": "liveChart"
+        }
+        
+    except Exception as e:
+        logger.error(f"Error analyzing chart from URL: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+
 @api_router.get("/analyses", response_model=List[dict])
 async def get_analyses(current_user = Depends(get_current_user)):
     """Get user's chart analyses"""
