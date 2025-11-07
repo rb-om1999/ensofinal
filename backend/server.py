@@ -90,7 +90,7 @@ def has_sufficient_credits(user_metadata: dict, email: str) -> bool:
     credits = user_metadata.get("credits_remaining", 0)
     return credits > 0
 
-def get_gemini_prompt(user_metadata: dict, email: str, symbol: str, timeframe: str, trading_style: str = None) -> str:
+def get_gemini_prompt(user_metadata: dict, email: str, symbol: str, timeframe: str, trading_style: str = None, mode: str = 'screenshot') -> str:
     if is_admin_user(email) or get_user_plan(user_metadata) == "pro":
         # Pro/Admin prompt
         risk_profile = user_metadata.get("risk_profile", "")
