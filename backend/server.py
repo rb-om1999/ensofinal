@@ -628,13 +628,14 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
             system_message="You are an expert trading analyst."
         ).with_model("gemini", gemini_model)
         
-        # Get appropriate prompt based on user plan
+        # Get appropriate prompt based on user plan (using screenshot mode for backward compatibility)
         prompt = get_gemini_prompt(
             current_user.user_metadata, 
             current_user.email, 
             request.symbol, 
             request.timeframe, 
-            request.tradingStyle
+            request.tradingStyle,
+            mode='screenshot'
         )
         
         # Create image content
