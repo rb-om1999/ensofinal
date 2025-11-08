@@ -791,8 +791,9 @@ async def analyze_chart_link(request: ChartLinkRequest, current_user = Depends(g
         platform = detect_chart_platform(request.chartUrl)
         logger.info(f"Detected platform: {platform} for URL: {request.chartUrl}")
         
-        # Capture chart screenshot
-        screenshot_base64 = await capture_chart_screenshot(request.chartUrl)
+        # Capture chart screenshot using browserless.io
+        screenshot_data = await capture_chart_screenshot(request.chartUrl)
+        screenshot_base64 = screenshot_data["base64"]
         
         # Create LlmChat instance
         llm = LlmChat()
