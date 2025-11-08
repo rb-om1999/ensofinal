@@ -741,6 +741,39 @@ async def analyze_chart(request: ChartAnalysisRequest, current_user = Depends(ge
         logger.error(f"Error analyzing chart: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
+@api_router.post("/capture-chart")
+async def capture_chart_preview(request: ChartLinkRequest, current_user = Depends(get_current_user)):
+    """Capture chart screenshot for preview before analysis"""
+    try:
+        # Check authentication
+        if not current_user:
+            raise HTTPException(status_code=401, detail="Authentication required")
+        
+        # Detect platform and capture screenshot
+        platform = detect_chart_platform(request.chartUrl)
+        logger.info(f"Capturing chart for preview - Platform: {platform}, URL: {request.chartUrl}")
+        
+        # Capture chart screenshot using browserless.io
+        screenshot_data = await capture_chart_screenshot(request.chartUrl)
+        
+        return {
+            "success": True,
+            "screenshot": screenshot_data["base64"],
+            "metadata": {
+                "platform": screenshot_data["platform"],
+                "width": screenshot_data["width"],
+                "height": screenshot_data["height"],
+                "size_bytes": screenshot_data["size_bytes"]
+            },
+            "symbol": request.symbol,
+            "timeframe": request.timeframe,
+            "chart_url": request.chartUrl
+        }
+        
+    except Exception as e:
+        logger.error(f"Error capturing chart for preview: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to capture chart: {str(e)}")
+
 @api_router.post("/analyze-chart-link")
 async def analyze_chart_link(request: ChartLinkRequest, current_user = Depends(get_current_user)):
     """Analyze chart from URL using live chart capture"""
