@@ -308,16 +308,34 @@ const TradingCockpit = () => {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label className="text-slate-300 text-sm">Trading Style</Label>
+                      <Label className="text-slate-300 text-sm">Trading Strategy (Optional)</Label>
                       <Select value={tradingStyle} onValueChange={setTradingStyle}>
                         <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select style" />
+                          <SelectValue placeholder="Select trading strategy" />
                         </SelectTrigger>
-                        <SelectContent className="bg-slate-900 border-slate-700">
-                          <SelectItem value="scalping">Scalping</SelectItem>
-                          <SelectItem value="day_trading">Day Trading</SelectItem>
-                          <SelectItem value="swing_trading">Swing Trading</SelectItem>
-                          <SelectItem value="position_trading">Position Trading</SelectItem>
+                        <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl max-h-64 overflow-y-auto">
+                          {/* Advanced Strategies */}
+                          <div className="px-2 py-1 text-xs font-semibold text-violet-400 uppercase tracking-wider">Advanced</div>
+                          <SelectItem value="smart-money-concepts" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Smart Money Concepts (SMC)</SelectItem>
+                          <SelectItem value="liquidity-sweep" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Liquidity Sweep</SelectItem>
+                          <SelectItem value="pullback-retracement" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Pullback Retracement</SelectItem>
+                          
+                          {/* Scalping Strategies */}
+                          <div className="px-2 py-1 text-xs font-semibold text-violet-400 uppercase tracking-wider mt-2">Scalping</div>
+                          <SelectItem value="scalping-ema" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Scalping EMA</SelectItem>
+                          <SelectItem value="volatility-breakout" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Volatility Breakout</SelectItem>
+                          <SelectItem value="breakout-retest" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Breakout Retest</SelectItem>
+                          <SelectItem value="squeeze-momentum" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Squeeze Momentum</SelectItem>
+                          <SelectItem value="mean-reversion" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Mean Reversion</SelectItem>
+                          
+                          {/* Swing Strategies */}
+                          <div className="px-2 py-1 text-xs font-semibold text-violet-400 uppercase tracking-wider mt-2">Swing</div>
+                          <SelectItem value="momentum-swing" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Momentum Swing</SelectItem>
+                          <SelectItem value="trend-following" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Trend Following</SelectItem>
+                          <SelectItem value="trend-reversal" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Trend Reversal</SelectItem>
+                          <SelectItem value="divergence-play" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Divergence Play</SelectItem>
+                          <SelectItem value="continuation-pattern" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Continuation Pattern</SelectItem>
+                          <SelectItem value="range-bound" className="text-white hover:bg-white/10 focus:bg-white/10 pl-4">Range Bound</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
