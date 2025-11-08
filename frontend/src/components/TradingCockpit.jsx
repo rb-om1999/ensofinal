@@ -243,6 +243,7 @@ const TradingCockpit = () => {
     setAnalysis(null);
     setError('');
     setChartPreview(null);
+    setScreenshotPreview(null);
   };
 
   return (
