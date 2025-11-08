@@ -391,11 +391,11 @@ const TradingCockpit = () => {
               </Card>
 
               {/* Trade Decision */}
-              <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 glow-gold panel-animate">
+              <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 glow-gold panel-animate" style={{animationDelay: '0.6s'}}>
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <Target className="w-5 h-5 text-yellow-400" />
-                    AI Decision
+                    💰 AI Decision
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
