@@ -43,6 +43,17 @@ const TradingCockpit = () => {
   const [chartPreview, setChartPreview] = useState(null);
   const [mode, setMode] = useState('link'); // 'link' or 'upload'
   const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'analyzing', 'results'
+  
+  // Authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  
+  // User info
+  const [isPro, setIsPro] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [credits, setCredits] = useState(0);
 
   // Platform detection
   const detectPlatform = (url) => {
