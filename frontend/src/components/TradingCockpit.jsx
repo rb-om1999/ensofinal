@@ -323,11 +323,11 @@ const TradingCockpit = () => {
 
             <div className="grid lg:grid-cols-3 gap-6">
               {/* Technical Summary */}
-              <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 glow-violet panel-animate">
+              <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 glow-violet panel-animate" style={{animationDelay: '0.2s'}}>
                 <CardHeader>
                   <CardTitle className="text-white flex items-center gap-2">
                     <TrendingUp className="w-5 h-5 text-violet-400" />
-                    Technical Summary
+                    📊 Technical Summary
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
