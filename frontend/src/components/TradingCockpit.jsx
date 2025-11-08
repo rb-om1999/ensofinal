@@ -186,15 +186,10 @@ const TradingCockpit = () => {
     }
   };
 
-  // Analyze chart
+  // Analyze chart (uses existing screenshot)
   const handleAnalyzeChart = async () => {
-    if (!isAuthenticated) {
-      setShowAuthModal(true);
-      return;
-    }
-
-    if (!chartPreview || !symbol || !timeframe) {
-      setError('Please provide chart URL, symbol, and timeframe');
+    if (!screenshotPreview) {
+      setError('Please capture chart screenshot first');
       return;
     }
 
@@ -204,17 +199,11 @@ const TradingCockpit = () => {
 
     try {
       const token = localStorage.getItem('token');
-      if (!token) {
-        setShowAuthModal(true);
-        setIsAnalyzing(false);
-        setCurrentPhase('input');
-        return;
-      }
 
       const response = await axios.post(`${API}/analyze-chart-link`, {
-        chartUrl: chartUrl,
-        symbol: symbol,
-        timeframe: timeframe,
+        chartUrl: screenshotPreview.chart_url,
+        symbol: screenshotPreview.symbol,
+        timeframe: screenshotPreview.timeframe,
         tradingStyle: tradingStyle
       }, {
         headers: {
@@ -227,7 +216,7 @@ const TradingCockpit = () => {
           setShowUpgradeModal(true);
         }
         setError(response.data.message || 'Analysis failed');
-        setCurrentPhase('input');
+        setCurrentPhase('preview');
       } else {
         setAnalysis(response.data);
         setCurrentPhase('results');
@@ -242,7 +231,7 @@ const TradingCockpit = () => {
       } else {
         setError(err.response?.data?.detail || err.response?.data?.message || 'Analysis failed. Please try again.');
       }
-      setCurrentPhase('input');
+      setCurrentPhase('preview');
     } finally {
       setIsAnalyzing(false);
     }
