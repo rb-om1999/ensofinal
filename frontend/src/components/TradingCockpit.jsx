@@ -426,83 +426,96 @@ const TradingCockpit = () => {
               </CardContent>
             </Card>
 
-            {/* Chart Preview Panel */}
-            {chartPreview && (
-              <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 glow-cyan panel-animate scan-lines relative overflow-hidden">
-                <CardHeader>
-                  <CardTitle className="text-xl text-white flex items-center gap-3">
-                    <Activity className="w-5 h-5 text-cyan-400" />
-                    Chart Preview
-                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">
-                      {chartPreview.platform}
-                    </Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="space-y-2">
-                      <Label className="text-slate-300 text-sm">Symbol</Label>
-                      <Input
-                        placeholder="BTCUSDT"
-                        value={symbol}
-                        onChange={(e) => setSymbol(e.target.value.toUpperCase())}
-                        className="bg-white/10 border-white/20 text-white placeholder-slate-400 font-mono"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-300 text-sm">Timeframe</Label>
-                      <Select value={timeframe} onValueChange={setTimeframe}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="bg-slate-900 border-slate-700">
-                          <SelectItem value="1m">1 Minute</SelectItem>
-                          <SelectItem value="5m">5 Minutes</SelectItem>
-                          <SelectItem value="15m">15 Minutes</SelectItem>
-                          <SelectItem value="1h">1 Hour</SelectItem>
-                          <SelectItem value="4h">4 Hours</SelectItem>
-                          <SelectItem value="1d">1 Day</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-300 text-sm">Trading Strategy (Optional)</Label>
-                      <Select value={tradingStyle} onValueChange={setTradingStyle}>
-                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
-                          <SelectValue placeholder="Select trading strategy" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl max-h-64 overflow-y-auto">
-                          <SelectItem value="smart-money-concepts" className="text-white hover:bg-white/10 focus:bg-white/10">Smart Money Concepts</SelectItem>
-                          <SelectItem value="liquidity-sweep" className="text-white hover:bg-white/10 focus:bg-white/10">Liquidity Sweep</SelectItem>
-                          <SelectItem value="pullback-retracement" className="text-white hover:bg-white/10 focus:bg-white/10">Pullback Retracement</SelectItem>
-                          <SelectItem value="scalping-ema" className="text-white hover:bg-white/10 focus:bg-white/10">Scalping EMA</SelectItem>
-                          <SelectItem value="volatility-breakout" className="text-white hover:bg-white/10 focus:bg-white/10">Volatility Breakout</SelectItem>
-                          <SelectItem value="breakout-retest" className="text-white hover:bg-white/10 focus:bg-white/10">Breakout Retest</SelectItem>
-                          <SelectItem value="squeeze-momentum" className="text-white hover:bg-white/10 focus:bg-white/10">Squeeze Momentum</SelectItem>
-                          <SelectItem value="mean-reversion" className="text-white hover:bg-white/10 focus:bg-white/10">Mean Reversion</SelectItem>
-                          <SelectItem value="momentum-swing" className="text-white hover:bg-white/10 focus:bg-white/10">Momentum Swing</SelectItem>
-                          <SelectItem value="trend-following" className="text-white hover:bg-white/10 focus:bg-white/10">Trend Following</SelectItem>
-                          <SelectItem value="trend-reversal" className="text-white hover:bg-white/10 focus:bg-white/10">Trend Reversal</SelectItem>
-                          <SelectItem value="divergence-play" className="text-white hover:bg-white/10 focus:bg-white/10">Divergence Play</SelectItem>
-                          <SelectItem value="continuation-pattern" className="text-white hover:bg-white/10 focus:bg-white/10">Continuation Pattern</SelectItem>
-                          <SelectItem value="range-bound" className="text-white hover:bg-white/10 focus:bg-white/10">Range Bound</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
+          </div>
+        )}
 
+        {currentPhase === 'preview' && screenshotPreview && (
+          <div className="max-w-5xl mx-auto space-y-8">
+            {/* Screenshot Preview Panel */}
+            <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 glow-cyan panel-animate">
+              <CardHeader>
+                <CardTitle className="text-xl text-white flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  Chart Screenshot Preview
+                  <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
+                    {screenshotPreview.metadata.platform}
+                  </Badge>
+                </CardTitle>
+                <CardDescription className="text-slate-300">
+                  Confirm this screenshot looks correct before proceeding with AI analysis
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Screenshot Display */}
+                <div className="relative bg-white/5 rounded-2xl p-4 border border-white/10">
+                  <img 
+                    src={`data:image/png;base64,${screenshotPreview.screenshot}`}
+                    alt="Chart Screenshot"
+                    className="w-full h-auto rounded-xl border border-white/20 shadow-2xl"
+                  />
+                  <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1">
+                    <span className="text-xs text-slate-300">
+                      {screenshotPreview.metadata.width}×{screenshotPreview.metadata.height}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Chart Info */}
+                <div className="grid md:grid-cols-3 gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                  <div className="text-center">
+                    <Label className="text-slate-400 text-sm">Symbol</Label>
+                    <p className="text-white font-mono font-bold text-lg">{screenshotPreview.symbol}</p>
+                  </div>
+                  <div className="text-center">
+                    <Label className="text-slate-400 text-sm">Timeframe</Label>
+                    <p className="text-white font-semibold text-lg">{screenshotPreview.timeframe}</p>
+                  </div>
+                  <div className="text-center">
+                    <Label className="text-slate-400 text-sm">Strategy</Label>
+                    <p className="text-white font-semibold text-lg">{tradingStyle || 'General Analysis'}</p>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-4">
+                  <Button
+                    onClick={() => {
+                      setCurrentPhase('input');
+                      setScreenshotPreview(null);
+                    }}
+                    variant="outline"
+                    className="flex-1 border-white/20 text-white hover:bg-white/10"
+                  >
+                    ← Retake Screenshot
+                  </Button>
                   <Button
                     onClick={handleAnalyzeChart}
-                    disabled={!symbol || !timeframe}
-                    className="w-full bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-600 hover:from-violet-500 hover:via-purple-500 hover:to-cyan-500 text-white py-6 text-xl font-semibold glow-violet"
+                    disabled={isAnalyzing}
+                    className="flex-1 bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-600 hover:from-violet-500 hover:via-purple-500 hover:to-cyan-500 text-white py-3 text-lg font-semibold glow-violet"
                   >
-                    <Zap className="w-6 h-6 mr-3" />
-                    Analyze Chart
-                    <ArrowRight className="w-6 h-6 ml-3" />
+                    {isAnalyzing ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      <>
+                        <Zap className="w-6 h-6 mr-2" />
+                        Analyze Chart
+                        <ArrowRight className="w-6 h-6 ml-2" />
+                      </>
+                    )}
                   </Button>
-                </CardContent>
-              </Card>
-            )}
+                </div>
+
+                {error && (
+                  <div className="flex items-center space-x-3 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                    <AlertCircle className="w-5 h-5 text-red-400" />
+                    <span className="text-red-300">{error}</span>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </div>
         )}
 
