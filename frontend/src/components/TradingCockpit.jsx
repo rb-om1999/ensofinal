@@ -307,9 +307,18 @@ const TradingCockpit = () => {
           <div className="max-w-7xl mx-auto space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-3xl font-display text-white">Analysis Results</h2>
-              <Button onClick={resetCockpit} variant="outline" className="border-white/20 text-white">
-                New Analysis
-              </Button>
+              <div className="flex items-center space-x-4">
+                <Button 
+                  onClick={() => navigator.clipboard.writeText(JSON.stringify(analysis, null, 2))}
+                  variant="outline" 
+                  className="border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10"
+                >
+                  📋 Copy JSON
+                </Button>
+                <Button onClick={resetCockpit} variant="outline" className="border-white/20 text-white">
+                  🔄 New Analysis
+                </Button>
+              </div>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-6">
