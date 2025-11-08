@@ -55,6 +55,58 @@ const TradingCockpit = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [credits, setCredits] = useState(0);
 
+  // Check authentication on component mount
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await axios.get(`${API}/user/profile`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setIsAuthenticated(true);
+        setUser(response.data);
+        
+        const plan = response.data.user_metadata?.plan || 'free';
+        const userCredits = response.data.user_metadata?.credits_remaining || 0;
+        
+        setIsPro(plan === 'pro');
+        setIsAdmin(response.data.email === 'omsonii9846@gmail.com');
+        setCredits(userCredits);
+      } catch (error) {
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+      }
+    }
+  };
+
+  const handleAuthSuccess = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+    setShowAuthModal(false);
+    
+    const plan = userData.user_metadata?.plan || 'free';
+    const userCredits = userData.user_metadata?.credits_remaining || 0;
+    
+    setIsPro(plan === 'pro');
+    setIsAdmin(userData.email === 'omsonii9846@gmail.com');
+    setCredits(userCredits);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    setUser(null);
+    setIsPro(false);
+    setIsAdmin(false);
+    setCredits(0);
+    setAnalysis(null);
+    setCurrentPhase('input');
+  };
+
   // Platform detection
   const detectPlatform = (url) => {
     if (url.includes('tradingview.com')) return 'TradingView';
