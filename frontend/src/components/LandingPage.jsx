@@ -261,14 +261,23 @@ const LandingPage = () => {
 
             {/* Centered Take Profit Button */}
             <div className="text-center">
-              <Button
-                onClick={() => navigate('/pricing')}
-                size="lg"
-                className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:via-orange-400 hover:to-amber-500 text-white font-bold px-16 py-8 text-2xl rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-500 transform hover:scale-105 ring-2 ring-amber-400/20 hover:ring-amber-400/40"
-              >
-                <DollarSign className="w-8 h-8 mr-4" />
-                Take Profit!
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button
+                  onClick={() => navigate('/cockpit')}
+                  size="lg"
+                  className="bg-gradient-to-r from-violet-500 via-purple-500 to-cyan-500 hover:from-violet-400 hover:via-purple-400 hover:to-cyan-400 text-white font-bold px-12 py-6 text-xl rounded-2xl shadow-2xl hover:shadow-violet-500/25 transition-all duration-500 transform hover:scale-105 ring-2 ring-violet-400/20 hover:ring-violet-400/40"
+                >
+                  🚀 Launch Cockpit
+                </Button>
+                <Button
+                  onClick={() => navigate('/pricing')}
+                  size="lg"
+                  className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:via-orange-400 hover:to-amber-500 text-white font-bold px-12 py-6 text-xl rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-500 transform hover:scale-105 ring-2 ring-amber-400/20 hover:ring-amber-400/40"
+                >
+                  <DollarSign className="w-6 h-6 mr-3" />
+                  Go Pro
+                </Button>
+              </div>
             </div>
           </div>
         </section>
