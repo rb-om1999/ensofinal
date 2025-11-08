@@ -237,7 +237,7 @@ async def capture_chart_screenshot(url: str) -> dict:
     """Capture chart screenshot using browserless.io and return base64 encoded image with metadata"""
     try:
         browserless_token = "2TNtEb9P4h0cSGo56221aad712d3ad88f38b622ee09c4e707"
-        browserless_url = f"https://production-sfo.browserless.io/screenshot?token={browserless_token}"
+        browserless_url = f"https://chrome.browserless.io/screenshot?token={browserless_token}"
         
         headers = {
             "Cache-Control": "no-cache",
