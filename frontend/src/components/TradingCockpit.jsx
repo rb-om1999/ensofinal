@@ -238,7 +238,7 @@ const TradingCockpit = () => {
       <div className="relative z-10 p-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-cyan-500 rounded-xl flex items-center justify-center glow-violet">
                 <BarChart3 className="w-7 h-7 text-white" />
@@ -249,6 +249,42 @@ const TradingCockpit = () => {
                 </h1>
                 <p className="text-slate-400 font-medium">Advanced AI-Powered Market Analysis</p>
               </div>
+            </div>
+
+            {/* User Authentication */}
+            <div className="flex items-center space-x-4">
+              {isAuthenticated ? (
+                <>
+                  <div className="text-right">
+                    <p className="text-white text-sm font-medium">{user?.email}</p>
+                    <div className="flex items-center space-x-2">
+                      {isPro && <Crown className="w-3 h-3 text-amber-400" />}
+                      <Badge className={isPro ? "bg-amber-500/20 text-amber-300" : "bg-slate-500/20 text-slate-300"}>
+                        {isPro ? 'Pro' : isAdmin ? 'Admin' : 'Free'}
+                      </Badge>
+                      {!isPro && !isAdmin && (
+                        <span className="text-xs text-slate-400">{credits} credits</span>
+                      )}
+                    </div>
+                  </div>
+                  <Button
+                    onClick={handleLogout}
+                    variant="outline"
+                    size="sm"
+                    className="border-white/20 text-white hover:bg-white/10"
+                  >
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  onClick={() => setShowAuthModal(true)}
+                  className="bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-400 hover:to-cyan-400 text-white"
+                >
+                  <LogIn className="w-4 h-4 mr-2" />
+                  Sign In
+                </Button>
+              )}
             </div>
           </div>
         </div>
