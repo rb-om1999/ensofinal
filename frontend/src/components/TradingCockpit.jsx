@@ -19,9 +19,14 @@ import {
   ArrowRight,
   AlertCircle,
   CheckCircle,
-  Loader2
+  Loader2,
+  User,
+  LogIn,
+  Crown
 } from 'lucide-react';
 import axios from 'axios';
+import AuthModal from './AuthModal';
+import UpgradeModal from './UpgradeModal';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
