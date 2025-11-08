@@ -428,11 +428,11 @@ const TradingCockpit = () => {
             </div>
 
             {/* Summary & Strategy */}
-            <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 panel-animate">
+            <Card className="bg-white/5 backdrop-blur-2xl border border-white/10 panel-animate" style={{animationDelay: '0.8s'}}>
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Shield className="w-5 h-5 text-violet-400" />
-                  Analysis Summary & Strategy
+                  ⚙️ Analysis Summary & Strategy
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
