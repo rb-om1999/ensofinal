@@ -41,8 +41,10 @@ const TradingCockpit = () => {
   const [analysis, setAnalysis] = useState(null);
   const [error, setError] = useState('');
   const [chartPreview, setChartPreview] = useState(null);
+  const [screenshotPreview, setScreenshotPreview] = useState(null);
   const [mode, setMode] = useState('link'); // 'link' or 'upload'
-  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'analyzing', 'results'
+  const [currentPhase, setCurrentPhase] = useState('input'); // 'input', 'preview', 'analyzing', 'results'
+  const [isCapturing, setIsCapturing] = useState(false);
   
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
