@@ -336,8 +336,8 @@ const TradingCockpit = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex-1">
+                <div className="space-y-4">
+                  <div>
                     <Input
                       placeholder="https://tradingview.com/chart/..."
                       value={chartUrl}
@@ -345,12 +345,75 @@ const TradingCockpit = () => {
                       className="bg-white/10 border-white/20 text-white placeholder-slate-400 h-14 text-lg font-mono"
                     />
                   </div>
+
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 text-sm">Symbol</Label>
+                      <Input
+                        placeholder="BTCUSDT"
+                        value={symbol}
+                        onChange={(e) => setSymbol(e.target.value.toUpperCase())}
+                        className="bg-white/10 border-white/20 text-white placeholder-slate-400 font-mono"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 text-sm">Timeframe</Label>
+                      <Select value={timeframe} onValueChange={setTimeframe}>
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-900 border-slate-700">
+                          <SelectItem value="1m">1 Minute</SelectItem>
+                          <SelectItem value="5m">5 Minutes</SelectItem>
+                          <SelectItem value="15m">15 Minutes</SelectItem>
+                          <SelectItem value="1h">1 Hour</SelectItem>
+                          <SelectItem value="4h">4 Hours</SelectItem>
+                          <SelectItem value="1d">1 Day</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-300 text-sm">Trading Strategy (Optional)</Label>
+                      <Select value={tradingStyle} onValueChange={setTradingStyle}>
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                          <SelectValue placeholder="Select trading strategy" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-900/95 backdrop-blur-xl border-white/20 shadow-2xl max-h-64 overflow-y-auto">
+                          <SelectItem value="smart-money-concepts" className="text-white hover:bg-white/10 focus:bg-white/10">Smart Money Concepts</SelectItem>
+                          <SelectItem value="liquidity-sweep" className="text-white hover:bg-white/10 focus:bg-white/10">Liquidity Sweep</SelectItem>
+                          <SelectItem value="pullback-retracement" className="text-white hover:bg-white/10 focus:bg-white/10">Pullback Retracement</SelectItem>
+                          <SelectItem value="scalping-ema" className="text-white hover:bg-white/10 focus:bg-white/10">Scalping EMA</SelectItem>
+                          <SelectItem value="volatility-breakout" className="text-white hover:bg-white/10 focus:bg-white/10">Volatility Breakout</SelectItem>
+                          <SelectItem value="breakout-retest" className="text-white hover:bg-white/10 focus:bg-white/10">Breakout Retest</SelectItem>
+                          <SelectItem value="squeeze-momentum" className="text-white hover:bg-white/10 focus:bg-white/10">Squeeze Momentum</SelectItem>
+                          <SelectItem value="mean-reversion" className="text-white hover:bg-white/10 focus:bg-white/10">Mean Reversion</SelectItem>
+                          <SelectItem value="momentum-swing" className="text-white hover:bg-white/10 focus:bg-white/10">Momentum Swing</SelectItem>
+                          <SelectItem value="trend-following" className="text-white hover:bg-white/10 focus:bg-white/10">Trend Following</SelectItem>
+                          <SelectItem value="trend-reversal" className="text-white hover:bg-white/10 focus:bg-white/10">Trend Reversal</SelectItem>
+                          <SelectItem value="divergence-play" className="text-white hover:bg-white/10 focus:bg-white/10">Divergence Play</SelectItem>
+                          <SelectItem value="continuation-pattern" className="text-white hover:bg-white/10 focus:bg-white/10">Continuation Pattern</SelectItem>
+                          <SelectItem value="range-bound" className="text-white hover:bg-white/10 focus:bg-white/10">Range Bound</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
                   <Button
                     onClick={handleFetchChart}
-                    className="bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-400 hover:to-cyan-400 text-white px-8 h-14 text-lg glow-violet"
+                    disabled={!symbol || !timeframe || !chartUrl || isCapturing}
+                    className="w-full bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-400 hover:to-cyan-400 text-white px-8 py-4 text-lg glow-violet disabled:opacity-50"
                   >
-                    <Eye className="w-5 h-5 mr-2" />
-                    Fetch Chart
+                    {isCapturing ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Capturing Chart...
+                      </>
+                    ) : (
+                      <>
+                        <Eye className="w-5 h-5 mr-2" />
+                        Capture Chart Screenshot
+                      </>
+                    )}
                   </Button>
                 </div>
 
