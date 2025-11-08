@@ -147,6 +147,11 @@ const TradingCockpit = () => {
 
   // Analyze chart
   const handleAnalyzeChart = async () => {
+    if (!isAuthenticated) {
+      setShowAuthModal(true);
+      return;
+    }
+
     if (!chartPreview || !symbol || !timeframe) {
       setError('Please provide chart URL, symbol, and timeframe');
       return;
@@ -158,6 +163,13 @@ const TradingCockpit = () => {
 
     try {
       const token = localStorage.getItem('token');
+      if (!token) {
+        setShowAuthModal(true);
+        setIsAnalyzing(false);
+        setCurrentPhase('input');
+        return;
+      }
+
       const response = await axios.post(`${API}/analyze-chart-link`, {
         chartUrl: chartUrl,
         symbol: symbol,
@@ -169,10 +181,26 @@ const TradingCockpit = () => {
         }
       });
 
-      setAnalysis(response.data);
-      setCurrentPhase('results');
+      if (response.data.error) {
+        if (response.data.message && response.data.message.includes('run out of free analyses')) {
+          setShowUpgradeModal(true);
+        }
+        setError(response.data.message || 'Analysis failed');
+        setCurrentPhase('input');
+      } else {
+        setAnalysis(response.data);
+        setCurrentPhase('results');
+        // Update credits
+        setCredits(response.data.credits_remaining || 0);
+      }
     } catch (err) {
-      setError(err.response?.data?.detail || 'Analysis failed. Please try again.');
+      if (err.response?.status === 401) {
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        setShowAuthModal(true);
+      } else {
+        setError(err.response?.data?.detail || err.response?.data?.message || 'Analysis failed. Please try again.');
+      }
       setCurrentPhase('input');
     } finally {
       setIsAnalyzing(false);
