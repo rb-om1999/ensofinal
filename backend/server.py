@@ -233,58 +233,65 @@ def detect_chart_platform(url: str) -> str:
     else:
         return 'unknown'
 
-async def capture_chart_screenshot(url: str) -> str:
-    """Capture chart screenshot using Playwright and return base64 encoded image"""
+async def capture_chart_screenshot(url: str) -> dict:
+    """Capture chart screenshot using browserless.io and return base64 encoded image with metadata"""
     try:
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
-            page = await browser.new_page(viewport={'width': 1920, 'height': 1080})
-            
-            # Set user agent to avoid detection
-            await page.set_extra_http_headers({
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            })
-            
-            # Navigate to the chart URL
-            await page.goto(url, wait_until='networkidle', timeout=30000)
-            
-            # Wait for chart to load
-            await page.wait_for_timeout(5000)
-            
-            # Try to remove any overlays or popups
-            try:
-                # Common selectors for TradingView popups
-                popup_selectors = [
-                    '[data-name="close"]',
-                    '.tv-dialog__close',
-                    '.close-button',
-                    '[aria-label="Close"]'
-                ]
-                for selector in popup_selectors:
-                    elements = await page.query_selector_all(selector)
-                    for element in elements:
-                        try:
-                            await element.click()
-                        except:
-                            continue
-                        
-                await page.wait_for_timeout(1000)
-            except:
-                pass
-            
-            # Take screenshot
-            screenshot_bytes = await page.screenshot(
-                full_page=False,
-                quality=90,
-                type='png'
-            )
-            
-            await browser.close()
-            
-            # Convert to base64
-            base64_string = base64.b64encode(screenshot_bytes).decode('utf-8')
-            return base64_string
-            
+        browserless_token = "2TNtEb9P4h0cSGo56221aad712d3ad88f38b622ee09c4e707"
+        browserless_url = f"https://production-sfo.browserless.io/screenshot?token={browserless_token}"
+        
+        headers = {
+            "Cache-Control": "no-cache",
+            "Content-Type": "application/json",
+        }
+        
+        payload = {
+            "url": url,
+            "options": {
+                "viewport": {
+                    "width": 1920,
+                    "height": 1080
+                },
+                "fullPage": False,
+                "quality": 90,
+                "type": "png"
+            },
+            "gotoOptions": {
+                "waitUntil": "networkidle2",
+                "timeout": 30000
+            },
+            "waitFor": 5000  # Wait 5 seconds for chart to load
+        }
+        
+        async with aiohttp.ClientSession() as session:
+            async with session.post(browserless_url, headers=headers, json=payload) as response:
+                if response.status == 200:
+                    screenshot_bytes = await response.read()
+                    
+                    # Convert to base64
+                    base64_string = base64.b64encode(screenshot_bytes).decode('utf-8')
+                    
+                    # Get image dimensions for metadata
+                    image = Image.open(io.BytesIO(screenshot_bytes))
+                    width, height = image.size
+                    
+                    return {
+                        "base64": base64_string,
+                        "width": width,
+                        "height": height,
+                        "size_bytes": len(screenshot_bytes),
+                        "platform": detect_chart_platform(url)
+                    }
+                else:
+                    error_text = await response.text()
+                    logger.error(f"Browserless.io API error: {response.status} - {error_text}")
+                    raise HTTPException(
+                        status_code=500, 
+                        detail=f"Screenshot service error: {response.status}"
+                    )
+                    
+    except aiohttp.ClientError as e:
+        logger.error(f"Network error capturing chart screenshot: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to capture chart: Network error")
     except Exception as e:
         logger.error(f"Error capturing chart screenshot: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to capture chart: {str(e)}")
