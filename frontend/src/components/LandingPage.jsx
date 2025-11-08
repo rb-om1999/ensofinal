@@ -126,12 +126,21 @@ const LandingPage = () => {
                 >
                   Pricing
                 </Button>
-                <Button
-                  onClick={() => navigate('/app')}
-                  className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ring-2 ring-amber-400/20 hover:ring-amber-400/40"
-                >
-                  Get Started
-                </Button>
+                <div className="flex items-center space-x-4">
+                  <Button
+                    onClick={() => navigate('/app')}
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10 font-semibold px-6 py-3 rounded-xl"
+                  >
+                    Classic View
+                  </Button>
+                  <Button
+                    onClick={() => navigate('/cockpit')}
+                    className="bg-gradient-to-r from-violet-500 to-cyan-500 hover:from-violet-400 hover:to-cyan-400 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ring-2 ring-violet-400/20 hover:ring-violet-400/40"
+                  >
+                    🚀 Trading Cockpit
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
