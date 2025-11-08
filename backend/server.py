@@ -14,8 +14,8 @@ from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
 from supabase import create_client, Client
 import base64
 import io
-import aiohttp
 from PIL import Image
+from playwright.async_api import async_playwright
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
