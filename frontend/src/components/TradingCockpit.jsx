@@ -134,17 +134,56 @@ const TradingCockpit = () => {
 
   // Fetch chart preview
   const handleFetchChart = async () => {
+    if (!isAuthenticated) {
+      setShowAuthModal(true);
+      return;
+    }
+
     if (!chartUrl || !isValidChartUrl(chartUrl)) {
       setError('Please enter a valid TradingView or Binance chart URL');
       return;
     }
 
+    if (!symbol || !timeframe) {
+      setError('Please provide symbol and timeframe');
+      return;
+    }
+
+    setIsCapturing(true);
     setError('');
-    setChartPreview({
-      url: chartUrl,
-      platform: detectPlatform(chartUrl),
-      status: 'ready'
-    });
+
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setShowAuthModal(true);
+        setIsCapturing(false);
+        return;
+      }
+
+      const response = await axios.post(`${API}/capture-chart`, {
+        chartUrl: chartUrl,
+        symbol: symbol,
+        timeframe: timeframe,
+        tradingStyle: tradingStyle
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      setScreenshotPreview(response.data);
+      setCurrentPhase('preview');
+    } catch (err) {
+      if (err.response?.status === 401) {
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        setShowAuthModal(true);
+      } else {
+        setError(err.response?.data?.detail || 'Failed to capture chart screenshot');
+      }
+    } finally {
+      setIsCapturing(false);
+    }
   };
 
   // Analyze chart
